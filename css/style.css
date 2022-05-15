@@ -6,7 +6,6 @@ html, body {
     overflow: scroll;
 }
 
-
 .row > div {
     width: auto;
     max-width: none;
@@ -82,22 +81,3 @@ html, body {
     flex-direction: column;
     padding-right: auto;
 }
-
-/* .node {
-    position: absolute;
-    display: block;
-    width: 10rem;
-    height: 7rem;
-    background-color: #fff;
-    border-radius: 5px;
-    margin: 5px;
-    padding: 5px;
-    box-shadow: 0 0 5px #000;
-}
-
-.children {
-    display: flex;
-    flex-direction: row;
-    margin-left: 10px;
-    width: auto
-} */

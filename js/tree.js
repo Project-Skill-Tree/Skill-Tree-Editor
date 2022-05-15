@@ -154,15 +154,6 @@ function deleteChildren(list, nodeId) {
     }
     
 }
-    
-
-// function findHeritage(list, parent) {
-//     let heritage = [];
-    
-//     parent.children.forEach(child => {
-        
-//     });
-// }
 
 function init(data) {
     changedTree = data;
