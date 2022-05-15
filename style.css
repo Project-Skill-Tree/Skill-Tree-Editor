@@ -1,0 +1,103 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: scroll;
+}
+
+
+.row > div {
+    width: auto;
+    max-width: none;
+}
+
+#tree-container {
+    overflow: scroll;
+    background-color: darkslategrey;
+}
+
+#data-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+#node-editor {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 3rem 0;
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    z-index: 100;
+}
+
+.edit-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.expanded {
+    width: 30rem !important;
+}
+
+.json-input_last-session-container {
+    display: none;
+}
+
+#editor-expand {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    z-index: 99;
+    cursor: pointer;
+    margin: 20px 20px 0 0;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
+#editor-close {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    z-index: 101;
+    cursor: pointer;
+    margin: 20px 0 0 20px;
+}
+
+#skill-inputs {
+    display: flex;
+    flex-direction: column;
+    padding-right: auto;
+}
+
+/* .node {
+    position: absolute;
+    display: block;
+    width: 10rem;
+    height: 7rem;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    box-shadow: 0 0 5px #000;
+}
+
+.children {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    width: auto
+} */

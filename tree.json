@@ -1,0 +1,65 @@
+[
+    {
+        "id": 0,
+        "title": "Self Improvement Skill Tree",
+        "category": "root",
+        "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
+        "type": "item",
+        "requires": [],
+        "children": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 1,
+        "iconName": "mindfulness",
+        "title": "Mindfulness I",
+        "level": 1,
+        "goal": "Mindfulness 2mins",
+        "frequency": "DAILY",
+        "timelimit": "1x Week",
+        "xp": 50,
+        "category": "health",
+        "type": "skill",
+        "requires": [],
+        "children": []
+    },
+    {
+        "id": 2,
+        "iconName": "journaling",
+        "title": "Journaling I",
+        "level": 1,
+        "goal": "Journal",
+        "frequency": "DAILY",
+        "timelimit": "1x Week",
+        "xp": 100,
+        "category": "skills",
+        "type": "skill",
+        "requires": [],
+        "children": [3, 4]
+    },
+    {
+        "id": 3,
+        "title": "Ancient Library",
+        "category": "Learning",
+        "link": "https://drive.google.com/drive/folders/1HGG7si_q8bfmT4eHEH0vcytn9TegRtPy",
+        "type": "item",
+        "requires": [],
+        "children": []
+    },
+    {
+        "id": 4,
+        "iconName": "relationships",
+        "title": "Relationships I",
+        "level": 1,
+        "goal": "Find a partner",
+        "frequency": "DAILY",
+        "timelimit": "1x Week",
+        "xp": 100,
+        "category": "skills",
+        "type": "skill",
+        "requires": [],
+        "children": []
+    }
+]
