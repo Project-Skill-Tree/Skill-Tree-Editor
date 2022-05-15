@@ -3,6 +3,13 @@ html, body {
     padding: 0;
     height: 100vh;
     width: 100vw;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
     overflow: scroll;
 }
 
@@ -11,9 +18,9 @@ html, body {
     max-width: none;
 }
 
-#tree-container {
-    overflow: scroll;
-    background-color: darkslategrey;
+.tree-container {
+    overflow: hidden;
+    /* background-color: darkslategrey; */
 }
 
 #data-inputs {

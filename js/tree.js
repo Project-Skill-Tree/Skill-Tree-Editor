@@ -12,7 +12,6 @@ let typeTemplates = {
         "children": []
     },
     "skill": {
-        "id": parseInt(highestId + 1),
         "iconName": "skill",
         "title": "challenge",
         "level": 1,
