@@ -1,6 +1,8 @@
 let childrenCount = {};
 let highestId = 0;
+let oldTree = [];
 let changedTree = [];
+
 
 let typeTemplates = {
     "item": {
@@ -101,7 +103,7 @@ function addNode(tree, parentId, newNodeData) {
         if (!parent.children && parent.children != []) parent.children = [];
         parent.children.push(newNodeData.id);
         changedTree.push(newNodeData);
-        window.localStorage.setItem('tree', JSON.stringify(changedTree));
+        saveTree();
     }
     else {
         console.log(`No parent found for ${parentId}`);
@@ -123,9 +125,9 @@ function drawChildren(list, parent) {
 
 function deleteNode(list, nodeId) {
     let node = findNode(list, nodeId);
-    
+
     // delete children
-    if(node.children) {
+    if (node.children) {
         deleteChildren(list, nodeId);
     }
 
@@ -151,10 +153,14 @@ function deleteChildren(list, nodeId) {
             list.splice(nodeIndex, 1);
         });
     }
-    
+
 }
 
 function init(data) {
+    // parse data if it is not already parsed
+    if (!Array.isArray(data)) data = JSON.parse(data);
+    // set old tree equal to the data passed in without changing it in the global scope, I am aware this is a retarded line but I am tired and this is a quick fix
+    oldTree = JSON.parse(JSON.stringify(data));
     changedTree = data;
     console.log("initializing tree")
     let root = getRoot(data);
@@ -209,8 +215,9 @@ function showcaseData(data) {
         newData.requires = data.requires;
         showcaseData(newData);
     });
+
     for (let field in data) {
-        if(field == 'type' || field == 'children') continue;
+        if (field == 'type' || field == 'children') continue;
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
         input.setAttribute('name', field);
@@ -241,7 +248,7 @@ function updateNode(id, data) {
     if (node) {
         changedTree[findNodeIndex(changedTree, id)] = data;
         node.querySelector('span').innerHTML = data.title;
-        window.localStorage.setItem('tree', JSON.stringify(changedTree));
+        saveTree();
     }
     else {
         console.log(`No node found for ${id}`);
@@ -269,6 +276,31 @@ function loadLastSession() {
     else {
         console.log('No tree found');
     }
+}
+
+function saveTree() {
+    window.localStorage.setItem('tree', JSON.stringify(changedTree));
+}
+
+// I don't even know what I just wrote
+function isEqualJson(obj1, obj2) {
+    keys1 = Object.keys(obj1);
+    keys2 = Object.keys(obj2);
+
+    //return true when the two json has same length and all the properties has same value key by key
+    let r = keys1.length === keys2.length && Object.keys(obj1).every(key => obj1[key] == obj2[key]);
+    console.log(r)
+    return r;
+}
+
+function findAllChangedNodes(oldList, newList) {
+    let changedNodes = [];
+    newList.forEach(newNode => {
+        let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
+        if(!oldNode) return changedNodes.push(newNode);
+        if(isEqualJson(oldNode, newNode)) changedNodes.push(newNode);
+    });
+    return changedNodes;
 }
 
 document.querySelector("#jsonInputModal").addEventListener('shown.bs.modal', () => {
