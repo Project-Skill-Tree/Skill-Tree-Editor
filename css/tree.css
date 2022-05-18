@@ -10,10 +10,6 @@
 	white-space: nowrap;
 }
 
-.tree-container {
-	overflow: scroll;
-}
-
 .tree {
 	height: auto;
 	text-align: center;
