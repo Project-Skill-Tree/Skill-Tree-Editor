@@ -1,3 +1,5 @@
+import {getSkills} from "./APIHelper";
+
 let childrenCount = {};
 let highestId = 0;
 let changedTree = [];
@@ -155,18 +157,18 @@ function deleteChildren(list, nodeId) {
     
 }
 
-function init(data) {
-    changedTree = data;
-    console.log("initializing tree")
-    let root = getRoot(data);
-    if (root) {
-        drawNode(root);
-        drawChildren(data, root);
-    }
-    else {
-        console.log('No root node found');
-        return
-    }
+function init() {
+    getSkills((root, skills) => {
+        changedTree = skills;
+        console.log("initializing tree");
+        if (root) {
+            drawNode(root);
+            drawChildren(skills, root);
+        }
+        else {
+            console.log('No root node found');
+        }
+    });
 }
 
 function getRoot(list) {
