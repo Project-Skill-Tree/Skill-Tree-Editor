@@ -154,9 +154,9 @@ function deleteChildren(list, nodeId) {
             list.splice(nodeIndex, 1);
         });
     }
-    
 }
 
+<<<<<<< Updated upstream
 function init() {
     getSkills((root, skills) => {
         changedTree = skills;
@@ -169,6 +169,35 @@ function init() {
             console.log('No root node found');
         }
     });
+=======
+function addVariables(){
+    const api_key = document.querySelector('#api-key-input').value;
+    const api_link = document.querySelector('#api-link-input').value;
+    localStorage.setItem('API_KEY', api_key);
+    localStorage.setItem('API_URL', api_link);
+    document.querySelector("#variable-close").click(); 
+}
+
+function init() {
+if (typeof localStorage["API_KEY"] === 'undefined' || typeof localStorage["API_URL"] === 'undefined' ){
+  const edit_variables_button = document.querySelector("#add-variables");
+  edit_variables_button.click();     
+  addVariables();
+}
+// gets the tree from the API, and then displays it
+    getTree()
+    let tree = JSON.parse(window.localStorage.getItem('tree'));
+    console.log(tree);
+    let root = getRoot(tree);
+    if (root) {
+        drawNode(root);
+        drawChildren(tree, root);
+    }
+    else {
+        console.log('No root node found');
+        return
+    }
+>>>>>>> Stashed changes
 }
 
 function getRoot(list) {

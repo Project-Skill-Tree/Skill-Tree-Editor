@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/tree.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -31,6 +32,7 @@
         <button class="btn btn-primary" id="save-skills" onclick="saveButtonClick()">Save Skills</button>
         <button class="btn btn-primary" id="add-skill" onclick="displayJson()" data-bs-toggle="modal" data-bs-target="#jsonOutputModal">Export JSON</button>
         <button class="btn btn-primary" id="import-json" data-bs-toggle="modal" data-bs-target="#jsonInputModal">Import JSON</button>
+        <button class="btn btn-primary" id="add-variables"  data-bs-toggle="modal" data-bs-target="#variableEditorModal">Edit Variables</button>
       </div>
     </div>
   </main>
@@ -89,6 +91,29 @@
     </div>
   </div>
 
+  <div id="variableEditorModal" class="modal" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit Variables</h5>
+                  <button type="button" id= "variable-close" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h5>API Key</h5>
+                  <textarea type="text" name="API key" id="api-key-input"></textarea>
+                  <h5>API Link</h5>
+                  <textarea type="text" name="API link" id="api-link-input"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="addVariables()">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+        </div>
+  </div>
+
   <div id="deleteConfirmModal" class="modal" tabindex="-1">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -112,10 +137,16 @@
 
   <!-- JavaScript Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+  <script src="./js/api.js"></script>
   <script src="./js/tree.js"></script>
+<<<<<<< Updated upstream
   <script>
     init()
+=======
+ <script>
+ // stuff goes here
+ init()
+>>>>>>> Stashed changes
   </script>
 </body>
 
