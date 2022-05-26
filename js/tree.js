@@ -1,5 +1,3 @@
-import {getSkills} from "./APIHelper";
-
 let childrenCount = {};
 let highestId = 0;
 let changedTree = [];
@@ -115,7 +113,6 @@ function drawChildren(list, parent) {
     if (!parent.children) return;
     parent.children.forEach(child => {
         let childData = findNode(list, child);
-        console.log(child);
         drawNode(findNode(list, child), parent.id);
         if (childData) {
             console.log(`Drawing child ${childData.title}`);
@@ -156,26 +153,25 @@ function deleteChildren(list, nodeId) {
     }
 }
 
-<<<<<<< Updated upstream
-function init() {
-    getSkills((root, skills) => {
-        changedTree = skills;
-        console.log("initializing tree");
-        if (root) {
-            drawNode(root);
-            drawChildren(skills, root);
-        }
-        else {
-            console.log('No root node found');
-        }
-    });
-=======
+
 function addVariables(){
     const api_key = document.querySelector('#api-key-input').value;
     const api_link = document.querySelector('#api-link-input').value;
     localStorage.setItem('API_KEY', api_key);
     localStorage.setItem('API_URL', api_link);
     document.querySelector("#variable-close").click(); 
+}
+
+function initializeTree(tree) { 
+    let root = getRoot(tree);
+    if (root) {
+        root.map(node => drawNode(node));
+        tree["skills"].map((child,index) => drawChildren(child,root[index]));
+    }
+    else {
+        console.log('No root node found');
+        return
+    }
 }
 
 function init() {
@@ -187,31 +183,18 @@ if (typeof localStorage["API_KEY"] === 'undefined' || typeof localStorage["API_U
 // gets the tree from the API, and then displays it
     getTree()
     let tree = JSON.parse(window.localStorage.getItem('tree'));
-    console.log(tree);
-    let root = getRoot(tree);
-    if (root) {
-        drawNode(root);
-        drawChildren(tree, root);
-    }
-    else {
-        console.log('No root node found');
-        return
-    }
->>>>>>> Stashed changes
+    initializeTree(tree);
 }
 
 function getRoot(list) {
-    let root = list.find(item => item.category == 'root');
+    let root = list["root"];
 
     return root ? root : null;
 }
 
-function findNode(list, id) {
-    let node = list.find(item => item.id == id);
-    if (node) {
-        return node;
-    }
-    return null;
+function findNode(node, id) {
+    if (node._id == id) return node;
+    else return null;
 }
 
 function findNodeIndex(list, id) {
@@ -289,14 +272,14 @@ function loadJson() {
     document.querySelector('.tree').innerHTML = "";
     let json = document.querySelector('#json-input').value;
     let data = JSON.parse(json);
-    init(data);
+    initializeTree(data);
 }
 
 function loadLastSession() {
     let tree = window.localStorage.getItem('tree');
     document.querySelector('.tree').innerHTML = "";
     if (tree) {
-        init(JSON.parse(tree));
+        initializeTree(JSON.parse(tree));
     }
     else {
         console.log('No tree found');
