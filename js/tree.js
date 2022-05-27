@@ -3,7 +3,6 @@ let highestId = 0;
 let oldTree = [];
 let changedTree = [];
 
-
 let typeTemplates = {
     "item": {
         "title": "item",
@@ -48,22 +47,34 @@ async function drawNode(data, parentId) {
         showcaseData(findNode(changedTree, data.id));
     });
 
-    nodeAncor.addEventListener('contextmenu', function (event) {
+    nodeAncor.addEventListener('contextmenu', async function (event) {
         event.preventDefault();
-        let newNode = {
-            "id": parseInt(highestId + 1),
-            "iconName": "edit",
-            "title": "Editing I",
-            "level": 1,
-            "goal": "Edit the data",
-            "frequency": "DAILY",
-            "timelimit": "1x Week",
-            "xp": 69,
-            "category": "new",
-            "type": "skill",
-            "requires": [],
-            "children": []
-        };
+        let isClone = event.ctrlKey;
+        var newNode = {};
+        console.log(parentId)
+        if(isClone && data.type != 'root') {
+            newNode = JSON.parse(JSON.stringify(data));
+            newNode.id = parseInt(highestId + 1);
+            newNode.title = `${data.title} (copy)`;
+            newNode.children = [];
+            newNode.level += 1;
+        }
+        else {
+            newNode = {
+                "id": parseInt(highestId + 1),
+                "iconName": "edit",
+                "title": "Editing I",
+                "level": 1,
+                "goal": "Edit the data",
+                "frequency": "DAILY",
+                "timelimit": "1x Week",
+                "xp": 69,
+                "category": "new",
+                "type": "skill",
+                "requires": [],
+                "children": []
+            };
+        }
         addNode(changedTree, parseInt(data.id), newNode);
         drawNode(newNode, data.id);
 
@@ -93,14 +104,13 @@ async function drawNode(data, parentId) {
     }
 
     document.getElementById(`node-${parentId}-ul`).appendChild(node);
-
-
 }
 
 function addNode(tree, parentId, newNodeData) {
     let parent = findNode(tree, parentId);
     if (parent) {
         if (!parent.children && parent.children != []) parent.children = [];
+        if (!parent.requires && parent.requires != []) parent.requires = [];
         parent.children.push(newNodeData.id);
         changedTree.push(newNodeData);
         saveTree();
@@ -153,7 +163,6 @@ function deleteChildren(list, nodeId) {
             list.splice(nodeIndex, 1);
         });
     }
-
 }
 
 function init(data) {
@@ -217,8 +226,12 @@ function showcaseData(data) {
     });
 
     for (let field in data) {
-        if (field == 'type' || field == 'children') continue;
+        // skip over the fields that are handled by the app automatically or have a separate UI
+        if (['type', 'children', 'requires'].includes(field)) continue;
         let input = document.createElement('input');
+        if (field == 'id') {
+            input.setAttribute('readonly', 'readonly');
+        }
         input.setAttribute('type', 'text');
         input.setAttribute('name', field);
         input.setAttribute('value', data[field]);
@@ -328,7 +341,7 @@ document.querySelector("#jsonOutputModal").addEventListener('shown.bs.modal', ()
 
     document.querySelector("#updateAPIBtn").addEventListener('click', () => {
         let xhr = new XMLHttpRequest();
-        
+
         newData.forEach(node => {
             xhr.open('PUT', 'http://localhost:3000/');
             xhr.setRequestHeader('Content-Type', 'application/json');

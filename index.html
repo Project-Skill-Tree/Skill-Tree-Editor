@@ -47,6 +47,27 @@
     <button id="deleteNode" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">Delete node and its children</button>
   </template>
 
+  <template id="node-tabs-template">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">goal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">requires</a>
+      </li>
+    </ul>
+
+    <div>
+      <div class="form-group">
+        <input type="url" name="exportAPILink" id="exportAPILink" class="form-control" placeholder="https://skilltree.com">
+        <button class="btn">Add</button>
+      </div>
+      <ul class="tabs-list">
+        
+      </ul>
+    </div>
+  </template>
+
   <div id="jsonOutputModal" class="modal" tabindex="-1">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
