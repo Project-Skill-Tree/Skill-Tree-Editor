@@ -257,7 +257,8 @@ function updateNode(id, data) {
 
 function displayJson() {
     let json = JSON.stringify(changedTree);
-    document.querySelector('#json-output').innerHTML = json;
+    document.querySelector('#json-output').value = json;
+    return json;
 }
 
 function loadJson() {
@@ -289,7 +290,6 @@ function isEqualJson(obj1, obj2) {
 
     //return true when the two json has same length and all the properties has same value key by key
     let r = keys1.length === keys2.length && Object.keys(obj1).every(key => obj1[key] == obj2[key]);
-    console.log(r)
     return r;
 }
 
@@ -297,8 +297,8 @@ function findAllChangedNodes(oldList, newList) {
     let changedNodes = [];
     newList.forEach(newNode => {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
-        if(!oldNode) return changedNodes.push(newNode);
-        if(isEqualJson(oldNode, newNode)) changedNodes.push(newNode);
+        if (!oldNode) return changedNodes.push(newNode);
+        if (isEqualJson(oldNode, newNode)) changedNodes.push(newNode);
     });
     return changedNodes;
 }
@@ -319,4 +319,20 @@ document.querySelector("#editor-close").addEventListener('click', () => {
     editor.classList.remove('expanded');
 
 
+});
+
+document.querySelector("#jsonOutputModal").addEventListener('shown.bs.modal', () => {
+    let data = displayJson();
+
+    let newData = findAllChangedNodes(oldTree, changedTree);
+
+    document.querySelector("#updateAPIBtn").addEventListener('click', () => {
+        let xhr = new XMLHttpRequest();
+        
+        newData.forEach(node => {
+            xhr.open('PUT', 'http://localhost:3000/');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(node));
+        });
+    });
 });

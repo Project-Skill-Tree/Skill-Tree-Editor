@@ -29,7 +29,7 @@
       <div id="data-inputs"></div>
       <div id="skill-controls">
         <button class="btn btn-primary" id="save-skills" onclick="saveButtonClick()">Save Skills</button>
-        <button class="btn btn-primary" id="add-skill" onclick="displayJson()" data-bs-toggle="modal" data-bs-target="#jsonOutputModal">Export JSON</button>
+        <button class="btn btn-primary" id="add-skill" data-bs-toggle="modal" data-bs-target="#jsonOutputModal">Export JSON</button>
         <button class="btn btn-primary" id="import-json" data-bs-toggle="modal" data-bs-target="#jsonInputModal">Import JSON</button>
       </div>
     </div>
@@ -57,7 +57,14 @@
           </button>
         </div>
         <div class="modal-body">
-          <textarea id="json-output">Modal body text goes here.</textarea>
+          <div class="mb-3">
+            <textarea id="json-output">Modal body text goes here.</textarea>
+          </div>
+          <label for="exportAPILink">API URL</label>
+          <input type="url" name="exportAPILink" id="exportAPILink" class="form-control" placeholder="https://skilltree.com">
+          <label for="exportAPIToken">API Token</label>
+          <input type="text" name="exportAPIToken" id="exportAPIToken" class="form-control" placeholder="API Token">
+          <button type="submit" class="btn btn-primary" id="updateAPIBtn">Update Tree</button>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
