@@ -41,10 +41,10 @@ async function drawNode(data, parentId) {
     let nodeTitle = document.createElement('span');
     nodeTitle.innerHTML = data.title;
     node.classList.add('node');
-    node.id = `node-${data.id}`;
+    node.id = `node-${data._id}`;
 
     nodeAncor.addEventListener('click', function () {
-        showcaseData(findNode(changedTree, data.id));
+        showcaseData(findNode(data._id));
     });
 
     nodeAncor.addEventListener('contextmenu', function (event) {
@@ -63,8 +63,8 @@ async function drawNode(data, parentId) {
             "requires": [],
             "children": []
         };
-        addNode(changedTree, parseInt(data.id), newNode);
-        drawNode(newNode, data.id);
+        addNode(changedTree, parseInt(data._id), newNode);
+        drawNode(newNode, data._id);
 
         return false;
     });
@@ -112,9 +112,9 @@ function addNode(tree, parentId, newNodeData) {
 function drawChildren(list, parent) {
     if (!parent.children) return;
     parent.children.forEach(child => {
-        let childData = findNode(list, child);
-        drawNode(findNode(list, child), parent.id);
+        let childData = findNode(child);
         if (childData) {
+            drawNode(childData, parent._id);
             console.log(`Drawing child ${childData.title}`);
             drawChildren(list, childData);
         }
@@ -165,11 +165,17 @@ function addVariables(){
 function initializeTree(tree) { 
     let root = getRoot(tree);
     if (root) {
-        root.map(node => drawNode(node));
-        tree["skills"].map((child,index) => drawChildren(child,root[index]));
+        root.map(node => drawNode(node, null))
+        tree["skills"].map(child => {
+            parent = tree["skills"].filter(parent => parent._id == child.requires[0])
+            if (parent.length != 0) {
+                drawChildren(child, parent[0])
+            }
+        }
+        );
     }
     else {
-        console.log('No root node found');
+        console.log('No root nodes found');
         return
     }
 }
@@ -188,13 +194,13 @@ if (typeof localStorage["API_KEY"] === 'undefined' || typeof localStorage["API_U
 
 function getRoot(list) {
     let root = list["root"];
-
     return root ? root : null;
 }
 
-function findNode(node, id) {
-    if (node._id == id) return node;
-    else return null;
+function findNode(id) {
+    let list = JSON.parse(window.localStorage.getItem('tree'));
+    let node = list["skills"].find(node => node._id == id);
+    return node;
 }
 
 function findNodeIndex(list, id) {
@@ -220,7 +226,7 @@ function showcaseData(data) {
         editFields.innerHTML = '';
         let newData = typeTemplates[type];
         newData.children = data.children;
-        newData.id = data.id;
+        newData.id = data._id;
         newData.requires = data.requires;
         showcaseData(newData);
     });
@@ -238,7 +244,7 @@ function showcaseData(data) {
 
 function saveButtonClick() {
     let id = parseInt(document.querySelector('.edit-fields').getAttribute('data-id'));
-    let data = findNode(changedTree, id);
+    let data = findNode(id);
     let newData = {};
     newData.id = data.id;
     let inputs = document.querySelectorAll('.edit-fields input');
