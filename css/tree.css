@@ -4,10 +4,12 @@
 	margin: 0px;
 	box-sizing: border-box;
 }
+
 .tree {
 	display: grid;
 	font-family: 'Poppins', sans-serif;
 	white-space: nowrap;
+	display: inline;
 }
 
 .tree {

@@ -1,6 +1,7 @@
 let childrenCount = {};
-let highestId = 0;
 let oldTree = [];
+
+// array that takes on all the changes of the tree
 let changedTree = [];
 
 let typeTemplates = {
@@ -35,6 +36,7 @@ let typeTemplates = {
     }
 };
 
+// add a new node to the tree UI using the data passed in
 async function drawNode(data, parentId) {
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
@@ -51,17 +53,16 @@ async function drawNode(data, parentId) {
         event.preventDefault();
         let isClone = event.ctrlKey;
         var newNode = {};
-        console.log(parentId)
-        if(isClone && data.type != 'root') {
+        if (isClone && data.type != 'root') {
             newNode = JSON.parse(JSON.stringify(data));
-            newNode.id = parseInt(highestId + 1);
+            newNode.id = generateUID();
             newNode.title = `${data.title} (copy)`;
             newNode.children = [];
             newNode.level += 1;
         }
         else {
             newNode = {
-                "id": parseInt(highestId + 1),
+                "id": generateUID(),
                 "iconName": "edit",
                 "title": "Editing I",
                 "level": 1,
@@ -71,11 +72,11 @@ async function drawNode(data, parentId) {
                 "xp": 69,
                 "category": "new",
                 "type": "skill",
-                "requires": [],
                 "children": []
             };
         }
-        addNode(changedTree, parseInt(data.id), newNode);
+        newNode.requires = [data.id];
+        addNode(changedTree, data.id, newNode);
         drawNode(newNode, data.id);
 
         return false;
@@ -98,14 +99,10 @@ async function drawNode(data, parentId) {
         document.getElementById(`node-${parentId}`).appendChild(ul);
     }
 
-    // update highestId if the new node has a higher id than the current highestId
-    if (data.id > highestId) {
-        highestId = data.id;
-    }
-
     document.getElementById(`node-${parentId}-ul`).appendChild(node);
 }
 
+// adds a new node to the tree
 function addNode(tree, parentId, newNodeData) {
     let parent = findNode(tree, parentId);
     if (parent) {
@@ -120,21 +117,26 @@ function addNode(tree, parentId, newNodeData) {
     }
 }
 
+// iterates through the node's children and draws them all using the drawNode function
 function drawChildren(list, parent) {
     if (!parent.children) return;
     parent.children.forEach(child => {
         let childData = findNode(list, child);
-        console.log(child);
         drawNode(findNode(list, child), parent.id);
         if (childData) {
-            console.log(`Drawing child ${childData.title}`);
             drawChildren(list, childData);
         }
     });
 }
 
+// removes a node from the UI and tree
 function deleteNode(list, nodeId) {
     let node = findNode(list, nodeId);
+
+    if (!node.requires || node.requires.length == 0) {
+        document.querySelector(`#node-${nodeId}`).remove();
+        return;
+    }
 
     // delete children
     if (node.children) {
@@ -154,6 +156,7 @@ function deleteNode(list, nodeId) {
     list.splice(findNodeIndex(list, nodeId), 1);
 }
 
+// wipes and entire node's family from the UI and tree. Basically goes through all the children and the children's children etc. and removes them
 function deleteChildren(list, nodeId) {
     let node = findNode(list, nodeId);
     if (node.children) {
@@ -165,30 +168,49 @@ function deleteChildren(list, nodeId) {
     }
 }
 
-function init(data) {
-    // parse data if it is not already parsed
-    if (!Array.isArray(data)) data = JSON.parse(data);
-    // set old tree equal to the data passed in without changing it in the global scope, I am aware this is a retarded line but I am tired and this is a quick fix
-    oldTree = JSON.parse(JSON.stringify(data));
-    changedTree = data;
+// init command that initalizes the whole tree
+async function init() {
+    // check if the user has their credentials stored in local storage, if not, prompt the user to input them
+    if (!window.localStorage.getItem('api_url') || !window.localStorage.getItem('api_key')) {
+        var varModal = new BSN.Modal(
+            '#variablesModal',
+            {
+                backdrop: 'static', // we don't want to dismiss Modal when Modal or backdrop is the click event target
+                keyboard: false // we don't want to dismiss Modal on pressing [Esc] key
+            }
+        );
+        varModal.show();
+        return;
+    }
+
+    let data = await getAllNodes();
+
+    changedTree = formatAPIToEditor(data);
+
     console.log("initializing tree")
-    let root = getRoot(data);
-    if (root) {
+
+    // draw the tree
+    let roots = getRoots(changedTree);
+    roots.forEach(root => {
         drawNode(root);
-        drawChildren(data, root);
-    }
-    else {
-        console.log('No root node found');
-        return
-    }
+        drawChildren(changedTree, root);
+    });
 }
 
-function getRoot(list) {
-    let root = list.find(item => item.category == 'root');
+function showError(message) {
+    let errorModal = new BSN.Modal('#errorModal');
+    errorModal.show();
+
+    document.querySelector('#error-message').innerHTML = message;
+}
+
+function getRoots(list) {
+    let root = list.filter(item => item.isRoot);
 
     return root ? root : null;
 }
 
+// returns a node from a tree based on the id (the actual data is returned, not the index)
 function findNode(list, id) {
     let node = list.find(item => item.id == id);
     if (node) {
@@ -197,6 +219,7 @@ function findNode(list, id) {
     return null;
 }
 
+// search for the index of a node in the list by id (only the index of the node is returned)
 function findNodeIndex(list, id) {
     let index = list.findIndex(item => item.id == id);
     if (index > -1) {
@@ -205,12 +228,15 @@ function findNodeIndex(list, id) {
     return null;
 }
 
+// display the data of the node that was clicked on the right hand side of the screen
 function showcaseData(data) {
+    console.log(data);
     // copy the data from the template to data-inputs
     let skillEditor = document.querySelector('#data-inputs');
     let templateData = document.querySelector(`#node-edit-template`);
     skillEditor.innerHTML = templateData.innerHTML;
     let editFields = skillEditor.querySelector('.edit-fields');
+
 
     editFields.innerHTML = '';
     editFields.setAttribute('data-id', data.id);
@@ -241,8 +267,9 @@ function showcaseData(data) {
     }
 }
 
+// update the tree data with the new data after pressing the save button
 function saveButtonClick() {
-    let id = parseInt(document.querySelector('.edit-fields').getAttribute('data-id'));
+    let id = document.querySelector('.edit-fields').getAttribute('data-id');
     let data = findNode(changedTree, id);
     let newData = {};
     newData.id = data.id;
@@ -256,6 +283,7 @@ function saveButtonClick() {
     updateNode(id, newData);
 }
 
+// update a node in the UI tree once the title is changed
 function updateNode(id, data) {
     let node = document.getElementById(`node-${id}`);
     if (node) {
@@ -268,12 +296,14 @@ function updateNode(id, data) {
     }
 }
 
+// shows the data inside the export modal (will be removed in near future since we don't need it)
 function displayJson() {
     let json = JSON.stringify(changedTree);
     document.querySelector('#json-output').value = json;
     return json;
 }
 
+// takes the input from the json input textarea and parses it into the tree then calls the init function to render the tree with that new data
 function loadJson() {
     document.querySelector('.tree').innerHTML = "";
     let json = document.querySelector('#json-input').value;
@@ -281,6 +311,7 @@ function loadJson() {
     init(data);
 }
 
+// loading the tree from local storage
 function loadLastSession() {
     let tree = window.localStorage.getItem('tree');
     document.querySelector('.tree').innerHTML = "";
@@ -292,20 +323,36 @@ function loadLastSession() {
     }
 }
 
+// function used to save the tree to local storage
 function saveTree() {
     window.localStorage.setItem('tree', JSON.stringify(changedTree));
 }
 
+// function used to save the API URL and API key to local storage for later use
+function updateVariables() {
+    let apiUrl = document.querySelector('#editAPIURL').value;
+    let apiKey = document.querySelector('#editAPIKey').value;
+
+    if(!apiKey || !apiUrl) return;
+
+    window.localStorage.setItem('api_url', apiUrl);
+    window.localStorage.setItem('api_key', apiKey);
+    var varModal = new BSN.Modal('#variablesModal');
+    varModal.hide();
+    init();
+}
+
 // I don't even know what I just wrote
 function isEqualJson(obj1, obj2) {
-    keys1 = Object.keys(obj1);
-    keys2 = Object.keys(obj2);
+    let keys1 = Object.keys(obj1);
+    let keys2 = Object.keys(obj2);
 
     //return true when the two json has same length and all the properties has same value key by key
     let r = keys1.length === keys2.length && Object.keys(obj1).every(key => obj1[key] == obj2[key]);
     return r;
 }
 
+// goes through two lists and finds the differences between them, used for finding changes in the tree which will be sent to the API
 function findAllChangedNodes(oldList, newList) {
     let changedNodes = [];
     newList.forEach(newNode => {
@@ -330,8 +377,6 @@ document.querySelector("#editor-expand").addEventListener('click', () => {
 document.querySelector("#editor-close").addEventListener('click', () => {
     let editor = document.querySelector('#node-editor');
     editor.classList.remove('expanded');
-
-
 });
 
 document.querySelector("#jsonOutputModal").addEventListener('shown.bs.modal', () => {
