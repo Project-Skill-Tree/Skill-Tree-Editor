@@ -45,6 +45,7 @@ function formatAPIToEditor(data) {
             item.type = key;
             item.id = item._id;
             delete item._id;
+            delete item.__v;
             if(!item.requires || item.requires.length < 1) item.isRoot = true;
             result.push(item);
         });
