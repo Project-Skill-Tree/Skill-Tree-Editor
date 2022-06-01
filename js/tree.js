@@ -230,7 +230,6 @@ function findNodeIndex(list, id) {
 
 // display the data of the node that was clicked on the right hand side of the screen
 function showcaseData(data) {
-    console.log(data);
     // copy the data from the template to data-inputs
     let skillEditor = document.querySelector('#data-inputs');
     let templateData = document.querySelector(`#node-edit-template`);
@@ -253,7 +252,7 @@ function showcaseData(data) {
 
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
-        if (['type', 'children', 'requires'].includes(field)) continue;
+        if (['type', 'children', 'requires', 'goal'].includes(field)) continue;
         let label = document.createElement('label');
         label.setAttribute('for', `${field}`);
         label.innerHTML = field;
