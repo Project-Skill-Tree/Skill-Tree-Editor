@@ -379,6 +379,11 @@ document.querySelector("#editor-close").addEventListener('click', () => {
     editor.classList.remove('expanded');
 });
 
+document.querySelector("#variablesModal").addEventListener('shown.bs.modal', () => {
+    document.querySelector('#editAPIURL').value = window.localStorage.getItem('api_url');
+    document.querySelector('#editAPIKey').value = window.localStorage.getItem('api_key');
+});
+
 document.querySelector("#jsonOutputModal").addEventListener('shown.bs.modal', () => {
     let data = displayJson();
 
