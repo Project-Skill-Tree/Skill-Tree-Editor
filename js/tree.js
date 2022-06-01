@@ -49,38 +49,40 @@ async function drawNode(data, parentId) {
         showcaseData(findNode(changedTree, data.id));
     });
 
-    nodeAncor.addEventListener('contextmenu', async function (event) {
-        event.preventDefault();
-        let isClone = event.ctrlKey;
-        var newNode = {};
-        if (isClone && data.type != 'root') {
-            newNode = JSON.parse(JSON.stringify(data));
-            newNode.id = generateUID();
-            newNode.title = `${data.title} (copy)`;
-            newNode.children = [];
-            newNode.level += 1;
-        }
-        else {
-            newNode = {
-                "id": generateUID(),
-                "iconName": "edit",
-                "title": "Editing I",
-                "level": 1,
-                "goal": "Edit the data",
-                "frequency": "DAILY",
-                "timelimit": "1x Week",
-                "xp": 69,
-                "category": "new",
-                "type": "skill",
-                "children": []
-            };
-        }
-        newNode.requires = [data.id];
-        addNode(changedTree, data.id, newNode);
-        drawNode(newNode, data.id);
+    if (data.type == 'skills') {
+        nodeAncor.addEventListener('contextmenu', async function (event) {
+            event.preventDefault();
+            let isClone = event.ctrlKey;
+            var newNode = {};
+            if (isClone && data.type != 'root') {
+                newNode = JSON.parse(JSON.stringify(data));
+                newNode.id = generateUID();
+                newNode.title = `${data.title} (copy)`;
+                newNode.children = [];
+                newNode.level += 1;
+            }
+            else {
+                newNode = {
+                    "id": generateUID(),
+                    "iconName": "edit",
+                    "title": "Editing I",
+                    "level": 1,
+                    "goal": "Edit the data",
+                    "frequency": "DAILY",
+                    "timelimit": "1x Week",
+                    "xp": 69,
+                    "category": "new",
+                    "type": "skill",
+                    "children": []
+                };
+            }
+            newNode.requires = [data.id];
+            addNode(changedTree, data.id, newNode);
+            drawNode(newNode, data.id);
 
-        return false;
-    });
+            return false;
+        });
+    }
 
     nodeAncor.appendChild(nodeTitle);
     node.appendChild(nodeAncor);
@@ -337,7 +339,7 @@ function updateVariables() {
     let apiUrl = document.querySelector('#editAPIURL').value;
     let apiKey = document.querySelector('#editAPIKey').value;
 
-    if(!apiKey || !apiUrl) return;
+    if (!apiKey || !apiUrl) return;
 
     window.localStorage.setItem('api_url', apiUrl);
     window.localStorage.setItem('api_key', apiKey);
