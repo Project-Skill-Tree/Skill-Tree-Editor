@@ -254,6 +254,9 @@ function showcaseData(data) {
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
         if (['type', 'children', 'requires'].includes(field)) continue;
+        let label = document.createElement('label');
+        label.setAttribute('for', `${field}`);
+        label.innerHTML = field;
         let input = document.createElement('input');
         if (field == 'id') {
             input.setAttribute('readonly', 'readonly');
@@ -263,6 +266,7 @@ function showcaseData(data) {
         input.setAttribute('value', data[field]);
         input.setAttribute('placeholder', field);
         input.setAttribute('id', `node-${field}`);
+        skillEditor.querySelector(`.edit-fields`).appendChild(label);
         skillEditor.querySelector('.edit-fields').appendChild(input);
     }
 }
