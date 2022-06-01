@@ -5,15 +5,14 @@ let oldTree = [];
 let changedTree = [];
 
 let typeTemplates = {
-    "item": {
-        "title": "item",
-        "category": "item",
+    "items": {
+        "name": "item",
+        "emoji": "item",
         "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
-        "type": "item",
-        "requires": [],
-        "children": []
+        "type": "items",
+        "requires": []
     },
-    "skill": {
+    "skills": {
         "iconName": "skill",
         "title": "challenge",
         "level": 1,
@@ -22,17 +21,16 @@ let typeTemplates = {
         "timelimit": "1x Week",
         "xp": 69,
         "category": "new",
-        "type": "skill",
+        "type": "skills",
         "requires": [],
         "children": []
     },
-    "challenge": {
-        "title": "item",
-        "category": "item",
-        "timelimit": "1x Week",
-        "type": "challenge",
-        "requires": [],
-        "children": []
+    "challenges": {
+        "goal": [],
+        "category": "example",
+        "type": "challenges",
+        "xp": 420,
+        "requires": []
     }
 };
 
@@ -72,7 +70,7 @@ async function drawNode(data, parentId) {
                     "timelimit": "1x Week",
                     "xp": 69,
                     "category": "new",
-                    "type": "skill",
+                    "type": "skills",
                     "children": []
                 };
             }
