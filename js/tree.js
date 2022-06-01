@@ -41,7 +41,7 @@ async function drawNode(data, parentId) {
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
-    nodeTitle.innerHTML = data.title;
+    nodeTitle.innerHTML = data.title || data.name || data.type;
     node.classList.add('node');
     node.id = `node-${data.id}`;
 
@@ -288,7 +288,7 @@ function updateNode(id, data) {
     let node = document.getElementById(`node-${id}`);
     if (node) {
         changedTree[findNodeIndex(changedTree, id)] = data;
-        node.querySelector('span').innerHTML = data.title;
+        node.querySelector('span').innerHTML = data.title || data.name || data.type;
         saveTree();
     }
     else {
