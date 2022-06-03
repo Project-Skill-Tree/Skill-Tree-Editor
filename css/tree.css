@@ -10,12 +10,14 @@
 	font-family: 'Poppins', sans-serif;
 	white-space: nowrap;
 	display: inline;
-}
-
-.tree {
 	height: auto;
 	text-align: center;
 }
+
+.tree-container {
+	padding-right: 500px !important;
+}
+
 .tree ul {
 	padding-top: 20px;
 	position: relative;

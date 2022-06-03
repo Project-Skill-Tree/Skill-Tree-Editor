@@ -13,12 +13,13 @@ let typeTemplates = {
         "requires": []
     },
     "skills": {
-        "iconName": "skill",
-        "title": "challenge",
+        "icon": "skill",
+        "title": "skill",
         "level": 1,
-        "goal": "Edit the data",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
+        "goal": ["Edit the data"],
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 12,
         "xp": 69,
         "category": "new",
         "type": "skills",
@@ -58,22 +59,13 @@ async function drawNode(data, parentId) {
                 newNode.title = `${data.title} (copy)`;
                 newNode.children = [];
                 newNode.level += 1;
+                delete newNode.isRoot;
             }
             else {
-                newNode = {
-                    "id": generateUID(),
-                    "iconName": "edit",
-                    "title": "Editing I",
-                    "level": 1,
-                    "goal": "Edit the data",
-                    "frequency": "DAILY",
-                    "timelimit": "1x Week",
-                    "xp": 69,
-                    "category": "new",
-                    "type": "skills",
-                    "children": []
-                };
+                newNode = typeTemplates["skills"];
+                newNode.id = generateUID();
             }
+            data.children.push(newNode.id);
             newNode.requires = [data.id];
             addNode(changedTree, data.id, newNode);
             drawNode(newNode, data.id);
@@ -172,7 +164,7 @@ function deleteChildren(list, nodeId) {
 async function init() {
     // check if the user has their credentials stored in local storage, if not, prompt the user to input them
     if (!window.localStorage.getItem('api_url') || !window.localStorage.getItem('api_key')) {
-        var varModal = new BSN.Modal(
+        var varModal = new bootstrap.Modal(
             '#variablesModal',
             {
                 backdrop: 'static', // we don't want to dismiss Modal when Modal or backdrop is the click event target
@@ -185,7 +177,9 @@ async function init() {
 
     let data = await getAllNodes();
 
-    changedTree = formatAPIToEditor(data);
+
+    oldTree = formatAPIToEditor(data);
+    changedTree = JSON.parse(JSON.stringify(oldTree));
 
     console.log("initializing tree")
 
@@ -260,7 +254,12 @@ function showcaseData(data) {
         if (field == 'id') {
             input.setAttribute('readonly', 'readonly');
         }
-        input.setAttribute('type', 'text');
+        let nodeTypeToField = {
+            'string': 'text',
+            'number': 'number',
+            'boolean': 'checkbox'
+        }
+        input.setAttribute('type', nodeTypeToField[typeof data[field]]);
         input.setAttribute('name', field);
         input.setAttribute('value', data[field]);
         input.setAttribute('placeholder', field);
@@ -276,9 +275,13 @@ function saveButtonClick() {
     let data = findNode(changedTree, id);
     let newData = {};
     newData.id = data.id;
+    newData.requires = data.requires;
+    if(data.children) newData.children = data.children
+    if(data.goal) newData.goal = data.goal 
+
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
-        newData[input.name] = input.value;
+        newData[input.name] = input.type == "number" ? parseInt(input.value) : input.value;
     });
     newData.type = document.querySelector('#node-type').value;
 
@@ -303,6 +306,8 @@ function updateNode(id, data) {
 function displayJson() {
     let json = JSON.stringify(changedTree);
     document.querySelector('#json-output').value = json;
+    document.querySelector('#exportAPILink').value = window.localStorage.getItem('api_url');
+    document.querySelector('#exportAPIKey').value = window.localStorage.getItem('api_key');
     return json;
 }
 
@@ -340,37 +345,54 @@ function updateVariables() {
 
     window.localStorage.setItem('api_url', apiUrl);
     window.localStorage.setItem('api_key', apiKey);
-    var varModal = new BSN.Modal('#variablesModal');
+    var varModal = bootstrap.Modal.getInstance('#variablesModal');
     varModal.hide();
     init();
-}
-
-// I don't even know what I just wrote
-function isEqualJson(obj1, obj2) {
-    let keys1 = Object.keys(obj1);
-    let keys2 = Object.keys(obj2);
-
-    //return true when the two json has same length and all the properties has same value key by key
-    let r = keys1.length === keys2.length && Object.keys(obj1).every(key => obj1[key] == obj2[key]);
-    return r;
 }
 
 // goes through two lists and finds the differences between them, used for finding changes in the tree which will be sent to the API
 function findAllChangedNodes(oldList, newList) {
     let changedNodes = [];
+    // console.log(oldList);
     newList.forEach(newNode => {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
-        if (!oldNode) return changedNodes.push(newNode);
-        if (isEqualJson(oldNode, newNode)) changedNodes.push(newNode);
+        if (oldNode) {
+            if (!isEqualJson(newNode, oldNode)) {
+                console.log(`${newNode.id} changed`);
+                newNode.isNew = false;
+                changedNodes.push(newNode);
+            }
+        }
+        else {
+            newNode.isNew = true;
+            changedNodes.push(newNode);
+        }
     });
     return changedNodes;
 }
 
-document.querySelector("#jsonInputModal").addEventListener('shown.bs.modal', () => {
-    if (window.localStorage.getItem('tree')) {
-        document.querySelector('.json-input_last-session-container').style.display = "block";
-    }
-})
+function sendTree() {
+    let changedNodes = findAllChangedNodes(oldTree, changedTree);
+
+    changedNodes.forEach(node => {
+        let method = node.isNew ? 'POST' : 'PUT';
+        let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
+        let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/${node.isNew ? 'create' : 'update'}${endpoint}`;
+        console.log(url)
+        let headers = new Headers();
+        headers.append('api_key', window.localStorage.getItem('api_key'));
+        headers.append('Content-Type', 'application/json');
+
+        delete node.isNew;
+        delete node.isRoot;
+
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(node)
+        });
+    });
+}
 
 document.querySelector("#editor-expand").addEventListener('click', () => {
     let editor = document.querySelector('#node-editor');
@@ -382,6 +404,12 @@ document.querySelector("#editor-close").addEventListener('click', () => {
     editor.classList.remove('expanded');
 });
 
+document.querySelector("#jsonInputModal").addEventListener('shown.bs.modal', () => {
+    if (window.localStorage.getItem('tree')) {
+        document.querySelector('.json-input_last-session-container').style.display = "block";
+    }
+})
+
 document.querySelector("#variablesModal").addEventListener('shown.bs.modal', () => {
     document.querySelector('#editAPIURL').value = window.localStorage.getItem('api_url');
     document.querySelector('#editAPIKey').value = window.localStorage.getItem('api_key');
@@ -390,15 +418,15 @@ document.querySelector("#variablesModal").addEventListener('shown.bs.modal', () 
 document.querySelector("#jsonOutputModal").addEventListener('shown.bs.modal', () => {
     let data = displayJson();
 
-    let newData = findAllChangedNodes(oldTree, changedTree);
+    // let newData = findAllChangedNodes(oldTree, changedTree);
 
-    document.querySelector("#updateAPIBtn").addEventListener('click', () => {
-        let xhr = new XMLHttpRequest();
+    // document.querySelector("#updateAPIBtn").addEventListener('click', () => {
+    //     let xhr = new XMLHttpRequest();
 
-        newData.forEach(node => {
-            xhr.open('PUT', 'http://localhost:3000/');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify(node));
-        });
-    });
+    //     newData.forEach(node => {
+    //         xhr.open('PUT', 'http://localhost:3000/');
+    //         xhr.setRequestHeader('Content-Type', 'application/json');
+    //         xhr.send(JSON.stringify(node));
+    //     });
+    // });
 });
