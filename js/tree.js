@@ -65,7 +65,6 @@ async function drawNode(data, parentId) {
                 newNode = typeTemplates["skills"];
                 newNode.id = generateUID();
             }
-            data.children.push(newNode.id);
             newNode.requires = [data.id];
             addNode(changedTree, data.id, newNode);
             drawNode(newNode, data.id);
