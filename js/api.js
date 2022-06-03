@@ -34,6 +34,7 @@ async function getAllNodes() {
 
 function formatAPIToEditor(data) {
     let result = [];
+    delete data.response;
 
     // remove the "root" field
     delete data.root;
