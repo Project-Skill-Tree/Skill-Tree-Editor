@@ -192,7 +192,7 @@ async function init() {
 }
 
 function showError(message) {
-    let errorModal = new BSN.Modal('#errorModal');
+    let errorModal = new bootstrap.Modal('#errorModal');
     errorModal.show();
 
     document.querySelector('#error-message').innerHTML = message;
