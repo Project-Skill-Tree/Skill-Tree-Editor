@@ -40,7 +40,7 @@ async function drawNode(data, parentId) {
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
-    nodeTitle.innerHTML = data.title || data.name || data.type;
+    nodeTitle.innerHTML = (data.title || data.name || data.type) + (data.level ? ` ${data.level}` : '');
     node.classList.add('node');
     node.id = `node-${data.id}`;
 
@@ -54,9 +54,8 @@ async function drawNode(data, parentId) {
             let isClone = event.ctrlKey;
             var newNode = {};
             if (isClone && data.type != 'root') {
-                newNode = JSON.parse(JSON.stringify(data));
+                newNode = Object.assign({}, findNode(changedTree, data.id));
                 newNode.id = generateUID();
-                newNode.title = `${data.title} (copy)`;
                 newNode.children = [];
                 newNode.level += 1;
                 delete newNode.isRoot;
@@ -87,6 +86,7 @@ async function drawNode(data, parentId) {
     if (!parentNode) {
         let ul = document.createElement('ul');
         ul.id = `node-${parentId}-ul`;
+        console.log(parentId)
         document.getElementById(`node-${parentId}`).appendChild(ul);
     }
 
@@ -295,7 +295,7 @@ function updateNode(id, data) {
     let node = document.getElementById(`node-${id}`);
     if (node) {
         changedTree[findNodeIndex(changedTree, id)] = data;
-        node.querySelector('span').innerHTML = data.title || data.name || data.type;
+        node.querySelector('span').innerHTML = (data.title || data.name || data.type) + (data.level ? ` ${data.level}` : '');
         saveTree();
     }
     else {
