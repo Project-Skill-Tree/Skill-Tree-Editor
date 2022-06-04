@@ -184,6 +184,8 @@ async function init() {
 
     // draw the tree
     let roots = getRoots(changedTree);
+    // clear the current tree, if there is one
+    document.querySelector('.tree').innerHTML = '';
     roots.forEach(root => {
         drawNode(root);
         drawChildren(changedTree, root);
