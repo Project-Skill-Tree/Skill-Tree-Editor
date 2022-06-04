@@ -13,6 +13,12 @@ body {
     overflow: scroll;
 }
 
+label {
+    font-size: 1;
+    font-weight: 700;
+    font-smooth: always;
+}
+
 .row > div {
     width: auto;
     max-width: none;

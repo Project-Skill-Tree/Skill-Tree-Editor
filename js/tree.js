@@ -1,44 +1,46 @@
 let childrenCount = {};
-let highestId = 0;
+let oldTree = [];
+
+// array that takes on all the changes of the tree
 let changedTree = [];
 
 let typeTemplates = {
-    "item": {
-        "title": "item",
-        "category": "item",
+    "items": {
+        "name": "item",
+        "emoji": "item",
         "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
-        "type": "item",
-        "requires": [],
-        "children": []
+        "type": "items",
+        "requires": []
     },
-    "skill": {
-        "iconName": "skill",
-        "title": "challenge",
+    "skills": {
+        "icon": "skill",
+        "title": "skill",
         "level": 1,
-        "goal": "Edit the data",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
+        "goal": ["Edit the data"],
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 12,
         "xp": 69,
         "category": "new",
-        "type": "skill",
+        "type": "skills",
         "requires": [],
         "children": []
     },
-    "challenge": {
-        "title": "item",
-        "category": "item",
-        "timelimit": "1x Week",
-        "type": "challenge",
-        "requires": [],
-        "children": []
+    "challenges": {
+        "goal": [],
+        "category": "example",
+        "type": "challenges",
+        "xp": 420,
+        "requires": []
     }
 };
 
+// add a new node to the tree UI using the data passed in
 async function drawNode(data, parentId) {
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
-    nodeTitle.innerHTML = data.title;
+    nodeTitle.innerHTML = data.title || data.name || data.type;
     node.classList.add('node');
     node.id = `node-${data.id}`;
 
@@ -46,27 +48,30 @@ async function drawNode(data, parentId) {
         showcaseData(findNode(changedTree, data.id));
     });
 
-    nodeAncor.addEventListener('contextmenu', function (event) {
-        event.preventDefault();
-        let newNode = {
-            "id": parseInt(highestId + 1),
-            "iconName": "edit",
-            "title": "Editing I",
-            "level": 1,
-            "goal": "Edit the data",
-            "frequency": "DAILY",
-            "timelimit": "1x Week",
-            "xp": 69,
-            "category": "new",
-            "type": "skill",
-            "requires": [],
-            "children": []
-        };
-        addNode(changedTree, parseInt(data.id), newNode);
-        drawNode(newNode, data.id);
+    if (data.type == 'skills') {
+        nodeAncor.addEventListener('contextmenu', async function (event) {
+            event.preventDefault();
+            let isClone = event.ctrlKey;
+            var newNode = {};
+            if (isClone && data.type != 'root') {
+                newNode = JSON.parse(JSON.stringify(data));
+                newNode.id = generateUID();
+                newNode.title = `${data.title} (copy)`;
+                newNode.children = [];
+                newNode.level += 1;
+                delete newNode.isRoot;
+            }
+            else {
+                newNode = typeTemplates["skills"];
+                newNode.id = generateUID();
+            }
+            newNode.requires = [data.id];
+            addNode(changedTree, data.id, newNode);
+            drawNode(newNode, data.id);
 
-        return false;
-    });
+            return false;
+        });
+    }
 
     nodeAncor.appendChild(nodeTitle);
     node.appendChild(nodeAncor);
@@ -85,47 +90,47 @@ async function drawNode(data, parentId) {
         document.getElementById(`node-${parentId}`).appendChild(ul);
     }
 
-    // update highestId if the new node has a higher id than the current highestId
-    if (data.id > highestId) {
-        highestId = data.id;
-    }
-
     document.getElementById(`node-${parentId}-ul`).appendChild(node);
-
-
 }
 
+// adds a new node to the tree
 function addNode(tree, parentId, newNodeData) {
     let parent = findNode(tree, parentId);
     if (parent) {
         if (!parent.children && parent.children != []) parent.children = [];
+        if (!parent.requires && parent.requires != []) parent.requires = [];
         parent.children.push(newNodeData.id);
         changedTree.push(newNodeData);
-        window.localStorage.setItem('tree', JSON.stringify(changedTree));
+        saveTree();
     }
     else {
         console.log(`No parent found for ${parentId}`);
     }
 }
 
+// iterates through the node's children and draws them all using the drawNode function
 function drawChildren(list, parent) {
     if (!parent.children) return;
     parent.children.forEach(child => {
         let childData = findNode(list, child);
-        console.log(child);
         drawNode(findNode(list, child), parent.id);
         if (childData) {
-            console.log(`Drawing child ${childData.title}`);
             drawChildren(list, childData);
         }
     });
 }
 
+// removes a node from the UI and tree
 function deleteNode(list, nodeId) {
     let node = findNode(list, nodeId);
-    
+
+    if (!node.requires || node.requires.length == 0) {
+        document.querySelector(`#node-${nodeId}`).remove();
+        return;
+    }
+
     // delete children
-    if(node.children) {
+    if (node.children) {
         deleteChildren(list, nodeId);
     }
 
@@ -142,6 +147,7 @@ function deleteNode(list, nodeId) {
     list.splice(findNodeIndex(list, nodeId), 1);
 }
 
+// wipes and entire node's family from the UI and tree. Basically goes through all the children and the children's children etc. and removes them
 function deleteChildren(list, nodeId) {
     let node = findNode(list, nodeId);
     if (node.children) {
@@ -151,29 +157,53 @@ function deleteChildren(list, nodeId) {
             list.splice(nodeIndex, 1);
         });
     }
-    
 }
 
-function init(data) {
-    changedTree = data;
+// init command that initalizes the whole tree
+async function init() {
+    // check if the user has their credentials stored in local storage, if not, prompt the user to input them
+    if (!window.localStorage.getItem('api_url') || !window.localStorage.getItem('api_key')) {
+        var varModal = new bootstrap.Modal(
+            '#variablesModal',
+            {
+                backdrop: 'static', // we don't want to dismiss Modal when Modal or backdrop is the click event target
+                keyboard: false // we don't want to dismiss Modal on pressing [Esc] key
+            }
+        );
+        varModal.show();
+        return;
+    }
+
+    let data = await getAllNodes();
+
+
+    oldTree = formatAPIToEditor(data);
+    changedTree = JSON.parse(JSON.stringify(oldTree));
+
     console.log("initializing tree")
-    let root = getRoot(data);
-    if (root) {
+
+    // draw the tree
+    let roots = getRoots(changedTree);
+    roots.forEach(root => {
         drawNode(root);
-        drawChildren(data, root);
-    }
-    else {
-        console.log('No root node found');
-        return
-    }
+        drawChildren(changedTree, root);
+    });
 }
 
-function getRoot(list) {
-    let root = list.find(item => item.category == 'root');
+function showError(message) {
+    let errorModal = new bootstrap.Modal('#errorModal');
+    errorModal.show();
+
+    document.querySelector('#error-message').innerHTML = message;
+}
+
+function getRoots(list) {
+    let root = list.filter(item => item.isRoot);
 
     return root ? root : null;
 }
 
+// returns a node from a tree based on the id (the actual data is returned, not the index)
 function findNode(list, id) {
     let node = list.find(item => item.id == id);
     if (node) {
@@ -182,6 +212,7 @@ function findNode(list, id) {
     return null;
 }
 
+// search for the index of a node in the list by id (only the index of the node is returned)
 function findNodeIndex(list, id) {
     let index = list.findIndex(item => item.id == id);
     if (index > -1) {
@@ -190,12 +221,14 @@ function findNodeIndex(list, id) {
     return null;
 }
 
+// display the data of the node that was clicked on the right hand side of the screen
 function showcaseData(data) {
     // copy the data from the template to data-inputs
     let skillEditor = document.querySelector('#data-inputs');
     let templateData = document.querySelector(`#node-edit-template`);
     skillEditor.innerHTML = templateData.innerHTML;
     let editFields = skillEditor.querySelector('.edit-fields');
+
 
     editFields.innerHTML = '';
     editFields.setAttribute('data-id', data.id);
@@ -209,26 +242,45 @@ function showcaseData(data) {
         newData.requires = data.requires;
         showcaseData(newData);
     });
+
     for (let field in data) {
-        if(field == 'type' || field == 'children') continue;
+        // skip over the fields that are handled by the app automatically or have a separate UI
+        if (['type', 'children', 'requires', 'goal'].includes(field)) continue;
+        let label = document.createElement('label');
+        label.setAttribute('for', `${field}`);
+        label.innerHTML = field;
         let input = document.createElement('input');
-        input.setAttribute('type', 'text');
+        if (field == 'id') {
+            input.setAttribute('readonly', 'readonly');
+        }
+        let nodeTypeToField = {
+            'string': 'text',
+            'number': 'number',
+            'boolean': 'checkbox'
+        }
+        input.setAttribute('type', nodeTypeToField[typeof data[field]]);
         input.setAttribute('name', field);
         input.setAttribute('value', data[field]);
         input.setAttribute('placeholder', field);
         input.setAttribute('id', `node-${field}`);
+        skillEditor.querySelector(`.edit-fields`).appendChild(label);
         skillEditor.querySelector('.edit-fields').appendChild(input);
     }
 }
 
+// update the tree data with the new data after pressing the save button
 function saveButtonClick() {
-    let id = parseInt(document.querySelector('.edit-fields').getAttribute('data-id'));
+    let id = document.querySelector('.edit-fields').getAttribute('data-id');
     let data = findNode(changedTree, id);
     let newData = {};
     newData.id = data.id;
+    newData.requires = data.requires;
+    if(data.children) newData.children = data.children
+    if(data.goal) newData.goal = data.goal 
+
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
-        newData[input.name] = input.value;
+        newData[input.name] = input.type == "number" ? parseInt(input.value) : input.value;
     });
     newData.type = document.querySelector('#node-type').value;
 
@@ -236,23 +288,29 @@ function saveButtonClick() {
     updateNode(id, newData);
 }
 
+// update a node in the UI tree once the title is changed
 function updateNode(id, data) {
     let node = document.getElementById(`node-${id}`);
     if (node) {
         changedTree[findNodeIndex(changedTree, id)] = data;
-        node.querySelector('span').innerHTML = data.title;
-        window.localStorage.setItem('tree', JSON.stringify(changedTree));
+        node.querySelector('span').innerHTML = data.title || data.name || data.type;
+        saveTree();
     }
     else {
         console.log(`No node found for ${id}`);
     }
 }
 
+// shows the data inside the export modal (will be removed in near future since we don't need it)
 function displayJson() {
     let json = JSON.stringify(changedTree);
-    document.querySelector('#json-output').innerHTML = json;
+    document.querySelector('#json-output').value = json;
+    document.querySelector('#exportAPILink').value = window.localStorage.getItem('api_url');
+    document.querySelector('#exportAPIKey').value = window.localStorage.getItem('api_key');
+    return json;
 }
 
+// takes the input from the json input textarea and parses it into the tree then calls the init function to render the tree with that new data
 function loadJson() {
     document.querySelector('.tree').innerHTML = "";
     let json = document.querySelector('#json-input').value;
@@ -260,6 +318,7 @@ function loadJson() {
     init(data);
 }
 
+// loading the tree from local storage
 function loadLastSession() {
     let tree = window.localStorage.getItem('tree');
     document.querySelector('.tree').innerHTML = "";
@@ -271,11 +330,68 @@ function loadLastSession() {
     }
 }
 
-document.querySelector("#jsonInputModal").addEventListener('shown.bs.modal', () => {
-    if (window.localStorage.getItem('tree')) {
-        document.querySelector('.json-input_last-session-container').style.display = "block";
-    }
-})
+// function used to save the tree to local storage
+function saveTree() {
+    window.localStorage.setItem('tree', JSON.stringify(changedTree));
+}
+
+// function used to save the API URL and API key to local storage for later use
+function updateVariables() {
+    let apiUrl = document.querySelector('#editAPIURL').value;
+    let apiKey = document.querySelector('#editAPIKey').value;
+
+    if (!apiKey || !apiUrl) return;
+
+    window.localStorage.setItem('api_url', apiUrl);
+    window.localStorage.setItem('api_key', apiKey);
+    var varModal = bootstrap.Modal.getInstance('#variablesModal');
+    varModal.hide();
+    init();
+}
+
+// goes through two lists and finds the differences between them, used for finding changes in the tree which will be sent to the API
+function findAllChangedNodes(oldList, newList) {
+    let changedNodes = [];
+    // console.log(oldList);
+    newList.forEach(newNode => {
+        let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
+        if (oldNode) {
+            if (!isEqualJson(newNode, oldNode)) {
+                console.log(`${newNode.id} changed`);
+                newNode.isNew = false;
+                changedNodes.push(newNode);
+            }
+        }
+        else {
+            newNode.isNew = true;
+            changedNodes.push(newNode);
+        }
+    });
+    return changedNodes;
+}
+
+function sendTree() {
+    let changedNodes = findAllChangedNodes(oldTree, changedTree);
+
+    changedNodes.forEach(node => {
+        let method = node.isNew ? 'POST' : 'PUT';
+        let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
+        let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/${node.isNew ? 'create' : 'update'}${endpoint}`;
+        console.log(url)
+        let headers = new Headers();
+        headers.append('api_key', window.localStorage.getItem('api_key'));
+        headers.append('Content-Type', 'application/json');
+
+        delete node.isNew;
+        delete node.isRoot;
+
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(node)
+        });
+    });
+}
 
 document.querySelector("#editor-expand").addEventListener('click', () => {
     let editor = document.querySelector('#node-editor');
@@ -285,6 +401,31 @@ document.querySelector("#editor-expand").addEventListener('click', () => {
 document.querySelector("#editor-close").addEventListener('click', () => {
     let editor = document.querySelector('#node-editor');
     editor.classList.remove('expanded');
+});
 
+document.querySelector("#jsonInputModal").addEventListener('shown.bs.modal', () => {
+    if (window.localStorage.getItem('tree')) {
+        document.querySelector('.json-input_last-session-container').style.display = "block";
+    }
+})
 
+document.querySelector("#variablesModal").addEventListener('shown.bs.modal', () => {
+    document.querySelector('#editAPIURL').value = window.localStorage.getItem('api_url');
+    document.querySelector('#editAPIKey').value = window.localStorage.getItem('api_key');
+});
+
+document.querySelector("#jsonOutputModal").addEventListener('shown.bs.modal', () => {
+    let data = displayJson();
+
+    // let newData = findAllChangedNodes(oldTree, changedTree);
+
+    // document.querySelector("#updateAPIBtn").addEventListener('click', () => {
+    //     let xhr = new XMLHttpRequest();
+
+    //     newData.forEach(node => {
+    //         xhr.open('PUT', 'http://localhost:3000/');
+    //         xhr.setRequestHeader('Content-Type', 'application/json');
+    //         xhr.send(JSON.stringify(node));
+    //     });
+    // });
 });

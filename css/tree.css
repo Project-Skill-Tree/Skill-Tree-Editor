@@ -4,16 +4,20 @@
 	margin: 0px;
 	box-sizing: border-box;
 }
+
 .tree {
 	display: grid;
 	font-family: 'Poppins', sans-serif;
 	white-space: nowrap;
-}
-
-.tree {
+	display: inline;
 	height: auto;
 	text-align: center;
 }
+
+.tree-container {
+	padding-right: 500px !important;
+}
+
 .tree ul {
 	padding-top: 20px;
 	position: relative;
