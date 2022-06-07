@@ -36,11 +36,11 @@ let typeTemplates = {
 };
 
 // add a new node to the tree UI using the data passed in
-async function drawNode(data, parentId) {
+function drawNode(data, parentId) {
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
-    nodeTitle.innerHTML = data.title || data.name || data.type;
+    nodeTitle.innerHTML = (data.title || data.name || data.type) + (data.level ? ` ${data.level}` : '');
     node.classList.add('node');
     node.id = `node-${data.id}`;
 
@@ -50,22 +50,26 @@ async function drawNode(data, parentId) {
 
     if (data.type == 'skills') {
         nodeAncor.addEventListener('contextmenu', async function (event) {
+            console.log(`creating child of ${data.id}`);
             event.preventDefault();
             let isClone = event.ctrlKey;
             var newNode = {};
             if (isClone && data.type != 'root') {
-                newNode = JSON.parse(JSON.stringify(data));
+                newNode = structuredClone(findNode(changedTree, data.id));
                 newNode.id = generateUID();
-                newNode.title = `${data.title} (copy)`;
                 newNode.children = [];
+                newNode.requires = [];
                 newNode.level += 1;
                 delete newNode.isRoot;
             }
             else {
-                newNode = typeTemplates["skills"];
+                newNode = structuredClone(typeTemplates["skills"]);
                 newNode.id = generateUID();
             }
-            newNode.requires = [data.id];
+
+            console.log(`drawing new node`);
+            console.log(newNode);
+
             addNode(changedTree, data.id, newNode);
             drawNode(newNode, data.id);
 
@@ -87,6 +91,7 @@ async function drawNode(data, parentId) {
     if (!parentNode) {
         let ul = document.createElement('ul');
         ul.id = `node-${parentId}-ul`;
+        console.log(parentId)
         document.getElementById(`node-${parentId}`).appendChild(ul);
     }
 
@@ -100,6 +105,7 @@ function addNode(tree, parentId, newNodeData) {
         if (!parent.children && parent.children != []) parent.children = [];
         if (!parent.requires && parent.requires != []) parent.requires = [];
         parent.children.push(newNodeData.id);
+        newNodeData.requires = [parentId];
         changedTree.push(newNodeData);
         saveTree();
     }
@@ -160,9 +166,9 @@ function deleteChildren(list, nodeId) {
 }
 
 // init command that initalizes the whole tree
-async function init() {
+async function init(tree) {
     // check if the user has their credentials stored in local storage, if not, prompt the user to input them
-    if (!window.localStorage.getItem('api_url') || !window.localStorage.getItem('api_key')) {
+    if (!tree && (!window.localStorage.getItem('api_url') || !window.localStorage.getItem('api_key'))) {
         var varModal = new bootstrap.Modal(
             '#variablesModal',
             {
@@ -174,16 +180,18 @@ async function init() {
         return;
     }
 
-    let data = await getAllNodes();
+    let data = tree || await getAllNodes();
 
 
-    oldTree = formatAPIToEditor(data);
-    changedTree = JSON.parse(JSON.stringify(oldTree));
+    oldTree = tree || formatAPIToEditor(data);
+    changedTree = structuredClone(oldTree);
 
     console.log("initializing tree")
 
     // draw the tree
     let roots = getRoots(changedTree);
+    // clear the current tree, if there is one
+    document.querySelector('.tree').innerHTML = '';
     roots.forEach(root => {
         drawNode(root);
         drawChildren(changedTree, root);
@@ -236,7 +244,7 @@ function showcaseData(data) {
     skillEditor.querySelector('#node-type').addEventListener('change', function () {
         let type = skillEditor.querySelector('#node-type').value;
         editFields.innerHTML = '';
-        let newData = typeTemplates[type];
+        let newData = structuredClone(typeTemplates[type]);
         newData.children = data.children;
         newData.id = data.id;
         newData.requires = data.requires;
@@ -258,6 +266,11 @@ function showcaseData(data) {
             'number': 'number',
             'boolean': 'checkbox'
         }
+
+        input.addEventListener('change', function () {
+            saveShowcasedNode();
+        });
+
         input.setAttribute('type', nodeTypeToField[typeof data[field]]);
         input.setAttribute('name', field);
         input.setAttribute('value', data[field]);
@@ -269,9 +282,9 @@ function showcaseData(data) {
 }
 
 // update the tree data with the new data after pressing the save button
-function saveButtonClick() {
+function saveShowcasedNode() {
     let id = document.querySelector('.edit-fields').getAttribute('data-id');
-    let data = findNode(changedTree, id);
+    let data = structuredClone(findNode(changedTree, id));
     let newData = {};
     newData.id = data.id;
     newData.requires = data.requires;
@@ -293,7 +306,7 @@ function updateNode(id, data) {
     let node = document.getElementById(`node-${id}`);
     if (node) {
         changedTree[findNodeIndex(changedTree, id)] = data;
-        node.querySelector('span').innerHTML = data.title || data.name || data.type;
+        node.querySelector('span').innerHTML = (data.title || data.name || data.type) + (data.level ? ` ${data.level}` : '');
         saveTree();
     }
     else {
