@@ -370,7 +370,6 @@ function findAllChangedNodes(oldList, newList) {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
         if (oldNode) {
             if (!isEqualJson(newNode, oldNode)) {
-                console.log(`${newNode.id} changed`);
                 newNode.isNew = false;
                 changedNodes.push(newNode);
             }
@@ -381,29 +380,6 @@ function findAllChangedNodes(oldList, newList) {
         }
     });
     return changedNodes;
-}
-
-function sendTree() {
-    let changedNodes = findAllChangedNodes(oldTree, changedTree);
-
-    changedNodes.forEach(node => {
-        let method = node.isNew ? 'POST' : 'PUT';
-        let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
-        let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/${node.isNew ? 'create' : 'update'}${endpoint}`;
-        console.log(url)
-        let headers = new Headers();
-        headers.append('api_key', window.localStorage.getItem('api_key'));
-        headers.append('Content-Type', 'application/json');
-
-        delete node.isNew;
-        delete node.isRoot;
-
-        fetch(url, {
-            method: method,
-            headers: headers,
-            body: JSON.stringify(node)
-        });
-    });
 }
 
 document.querySelector("#editor-expand").addEventListener('click', () => {

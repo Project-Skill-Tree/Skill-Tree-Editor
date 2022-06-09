@@ -54,3 +54,65 @@ function formatAPIToEditor(data) {
     
     return result;
 }
+
+async function updateTree(tree) {
+    let newTree = await replaceIntermediateReferences(tree);
+    let changedNodes = findAllChangedNodes(oldTree, newTree);
+
+
+    changedNodes.forEach(node => {
+        let method = 'PUT';
+        let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
+        let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/update${endpoint}`;
+        console.log(url)
+        let headers = new Headers();
+        headers.append('api_key', window.localStorage.getItem('api_key'));
+        headers.append('Content-Type', 'application/json');
+
+        delete node.isNew;
+        delete node.isRoot;
+
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(node)
+        });
+    });
+}
+
+async function replaceIntermediateReferences(tree) {
+    // for each item that has an intermediate reference, send it to the server and replace the reference with the new id
+    let changedNodes = findAllChangedNodes(oldTree, tree).filter(node => node.id.startsWith('IR'));
+    let method = 'POST';
+
+    for(node of changedNodes) {
+        let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
+        let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/create${endpoint}`;
+        console.log(url)
+        let headers = new Headers();
+        headers.append('api_key', window.localStorage.getItem('api_key'));
+        headers.append('Content-Type', 'application/json');
+
+        delete node.isNew;
+        delete node.isRoot;
+
+        let response = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(node)
+        })
+        response = await response.json();
+        console.log(response)
+        responseID = response[node.type.slice(0, -1)]["_id"];
+        
+        if(!responseID) {
+            showError('Error creating node \n Some nodes may not have been created.');
+            return;
+        }
+        let newTree = await replaceID(tree, node.id, responseID);
+        console.log(newTree);
+        tree = newTree;
+    }
+
+    return tree;
+}
