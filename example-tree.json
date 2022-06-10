@@ -1,65 +1,74 @@
 [
     {
-        "id": 0,
-        "title": "Self Improvement Skill Tree",
-        "category": "root",
-        "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
-        "type": "item",
+        "title": "babble",
+        "level": 2,
+        "goal": [
+            "annihalate infants",
+            "buy food"
+        ],
+        "frequency": 2,
+        "interval": "day",
+        "timelimit": "1 WEEK",
+        "xp": 1500,
+        "icon": "apple",
+        "category": "health",
+        "requires": [
+            "629619a3be6df3d69aa702e5"
+        ],
+        "children": [],
+        "type": "skills",
+        "id": "62961972be6df3d69aa702e2"
+    },
+    {
+        "title": "gaggle",
+        "level": 1,
+        "goal": [
+            "test skills",
+            "make the damn web editor"
+        ],
+        "frequency": 4,
+        "interval": "week",
+        "timelimit": "2 WEEKS",
+        "xp": 1000,
+        "icon": "apple",
+        "category": "fitness",
         "requires": [],
         "children": [
-            1,
-            2
-        ]
+            "62961972be6df3d69aa702e2"
+        ],
+        "type": "skills",
+        "id": "629619a3be6df3d69aa702e5",
+        "isRoot": true
     },
     {
-        "id": 1,
-        "iconName": "mindfulness",
-        "title": "Mindfulness I",
-        "level": 1,
-        "goal": "Mindfulness 2mins",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
-        "xp": 50,
-        "category": "health",
-        "type": "skill",
+        "title": "foobar",
+        "level": 3,
+        "goal": [
+            "testing goal",
+            "should be gucci"
+        ],
+        "frequency": 3,
+        "interval": "week",
+        "timelimit": "1 WEEKS",
+        "xp": 1200,
+        "icon": "banana",
+        "category": "fitness",
         "requires": [],
-        "children": []
+        "children": [
+            "62968c920e15c4cb06a8283b"
+        ],
+        "type": "skills",
+        "id": "62968af5af70a3169a1a6fc9",
+        "isRoot": true
     },
     {
-        "id": 2,
-        "iconName": "journaling",
-        "title": "Journaling I",
-        "level": 1,
-        "goal": "Journal",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
-        "xp": 100,
-        "category": "skills",
-        "type": "skill",
-        "requires": [],
-        "children": [3, 4]
-    },
-    {
-        "id": 3,
-        "title": "Ancient Library",
-        "category": "Learning",
-        "link": "https://drive.google.com/drive/folders/1HGG7si_q8bfmT4eHEH0vcytn9TegRtPy",
-        "type": "item",
-        "requires": [],
-        "children": []
-    },
-    {
-        "id": 4,
-        "iconName": "relationships",
-        "title": "Relationships I",
-        "level": 1,
-        "goal": "Find a partner",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
-        "xp": 100,
-        "category": "skills",
-        "type": "skill",
-        "requires": [],
-        "children": []
+        "name": "item test",
+        "link": "omersabic.xyz",
+        "emoji": "😋",
+        "requires": [
+            "62968af5af70a3169a1a6fc9"
+        ],
+        "type": "items",
+        "id": "62968c920e15c4cb06a8283b"
     }
 ]
