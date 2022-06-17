@@ -257,7 +257,49 @@ function showcaseData(data) {
 
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
-        if (['type', 'children', 'requires', 'goal'].includes(field)) continue;
+        if (['type', 'children'].includes(field)) continue;
+        if(Array.isArray(data[field])) {
+            let openEditorBtn = document.createElement('button');
+            openEditorBtn.innerHTML = `Edit ${field}`;
+            openEditorBtn.classList.add('btn', 'btn-primary');
+            openEditorBtn.addEventListener('click', function () {
+                let editor = new bootstrap.Modal('#arrayEditorModal');
+                editor.show();
+                let editorElement = document.querySelector('#arrayEditorModal');
+                let editorFields = editorElement.querySelector('#array-list');
+                editorFields.innerHTML = '';
+                data[field].forEach(item => {
+                    let li = document.createElement('li');
+                    li.innerHTML = item;
+                    li.setAttribute('aria-label', item);
+                    editorFields.appendChild(li);
+                    let deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = 'Delete';
+                    deleteBtn.classList.add('btn', 'btn-danger');
+                    deleteBtn.addEventListener('click', function () {
+                        data[field].splice(data[field].indexOf(item), 1);
+                        editorFields.querySelector('li[aria-label="' + item + '"]').remove();
+                    });
+                    li.appendChild(deleteBtn);
+                });
+
+                let addBtn = editorElement.querySelector('#add-array-button');
+                addBtn.addEventListener('click', function () {
+                    let inputData = document.querySelector('#array-input').value;
+                    let li = document.createElement('li');
+                    li.innerHTML = inputData;
+                    editorFields.appendChild(li);
+                    editorElement.querySelector('#array-input').value = '';
+
+                    // save the new item in the array
+                    data[field].push(inputData);
+                });
+            });
+
+            editFields.appendChild(openEditorBtn);
+            continue;
+        };
+
         let label = document.createElement('label');
         label.setAttribute('for', `${field}`);
         label.innerHTML = field;
