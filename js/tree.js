@@ -141,7 +141,9 @@ function deleteNode(list, nodeId) {
     }
 
     // remove child reference from parent
-    let parentId = document.getElementById(`node-${node.id}`).parentElement.getAttribute('id').split('-')[1];
+    let parentId = document.getElementById(`node-${node.id}`).parentElement.getAttribute('id');
+    parentId = parentId.replace('node-', '');
+    parentId = parentId.replace('-ul', '');
 
     let parentIndex = findNodeIndex(list, parentId);
     if (parent) {
