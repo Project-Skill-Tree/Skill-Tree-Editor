@@ -37,6 +37,7 @@ let typeTemplates = {
 
 // add a new node to the tree UI using the data passed in
 function drawNode(data, parentId) {
+    if(!data) return;
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
