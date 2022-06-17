@@ -249,6 +249,7 @@ function showcaseData(data) {
         newData.id = data.id;
         newData.requires = data.requires;
         showcaseData(newData);
+        saveShowcasedNode(newData);
     });
 
     for (let field in data) {
