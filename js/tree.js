@@ -286,6 +286,8 @@ function showcaseData(data) {
                 let addBtn = editorElement.querySelector('#add-array-button');
                 addBtn.addEventListener('click', function () {
                     let inputData = document.querySelector('#array-input').value;
+                    console.log(`${inputData} is ${isNaN(inputData)}`);
+                    if(inputData === "") return;
                     let li = document.createElement('li');
                     li.innerHTML = inputData;
                     editorFields.appendChild(li);
