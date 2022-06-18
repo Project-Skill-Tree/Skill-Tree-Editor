@@ -16,7 +16,7 @@ let typeTemplates = {
         "icon": "skill",
         "title": "skill",
         "level": 1,
-        "goal": ["Edit the data"],
+        "goal": [],
         "frequency": 1,
         "interval": "week",
         "timelimit": 12,
