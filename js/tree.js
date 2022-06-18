@@ -284,18 +284,19 @@ function showcaseData(data) {
                 });
 
                 let addBtn = editorElement.querySelector('#add-array-button');
-                addBtn.addEventListener('click', function () {
+                addBtn.onclick = () => {
                     let inputData = document.querySelector('#array-input').value;
-                    console.log(`${inputData} is ${isNaN(inputData)}`);
                     if(inputData === "") return;
+                    console.log(`Adding goal ${inputData} to ${data.title || data.id}`);
+                    
                     let li = document.createElement('li');
                     li.innerHTML = inputData;
                     editorFields.appendChild(li);
                     editorElement.querySelector('#array-input').value = '';
 
                     // save the new item in the array
-                    data[field].push(inputData);
-                });
+                    changedTree[findNodeIndex(changedTree, data.id)].goal.push(inputData);
+                };
             });
 
             editFields.appendChild(openEditorBtn);
