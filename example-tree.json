@@ -1,10 +1,10 @@
 [
     {
-        "title": "babble",
+        "title": "bar",
         "level": 2,
         "goal": [
-            "annihalate infants",
-            "buy food"
+            "example goal 1",
+            "example goal 2"
         ],
         "frequency": 2,
         "interval": "day",
@@ -13,18 +13,18 @@
         "icon": "apple",
         "category": "health",
         "requires": [
-            "629619a3be6df3d69aa702e5"
+            "IR-f125aed4-3631-45d0"
         ],
         "children": [],
         "type": "skills",
-        "id": "62961972be6df3d69aa702e2"
+        "id": "IR-e8bdfd86-8ec0-4d25"
     },
     {
-        "title": "gaggle",
+        "title": "foo",
         "level": 1,
         "goal": [
-            "test skills",
-            "make the damn web editor"
+            "test goal 1",
+            "test goal 2"
         ],
         "frequency": 4,
         "interval": "week",
@@ -34,18 +34,18 @@
         "category": "fitness",
         "requires": [],
         "children": [
-            "62961972be6df3d69aa702e2"
+            "IR-e8bdfd86-8ec0-4d25"
         ],
         "type": "skills",
-        "id": "629619a3be6df3d69aa702e5",
+        "id": "IR-f125aed4-3631-45d0",
         "isRoot": true
     },
     {
         "title": "foobar",
         "level": 3,
         "goal": [
-            "testing goal",
-            "should be gucci"
+            "goal example 1",
+            "goal example 2"
         ],
         "frequency": 3,
         "interval": "week",
@@ -55,10 +55,10 @@
         "category": "fitness",
         "requires": [],
         "children": [
-            "62968c920e15c4cb06a8283b"
+            "IR-4c1c7159-2883-45b5"
         ],
         "type": "skills",
-        "id": "62968af5af70a3169a1a6fc9",
+        "id": "IR-6c8d0f36-1528-430d",
         "isRoot": true
     },
     {
@@ -66,9 +66,9 @@
         "link": "omersabic.xyz",
         "emoji": "😋",
         "requires": [
-            "62968af5af70a3169a1a6fc9"
+            "IR-6c8d0f36-1528-430d"
         ],
         "type": "items",
-        "id": "62968c920e15c4cb06a8283b"
+        "id": "IR-4c1c7159-2883-45b5"
     }
 ]
