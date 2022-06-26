@@ -278,6 +278,7 @@ function showcaseData(data) {
                     deleteBtn.classList.add('btn', 'btn-danger');
                     deleteBtn.addEventListener('click', function () {
                         data[field].splice(data[field].indexOf(item), 1);
+                        if(item.includes('"')) item = item.replace(/"/g, '&quot;');
                         editorFields.querySelector('li[aria-label="' + item + '"]').remove();
                     });
                     li.appendChild(deleteBtn);
