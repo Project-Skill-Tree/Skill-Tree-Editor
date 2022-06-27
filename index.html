@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/tree.css">
   <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
 <body>
@@ -16,22 +17,30 @@
       </ul>
     </div>
     <div id="editor-expand">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
       </svg>
     </div>
     <div id="node-editor" class="col-3 expanded">
       <div id="editor-close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
-          <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+          <path fill-rule="evenodd"
+            d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
         </svg>
       </div>
       <div id="data-inputs"></div>
       <div id="skill-controls">
-        <button class="btn btn-primary" id="add-skill" data-bs-toggle="modal" data-bs-target="#jsonOutputModal">Export JSON</button>
-        <button class="btn btn-primary" id="import-json" data-bs-toggle="modal" data-bs-target="#jsonInputModal">Import JSON</button>
-        <button class="btn btn-primary" id="edit-variables" data-bs-toggle="modal" data-bs-target="#variablesModal">Edit Variables</button>
+        <button class="btn btn-primary" id="add-skill" data-bs-toggle="modal" data-bs-target="#jsonOutputModal">Export
+          JSON</button>
+        <button class="btn btn-primary" id="import-json" data-bs-toggle="modal" data-bs-target="#jsonInputModal">Import
+          JSON</button>
+        <button class="btn btn-primary" id="edit-variables" data-bs-toggle="modal" data-bs-target="#variablesModal">Edit
+          Variables</button>
       </div>
     </div>
   </main>
@@ -45,7 +54,8 @@
       <option value="items">item</option>
       <option value="challenges">challenge</option>
     </select>
-    <button class="btn btn-primary" id="delete-node" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">Delete node and its children</button>
+    <button class="btn btn-primary" id="delete-node" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">Delete
+      node and its children</button>
   </template>
 
   <template id="node-tabs-template">
@@ -60,7 +70,8 @@
 
     <div>
       <div class="form-group">
-        <input type="url" name="exportAPILink" id="exportAPILink" class="form-control" placeholder="https://projectskilltree.com">
+        <input type="url" name="exportAPILink" id="exportAPILink" class="form-control"
+          placeholder="https://projectskilltree.com">
         <button class="btn">Add</button>
       </div>
       <ul class="tabs-list">
@@ -83,10 +94,12 @@
             <textarea id="json-output">Modal body text goes here.</textarea>
           </div>
           <label for="exportAPILink">API URL</label>
-          <input type="url" name="exportAPILink" id="exportAPILink" class="form-control" placeholder="https://skilltree.com">
+          <input type="url" name="exportAPILink" id="exportAPILink" class="form-control"
+            placeholder="https://skilltree.com">
           <label for="exportAPIKey">API Token</label>
           <input type="text" name="exportAPIKey" id="exportAPIKey" class="form-control" placeholder="API Token">
-          <button type="submit" class="btn btn-primary" id="updateAPIBtn" onclick="sendTree()">Update Tree</button>
+          <button type="submit" class="btn btn-primary" id="updateAPIBtn" onclick="updateTree(changedTree)">Update
+            Tree</button>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -131,7 +144,9 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="deleteNode(changedTree, document.querySelector('.edit-fields').getAttribute('data-id'))">Delete node</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+            onclick="deleteNode(changedTree, document.querySelector('.edit-fields').getAttribute('data-id'))">Delete
+            node</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </div>
@@ -151,10 +166,13 @@
             </div>
           </div>
           <label for="exportAPILink">API URL</label>
-          <input type="url" name="exportAPILink" id="editAPIURL" class="form-control mb-3" placeholder="https://skilltreeproject.com" required>
+          <input type="url" name="exportAPILink" id="editAPIURL" class="form-control mb-3"
+            placeholder="https://skilltreeproject.com" required>
           <label for="exportAPIToken">API Key</label>
-          <input type="text" name="exportAPIToken" id="editAPIKey" class="form-control mb-3" placeholder="API Key" required>
-          <button type="submit" class="btn btn-primary" id="updateAPIBtn" onclick="updateVariables()">Update Variables</button>
+          <input type="text" name="exportAPIToken" id="editAPIKey" class="form-control mb-3" placeholder="API Key"
+            required>
+          <button type="submit" class="btn btn-primary" id="updateAPIBtn" onclick="updateVariables()">Update
+            Variables</button>
         </div>
       </div>
     </div>
@@ -181,11 +199,43 @@
     </div>
   </div>
 
+  <div id="arrayEditorModal" class="modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editing array</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" id="array-input" class="form-control" aria-describedby="array-add-button">
+            <button id="add-array-button" type="button" class="btn btn-outline-primary">Add</button>
+          </div>
+          <div id="array-list">
+            <ul>
+              <li>
+                <span class="array-item-name">Item 1</span>
+                <button class="array-item-delete">Delete</button>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
   <!-- JavaScript Bundle with Popper -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap.native@4.2.0/dist/bootstrap-native.min.js"></script> -->
 
   <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
 
 
   <script src="./js/util.js"></script>

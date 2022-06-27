@@ -11,8 +11,14 @@ function isEqualJson(obj1, obj2) {
 
     //return true when the two json has same length and all the properties has same value key by key
     let r = keys1.length === keys2.length && Object.keys(obj1).every(key => {
-        console.log(`comparing ${obj1[key]} and ${obj2[key]}`);
         return typeof obj1[key] == "object" ? JSON.stringify(obj1[key]) == JSON.stringify(obj2[key]) : obj1[key] == obj2[key]; 
     });
     return r;
+}
+
+// replace all instance of an ID with a new ID including the children and required fields
+function replaceID(tree, id, newId) {
+    let stringTree = JSON.stringify(tree);
+    stringTree = stringTree.replace(new RegExp(id, 'g'), newId);
+    return JSON.parse(stringTree);
 }

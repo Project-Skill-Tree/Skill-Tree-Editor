@@ -16,7 +16,7 @@ let typeTemplates = {
         "icon": "skill",
         "title": "skill",
         "level": 1,
-        "goal": ["Edit the data"],
+        "goal": [],
         "frequency": 1,
         "interval": "week",
         "timelimit": 12,
@@ -37,6 +37,7 @@ let typeTemplates = {
 
 // add a new node to the tree UI using the data passed in
 function drawNode(data, parentId) {
+    if(!data) return;
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
@@ -141,7 +142,9 @@ function deleteNode(list, nodeId) {
     }
 
     // remove child reference from parent
-    let parentId = document.getElementById(`node-${node.id}`).parentElement.getAttribute('id').split('-')[1];
+    let parentId = document.getElementById(`node-${node.id}`).parentElement.getAttribute('id');
+    parentId = parentId.replace('node-', '');
+    parentId = parentId.replace('-ul', '');
 
     let parentIndex = findNodeIndex(list, parentId);
     if (parent) {
@@ -249,11 +252,58 @@ function showcaseData(data) {
         newData.id = data.id;
         newData.requires = data.requires;
         showcaseData(newData);
+        saveShowcasedNode(newData);
     });
 
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
-        if (['type', 'children', 'requires', 'goal'].includes(field)) continue;
+        if (['type', 'children'].includes(field)) continue;
+        if(Array.isArray(data[field])) {
+            let openEditorBtn = document.createElement('button');
+            openEditorBtn.innerHTML = `Edit ${field}`;
+            openEditorBtn.classList.add('btn', 'btn-primary');
+            openEditorBtn.addEventListener('click', function () {
+                let editor = new bootstrap.Modal('#arrayEditorModal');
+                editor.show();
+                let editorElement = document.querySelector('#arrayEditorModal');
+                let editorFields = editorElement.querySelector('#array-list');
+                editorFields.innerHTML = '';
+                data[field].forEach(item => {
+                    let li = document.createElement('li');
+                    li.innerHTML = item;
+                    li.setAttribute('aria-label', item);
+                    editorFields.appendChild(li);
+                    let deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = 'Delete';
+                    deleteBtn.classList.add('btn', 'btn-danger');
+                    deleteBtn.addEventListener('click', function () {
+                        data[field].splice(data[field].indexOf(item), 1);
+                        if(item.includes('"')) item = item.replace(/"/g, '&quot;');
+                        editorFields.querySelector('li[aria-label="' + item + '"]').remove();
+                    });
+                    li.appendChild(deleteBtn);
+                });
+
+                let addBtn = editorElement.querySelector('#add-array-button');
+                addBtn.onclick = () => {
+                    let inputData = document.querySelector('#array-input').value;
+                    if(inputData === "") return;
+                    console.log(`Adding goal ${inputData} to ${data.title || data.id}`);
+                    
+                    let li = document.createElement('li');
+                    li.innerHTML = inputData;
+                    editorFields.appendChild(li);
+                    editorElement.querySelector('#array-input').value = '';
+
+                    // save the new item in the array
+                    changedTree[findNodeIndex(changedTree, data.id)].goal.push(inputData);
+                };
+            });
+
+            editFields.appendChild(openEditorBtn);
+            continue;
+        };
+
         let label = document.createElement('label');
         label.setAttribute('for', `${field}`);
         label.innerHTML = field;
@@ -370,7 +420,6 @@ function findAllChangedNodes(oldList, newList) {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
         if (oldNode) {
             if (!isEqualJson(newNode, oldNode)) {
-                console.log(`${newNode.id} changed`);
                 newNode.isNew = false;
                 changedNodes.push(newNode);
             }
@@ -381,29 +430,6 @@ function findAllChangedNodes(oldList, newList) {
         }
     });
     return changedNodes;
-}
-
-function sendTree() {
-    let changedNodes = findAllChangedNodes(oldTree, changedTree);
-
-    changedNodes.forEach(node => {
-        let method = node.isNew ? 'POST' : 'PUT';
-        let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
-        let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/${node.isNew ? 'create' : 'update'}${endpoint}`;
-        console.log(url)
-        let headers = new Headers();
-        headers.append('api_key', window.localStorage.getItem('api_key'));
-        headers.append('Content-Type', 'application/json');
-
-        delete node.isNew;
-        delete node.isRoot;
-
-        fetch(url, {
-            method: method,
-            headers: headers,
-            body: JSON.stringify(node)
-        });
-    });
 }
 
 document.querySelector("#editor-expand").addEventListener('click', () => {

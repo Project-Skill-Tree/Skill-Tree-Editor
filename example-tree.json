@@ -1,65 +1,74 @@
 [
     {
-        "id": 0,
-        "title": "Self Improvement Skill Tree",
-        "category": "root",
-        "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
-        "type": "item",
+        "title": "bar",
+        "level": 2,
+        "goal": [
+            "example goal 1",
+            "example goal 2"
+        ],
+        "frequency": 2,
+        "interval": "day",
+        "timelimit": "1 WEEK",
+        "xp": 1500,
+        "icon": "apple",
+        "category": "health",
+        "requires": [
+            "IR-f125aed4-3631-45d0"
+        ],
+        "children": [],
+        "type": "skills",
+        "id": "IR-e8bdfd86-8ec0-4d25"
+    },
+    {
+        "title": "foo",
+        "level": 1,
+        "goal": [
+            "test goal 1",
+            "test goal 2"
+        ],
+        "frequency": 4,
+        "interval": "week",
+        "timelimit": "2 WEEKS",
+        "xp": 1000,
+        "icon": "apple",
+        "category": "fitness",
         "requires": [],
         "children": [
-            1,
-            2
-        ]
+            "IR-e8bdfd86-8ec0-4d25"
+        ],
+        "type": "skills",
+        "id": "IR-f125aed4-3631-45d0",
+        "isRoot": true
     },
     {
-        "id": 1,
-        "iconName": "mindfulness",
-        "title": "Mindfulness I",
-        "level": 1,
-        "goal": "Mindfulness 2mins",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
-        "xp": 50,
-        "category": "health",
-        "type": "skill",
+        "title": "foobar",
+        "level": 3,
+        "goal": [
+            "goal example 1",
+            "goal example 2"
+        ],
+        "frequency": 3,
+        "interval": "week",
+        "timelimit": "1 WEEKS",
+        "xp": 1200,
+        "icon": "banana",
+        "category": "fitness",
         "requires": [],
-        "children": []
+        "children": [
+            "IR-4c1c7159-2883-45b5"
+        ],
+        "type": "skills",
+        "id": "IR-6c8d0f36-1528-430d",
+        "isRoot": true
     },
     {
-        "id": 2,
-        "iconName": "journaling",
-        "title": "Journaling I",
-        "level": 1,
-        "goal": "Journal",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
-        "xp": 100,
-        "category": "skills",
-        "type": "skill",
-        "requires": [],
-        "children": [3, 4]
-    },
-    {
-        "id": 3,
-        "title": "Ancient Library",
-        "category": "Learning",
-        "link": "https://drive.google.com/drive/folders/1HGG7si_q8bfmT4eHEH0vcytn9TegRtPy",
-        "type": "item",
-        "requires": [],
-        "children": []
-    },
-    {
-        "id": 4,
-        "iconName": "relationships",
-        "title": "Relationships I",
-        "level": 1,
-        "goal": "Find a partner",
-        "frequency": "DAILY",
-        "timelimit": "1x Week",
-        "xp": 100,
-        "category": "skills",
-        "type": "skill",
-        "requires": [],
-        "children": []
+        "name": "item test",
+        "link": "omersabic.xyz",
+        "emoji": "😋",
+        "requires": [
+            "IR-6c8d0f36-1528-430d"
+        ],
+        "type": "items",
+        "id": "IR-4c1c7159-2883-45b5"
     }
 ]
