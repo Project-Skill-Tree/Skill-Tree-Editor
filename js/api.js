@@ -58,19 +58,22 @@ function formatAPIToEditor(data) {
 async function updateTree(tree) {
     let duplicateNodes = findDuplicateNodes(tree);
     if(duplicateNodes.length > 0) {
-        showError(`There are duplicate nodes with the same title and level (shown as {type} {title} {level}). \n${duplicateNodes.join(',').replaceAll('-', ' ')}`);
+        showError(`There are duplicate skill nodes with the same title and level. \n${duplicateNodes.join(',').replaceAll('-', ' ')}`);
         return;
     }
-    let newTree = await replaceIntermediateReferences(tree);
+
+    let newNodes = tree.filter(node => node.id.startsWith('IR'));
+
+    let newTree = await replaceIntermediateReferences(newNodes);
     if(newTree === false) {
         return;
     }
-    let changedNodes = findAllChangedNodes(oldTree, newTree);
 
-    // check if there are any two nodes with the same title and level combo
-    
+    if(oldTree && oldTree.length > 0) newTree = findAllChangedNodes(oldTree, newTree);
 
-    changedNodes.forEach(node => {
+    newTree = await newTree.filter(node => !node.id.startsWith('IR'));
+
+    newTree.forEach(node => {
         let method = 'PUT';
         let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
         let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/update${endpoint}`;
@@ -90,12 +93,37 @@ async function updateTree(tree) {
     });
 }
 
+// Sort the nodes by the requirement ID, ones without a requirement ID go first, then go the ones with a normal ID and lastly the ones with a requirement that starts with IR
+function sortTree() {
+    let tree = structuredClone(oldTree);
+    tree.sort((a, b) => {
+        if(!a.requires || a.requires.length < 1) return -1;
+        if(!b.requires || b.requires.length < 1) return 1;
+        if(a.requires[0].startsWith('IR')) return -1;
+        if(b.requires[0].startsWith('IR')) return 1;
+        return 0;
+    });
+    return tree;
+}
+
 async function replaceIntermediateReferences(tree) {
     // for each item that has an intermediate reference, send it to the server and replace the reference with the new id
-    let changedNodes = findAllChangedNodes(oldTree, tree).filter(node => node.id.startsWith('IR'));
+    let changedNodes = structuredClone(tree);
+    // if(oldTree && oldTree.length > 0) changedNodes = findAllChangedNodes(oldTree, newTree);
+    console.log(changedNodes)
+    // changedNodes.sort((a, b) => {
+    //     return (a.requires ? a.requires.length : 0) - (b.requires ? b.requires.length : 0);
+    // });
+
     let method = 'POST';
 
-    for(node of changedNodes) {
+    // sort the nodes by amount of requires to make sure we send the root nodes first if there are any new ones
+    changedNodes.sort((a, b) => {
+        return (a.requires ? a.requires.length : 0) - (b.requires ? b.requires.length : 0);
+    });
+    
+    for(var i = 0; i < changedNodes.length; i++) {
+        node = changedNodes[i];
         let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
         let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/create${endpoint}`;
         console.log(url)
@@ -116,18 +144,17 @@ async function replaceIntermediateReferences(tree) {
         response = await response.json();
         console.log(response)
         if(response.response !== 'success') {
-            showError(`Error creating ${node.type}. Response: ${response.error}`);
+            showError(`Error creating ${node.type}. Response: ${JSON.stringify(response.error)}`);
             return false;
         }
-        responseID = response[node.type.slice(0, -1)]["_id"];
+        let responseID = response[node.type.slice(0, -1)]["_id"];
         
         if(!responseID) {
             showError('Error creating node \n Some nodes may not have been created.');
             return;
         }
-        let newTree = await replaceID(tree, node.id, responseID);
-        console.log(newTree);
-        tree = newTree;
+        let newTree = await replaceID(changedNodes, node.id, responseID);
+        changedNodes = newTree;
     }
 
     return tree;
@@ -135,13 +162,11 @@ async function replaceIntermediateReferences(tree) {
 
 function findDuplicateNodes(tree) {
     // check if there are any two nodes with the same title and level combo
-    let namedNodes = [];
-    tree.forEach(node => {
-        namedNodes.push(`${node.type}-${node.title}-${node.level}`);
-    });
+    let nodeIds = [];
+    nodeIds = tree.map(node => node.type == "skills" ? node.title + "-" + node.level : false).filter(node => node);
 
-    let duplicates = namedNodes.filter((item, index) => {
-        return namedNodes.indexOf(item) != index
+    let duplicates = nodeIds.filter((item, index) => {
+        return nodeIds.indexOf(item) !== index;
     });
 
     return [...new Set(duplicates)];

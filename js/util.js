@@ -17,8 +17,9 @@ function isEqualJson(obj1, obj2) {
 }
 
 // replace all instance of an ID with a new ID including the children and required fields
-function replaceID(tree, id, newId) {
+async function replaceID(tree, id, newId) {
     let stringTree = JSON.stringify(tree);
     stringTree = stringTree.replace(new RegExp(id, 'g'), newId);
-    return JSON.parse(stringTree);
+    stringTree = JSON.parse(stringTree);
+    return stringTree
 }
