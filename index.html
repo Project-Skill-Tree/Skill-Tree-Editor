@@ -10,6 +10,11 @@
 </head>
 
 <body>
+  <!-- A spinning icon with black background blocking you from doing anything on the website -->
+  <div id="spinner">
+    <div class="spinner-icon"></div>
+  </div>
+
   <main class="row">
     <div class="tree-container">
       <ul class="tree">
@@ -189,6 +194,27 @@
         </div>
         <div class="modal-body">
           <div id="error-message" class="alert alert-danger">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="successModal" class="modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Error</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="success-message" class="alert alert-success">
 
           </div>
         </div>

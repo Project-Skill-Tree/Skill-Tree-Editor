@@ -56,6 +56,8 @@ function formatAPIToEditor(data) {
 }
 
 async function updateTree(tree) {
+    let spinner = document.getElementById('spinner');
+    spinner.style.display = 'flex';
     let duplicateNodes = findDuplicateNodes(tree);
     if(duplicateNodes.length > 0) {
         showError(`There are duplicate skill nodes with the same title and level. \n${duplicateNodes.join(',').replaceAll('-', ' ')}`);
@@ -91,6 +93,8 @@ async function updateTree(tree) {
             body: JSON.stringify(node)
         });
     });
+
+    spinner.style.display = 'none';
 }
 
 // Sort the nodes by the requirement ID, ones without a requirement ID go first, then go the ones with a normal ID and lastly the ones with a requirement that starts with IR
