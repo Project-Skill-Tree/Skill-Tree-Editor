@@ -12,7 +12,6 @@ let typeTemplates = {
         "requires": []
     },
     "skills": {
-        "icon": "skill",
         "title": "skill",
         "level": 1,
         "goal": [],
