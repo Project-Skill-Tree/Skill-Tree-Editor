@@ -47,7 +47,7 @@ label {
     right: 0;
     bottom: 0;
     left: auto;
-    z-index: 100;
+    z-index: 90;
 }
 
 .edit-fields {
@@ -69,7 +69,7 @@ label {
     right: 0;
     bottom: auto;
     left: auto;
-    z-index: 99;
+    z-index: 90;
     cursor: pointer;
     margin: 20px 20px 0 0;
     padding: 0;
@@ -83,7 +83,7 @@ label {
     right: auto;
     bottom: auto;
     left: 0;
-    z-index: 101;
+    z-index: 95;
     cursor: pointer;
     margin: 20px 0 0 20px;
 }
@@ -92,4 +92,39 @@ label {
     display: flex;
     flex-direction: column;
     padding-right: auto;
+}
+
+#spinner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spinner-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    border-top: 2px solid #000;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.display-none {
+    display: none !important;
 }

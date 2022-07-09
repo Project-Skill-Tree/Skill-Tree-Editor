@@ -1,74 +1,3656 @@
 [
     {
-        "title": "bar",
-        "level": 2,
+        "id": "624c585ad7fadc0d73ccc244",
+        "requires": [],
+        "children": [
+            "626ae573c9b7b478d5a06780",
+            "628f9993c4ce6e67da2b5e16"
+        ],
         "goal": [
-            "example goal 1",
-            "example goal 2"
+            "Meditate for 2 minutes"
         ],
-        "frequency": 2,
-        "interval": "day",
-        "timelimit": "1 WEEK",
-        "xp": 1500,
-        "icon": "apple",
-        "category": "health",
-        "requires": [
-            "IR-f125aed4-3631-45d0"
-        ],
-        "children": [],
-        "type": "skills",
-        "id": "IR-e8bdfd86-8ec0-4d25"
-    },
-    {
-        "title": "foo",
+        "title": "meditation",
         "level": 1,
-        "goal": [
-            "test goal 1",
-            "test goal 2"
-        ],
-        "frequency": 4,
-        "interval": "week",
-        "timelimit": "2 WEEKS",
-        "xp": 1000,
-        "icon": "apple",
-        "category": "fitness",
-        "requires": [],
-        "children": [
-            "IR-e8bdfd86-8ec0-4d25"
-        ],
-        "type": "skills",
-        "id": "IR-f125aed4-3631-45d0",
-        "isRoot": true
+        "frequency": 1,
+        "xp": 50,
+        "category": "MENTAL HEALTH",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "isRoot": "true",
+        "type": "skills"
     },
     {
-        "title": "foobar",
-        "level": 3,
-        "goal": [
-            "goal example 1",
-            "goal example 2"
-        ],
-        "frequency": 3,
-        "interval": "week",
-        "timelimit": "1 WEEKS",
-        "xp": 1200,
-        "icon": "banana",
-        "category": "fitness",
-        "requires": [],
-        "children": [
-            "IR-4c1c7159-2883-45b5"
-        ],
-        "type": "skills",
-        "id": "IR-6c8d0f36-1528-430d",
-        "isRoot": true
-    },
-    {
-        "name": "item test",
-        "link": "omersabic.xyz",
-        "emoji": "😋",
+        "id": "628f9993c4ce6e67da2b5e16",
         "requires": [
-            "IR-6c8d0f36-1528-430d"
+            "624c585ad7fadc0d73ccc244"
+        ],
+        "children": [
+            "IR-09ad0d42-934f-46cf",
+            "IR-a3697be5-3373-4838",
+            "IR-8a1a50b3-f377-4292"
+        ],
+        "goal": [
+            "Meditate for 5 minutes"
+        ],
+        "title": "meditation",
+        "level": 2,
+        "frequency": 1,
+        "xp": 100,
+        "category": "MENTAL HEALTH",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "628f99eec4ce6e67da2b5e17",
+        "requires": [],
+        "children": [
+            "IR-474133a2-aa9a-494b",
+            "IR-686b7ee7-a89f-4979",
+            "IR-34697784-3040-4bdf",
+            "IR-b8cc750a-8b1f-4c76",
+            "IR-e2e4ace9-9117-4012"
+        ],
+        "goal": [
+            "PROMPT: Why do I want to improve myself?",
+            "PROMPT: What makes me happy?",
+            "PROMPT: Who am I? How would I describe myself? ",
+            "PROMPT: What do I need to change in my life?",
+            "PROMPT: Where do I want to be in 5 Years?"
+        ],
+        "title": "JOURNALING",
+        "level": 1,
+        "frequency": 1,
+        "xp": 100,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "isRoot": "true",
+        "type": "skills"
+    },
+    {
+        "name": "HOW TO START MEDITATING",
+        "link": "https://youtu.be/nDFE1GAovMw",
+        "emoji": "📘",
+        "requires": [
+            "624c585ad7fadc0d73ccc244"
         ],
         "type": "items",
-        "id": "IR-4c1c7159-2883-45b5"
+        "id": "626ae573c9b7b478d5a06780"
+    },
+    {
+        "goal": [
+            "Meditate for 2 minutes"
+        ],
+        "xp": 420,
+        "category": "Meditate for 30 days",
+        "requires": [
+            "624c585ad7fadc0d73ccc244"
+        ],
+        "type": "challenges",
+        "id": "62a33038d2b91fc0a5826a26"
+    },
+    {
+        "id": "IR-09ad0d42-934f-46cf",
+        "requires": [
+            "628f9993c4ce6e67da2b5e16"
+        ],
+        "children": [
+            "IR-fcfd9bc6-a30a-490b",
+            "IR-4f4448c4-c745-4c44",
+            "IR-fd81b680-502d-4631",
+            "IR-b6485b62-5da9-4825"
+        ],
+        "goal": [
+            "Perform some type of strength training exercise"
+        ],
+        
+        "title": "Fitness",
+        "level": 1,
+        "frequency": 3,
+        "interval": "week",
+        "timelimit": 14,
+        "xp": 250,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-a3697be5-3373-4838",
+        "requires": [
+            "628f9993c4ce6e67da2b5e16"
+        ],
+        "children": [
+            "IR-4f289088-8508-4108",
+            "IR-55041c99-e63b-4328",
+            "IR-bb974077-4a83-44ca",
+            "IR-c33897eb-c41e-45cd",
+            "IR-db4aba40-54ec-4df7"
+        ],
+        "goal": [
+            "Meditate for 10 minutes"
+        ],
+        
+        "title": "MEDITATION",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 200,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-8a1a50b3-f377-4292",
+        "requires": [
+            "628f9993c4ce6e67da2b5e16"
+        ],
+        "children": [
+            "IR-01d330a9-4226-4aab",
+            "IR-f7ec03df-2e21-431f",
+            "IR-2d9b7adc-80df-452e",
+            "IR-e8d5649e-dccb-473c"
+        ],
+        "goal": [
+            "Set a consistent bedtime and wake time"
+        ],
+        
+        "title": "SLEEP",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 7,
+        "xp": 200,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-fcfd9bc6-a30a-490b",
+        "requires": [
+            "IR-09ad0d42-934f-46cf"
+        ],
+        "goal": [],
+        "name": "Strong app",
+        "emoji": "📱",
+        "link": "https://www.strong.app/",
+        "type": "items"
+    },
+    {
+        "id": "IR-4f4448c4-c745-4c44",
+        "requires": [
+            "IR-09ad0d42-934f-46cf"
+        ],
+        "children": [
+            "IR-2e6c7be3-2414-4c30",
+            "IR-b9ae35e5-1bfd-4661",
+            "IR-6f2712da-b217-4386",
+            "IR-d2dfe149-8e39-4826"
+        ],
+        "goal": [
+            "DON'T eat any Fast Food"
+        ],
+        
+        "title": "Nutrition",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 300,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-2e6c7be3-2414-4c30",
+        "requires": [
+            "IR-4f4448c4-c745-4c44"
+        ],
+        "goal": [],
+        "name": "MyFitnessPal",
+        "emoji": "📱",
+        "link": "https://www.myfitnesspal.com/",
+        "type": "items"
+    },
+    {
+        "id": "IR-b9ae35e5-1bfd-4661",
+        "requires": [
+            "IR-4f4448c4-c745-4c44"
+        ],
+        "children": [
+            "IR-874bd9f9-323e-43cb"
+        ],
+        "goal": [
+            "Roughly track the calories of most major meals"
+        ],
+        
+        "title": "nutrition",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 1000,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-01d330a9-4226-4aab",
+        "requires": [
+            "IR-8a1a50b3-f377-4292"
+        ],
+        "children": [
+            "IR-805fbb69-3bc0-4516",
+            "IR-0f4514b2-8cd8-4c53"
+        ],
+        "goal": [
+            "Create and stick to a 30 minute morning routine"
+        ],
+        
+        "title": "routines",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 450,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-874bd9f9-323e-43cb",
+        "requires": [
+            "IR-b9ae35e5-1bfd-4661"
+        ],
+        "children": [
+            "IR-14c6e612-dbf7-40a5"
+        ],
+        "goal": [
+            "Structure your diet to hit your macronutrient goals"
+        ],
+        
+        "title": "nutrition",
+        "level": 3,
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 90,
+        "xp": 2000,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-14c6e612-dbf7-40a5",
+        "requires": [
+            "IR-874bd9f9-323e-43cb"
+        ],
+        "children": [],
+        "goal": [
+            "Plan and hit your daily calories for a successful BULK/CUT"
+        ],
+        
+        "title": "nutrition",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 180,
+        "xp": 8000,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-fd81b680-502d-4631",
+        "requires": [
+            "IR-09ad0d42-934f-46cf"
+        ],
+        "children": [
+            "IR-bd9dc8ee-a438-4f3f",
+            "IR-519e5038-6fd3-44de",
+            "IR-545ec239-51a4-4a35",
+            "IR-11873d54-3248-402e"
+        ],
+        "goal": [
+            "Exercise >30 min(s)"
+        ],
+        
+        "title": "fitness",
+        "level": 2,
+        "frequency": 4,
+        "interval": "week",
+        "timelimit": 30,
+        "xp": 750,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-bd9dc8ee-a438-4f3f",
+        "requires": [
+            "IR-fd81b680-502d-4631"
+        ],
+        "children": [
+            "IR-c16dfd46-5131-45e3"
+        ],
+        "goal": [
+            "No alcohol / soft-drinks / energy drinks"
+        ],
+        
+        "title": "water",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 400,
+        "category": "hydration",
+        "type": "skills"
+    },
+    {
+        "id": "IR-519e5038-6fd3-44de",
+        "requires": [
+            "IR-fd81b680-502d-4631"
+        ],
+        "children": [
+            "IR-51ee08b0-4eba-4179"
+        ],
+        "goal": [
+            "Run or swim or cycle for 20 minutes"
+        ],
+        
+        "title": "cardio",
+        "level": 1,
+        "frequency": 2,
+        "interval": "week",
+        "timelimit": 30,
+        "xp": 500,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-545ec239-51a4-4a35",
+        "requires": [
+            "IR-fd81b680-502d-4631"
+        ],
+        "children": [
+            "IR-84f84bb4-884f-4b06",
+            "IR-df49e8ff-9c9c-44a0",
+            "IR-6a7e2362-cc02-42d5"
+        ],
+        "goal": [
+            "Create a workout routine and track your workouts with strong"
+        ],
+        
+        "title": "fitness",
+        "level": 3,
+        "frequency": 5,
+        "interval": "week",
+        "timelimit": 60,
+        "xp": 3000,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-11873d54-3248-402e",
+        "requires": [
+            "IR-fd81b680-502d-4631"
+        ],
+        "children": [
+            "IR-dbd29660-b163-49c7",
+            "IR-80095306-47c3-4107",
+            "IR-8a103e76-b1a8-434f",
+            "IR-3d266646-738e-45c9"
+        ],
+        "goal": [
+            "Wash your face with soap twice a day"
+        ],
+        
+        "title": "attraction",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 100,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-c16dfd46-5131-45e3",
+        "requires": [
+            "IR-bd9dc8ee-a438-4f3f"
+        ],
+        "children": [
+            "IR-0ee0cd31-88a3-4e39"
+        ],
+        "goal": [
+            "Drink a glass of water each morning"
+        ],
+        
+        "title": "water",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 600,
+        "category": "hydration",
+        "type": "skills"
+    },
+    {
+        "id": "IR-51ee08b0-4eba-4179",
+        "requires": [
+            "IR-519e5038-6fd3-44de"
+        ],
+        "children": [
+            "IR-4d90c8dc-e25e-4fa2",
+            "IR-2351f9fa-4d78-437c"
+        ],
+        "goal": [
+            "Run or swim or cycle for 40 minutes"
+        ],
+        
+        "title": "cardio",
+        "level": 2,
+        "frequency": 3,
+        "interval": "week",
+        "timelimit": 30,
+        "xp": 750,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-4d90c8dc-e25e-4fa2",
+        "requires": [
+            "IR-51ee08b0-4eba-4179"
+        ],
+        "children": [
+            "IR-57df3c2d-3053-42d8",
+            "IR-aa085fd7-9b82-4f3c"
+        ],
+        "goal": [
+            "Run or swim or cycle for 1 hour"
+        ],
+        
+        "title": "cardio",
+        "level": 3,
+        "frequency": 4,
+        "interval": "week",
+        "timelimit": 30,
+        "xp": 1000,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-57df3c2d-3053-42d8",
+        "requires": [
+            "IR-4d90c8dc-e25e-4fa2"
+        ],
+        "children": [
+            "IR-df038b8f-0f51-4f02"
+        ],
+        "goal": [
+            "Join a swimming/cycling/running competition"
+        ],
+        
+        "title": "cardio",
+        "level": 4,
+        "frequency": "1",
+        "interval": "month",
+        "timelimit": "30",
+        "xp": 2000,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-df038b8f-0f51-4f02",
+        "requires": [
+            "IR-57df3c2d-3053-42d8"
+        ],
+        "children": [],
+        "goal": [
+            "Place first in a running/cycling/swimming competition"
+        ],
+        
+        "title": "cardio",
+        "level": 5,
+        "frequency": "1",
+        "interval": "month",
+        "timelimit": "30",
+        "xp": 3000,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-2351f9fa-4d78-437c",
+        "requires": [
+            "IR-51ee08b0-4eba-4179"
+        ],
+        "children": [],
+        "goal": [
+            "Run a 5K"
+        ],
+        "category": "fitness",
+        "xp": 500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-aa085fd7-9b82-4f3c",
+        "requires": [
+            "IR-4d90c8dc-e25e-4fa2"
+        ],
+        "children": [],
+        "goal": [
+            "Run a 12K"
+        ],
+        "category": "fitness",
+        "xp": 1500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-f7ec03df-2e21-431f",
+        "requires": [
+            "IR-8a1a50b3-f377-4292"
+        ],
+        "children": [
+            "IR-7c0124da-f8c3-474a"
+        ],
+        "goal": [
+            "Stay in bed and attempt to sleep for 8 hours a night"
+        ],
+        
+        "title": "SLEEP",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 500,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-0f4514b2-8cd8-4c53",
+        "requires": [
+            "IR-01d330a9-4226-4aab"
+        ],
+        "children": [
+            "IR-944cc258-e6f5-428a",
+            "IR-886dd5d2-6f42-41a7"
+        ],
+        "goal": [
+            "Create and stick to a 1 hour evening routine (without screens)"
+        ],
+        
+        "title": "routines",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 2000,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-944cc258-e6f5-428a",
+        "requires": [
+            "IR-0f4514b2-8cd8-4c53"
+        ],
+        "children": [
+            "IR-840d1572-066f-4279"
+        ],
+        "goal": [
+            "Write a daily plan each morning with tasks you will complete"
+        ],
+        
+        "title": "routines",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 3000,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-7c0124da-f8c3-474a",
+        "requires": [
+            "IR-f7ec03df-2e21-431f"
+        ],
+        "children": [
+            "IR-9bfe5a6c-6bf9-455b"
+        ],
+        "goal": [
+            "Wake up at 7AM"
+        ],
+        
+        "title": "SLEEP",
+        "level": 3,
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 12,
+        "xp": 69,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-9bfe5a6c-6bf9-455b",
+        "requires": [
+            "IR-7c0124da-f8c3-474a"
+        ],
+        "children": [],
+        "goal": [
+            "Wake up at 5AM"
+        ],
+        
+        "title": "SLEEP",
+        "level": 4,
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 12,
+        "xp": 69,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-840d1572-066f-4279",
+        "requires": [
+            "IR-944cc258-e6f5-428a"
+        ],
+        "children": [
+            "IR-f9fa7486-2760-4d93"
+        ],
+        "goal": [
+            "Create an ideal daily plan in 15 minute increments and stick to it"
+        ],
+        
+        "title": "routines",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 60,
+        "xp": 6000,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-f9fa7486-2760-4d93",
+        "requires": [
+            "IR-840d1572-066f-4279"
+        ],
+        "children": [],
+        "goal": [
+            "Perform a weekly review to assess your progress and alter your daily plan"
+        ],
+        
+        "title": "routines",
+        "level": 5,
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 60,
+        "xp": 8000,
+        "category": "routines",
+        "type": "skills"
+    },
+    {
+        "id": "IR-886dd5d2-6f42-41a7",
+        "requires": [
+            "IR-0f4514b2-8cd8-4c53"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "SLEEP CYCLE APP",
+        "emoji": "item",
+        "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
+        "type": "items"
+    },
+    {
+        "id": "IR-dbd29660-b163-49c7",
+        "requires": [
+            "IR-11873d54-3248-402e"
+        ],
+        "children": [
+            "IR-b30e693d-3a2e-42ff",
+            "IR-0e409667-54e2-47e6"
+        ],
+        "goal": [
+            "Apply moisturiser and sunscreen daily"
+        ],
+        
+        "title": "attraction",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 300,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-80095306-47c3-4107",
+        "requires": [
+            "IR-11873d54-3248-402e"
+        ],
+        "children": [
+            "IR-24e545df-dc81-419f"
+        ],
+        "goal": [
+            "Spend 2 hours researching fashion styles that you're interested in"
+        ],
+        
+        "title": "fashion",
+        "level": 1,
+        "frequency": 1,
+        "interval": "week",
+        "timelimit": 7,
+        "xp": 250,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-8a103e76-b1a8-434f",
+        "requires": [
+            "IR-11873d54-3248-402e"
+        ],
+        "children": [
+            "IR-a43fdd85-48b9-4683",
+            "IR-e6a1ecf2-981e-496f"
+        ],
+        "goal": [
+            "Spend 2 hours researching hair care and styles"
+        ],
+        
+        "title": "hair care",
+        "level": 1,
+        "frequency": 1,
+        "interval": "month",
+        "timelimit": 30,
+        "xp": 500,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-b30e693d-3a2e-42ff",
+        "requires": [
+            "IR-dbd29660-b163-49c7"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "Mewing guide",
+        "emoji": "📔",
+        "link": "https://www.youtube.com/watch?v=zbzT00Cyq-g",
+        "type": "items"
+    },
+    {
+        "id": "IR-0e409667-54e2-47e6",
+        "requires": [
+            "IR-dbd29660-b163-49c7"
+        ],
+        "children": [
+            "IR-7ea403fe-f338-4f3f",
+            "IR-43d0f57d-8206-48d4"
+        ],
+        "goal": [
+            "Mew for at least 5 minutes"
+        ],
+        
+        "title": "attraction",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 600,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-7ea403fe-f338-4f3f",
+        "requires": [
+            "IR-0e409667-54e2-47e6"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "Potion of attraction",
+        "emoji": "🧪",
+        "link": "https://www.youtube.com/watch?v=mqphY24Tnp0",
+        "type": "items"
+    },
+    {
+        "id": "IR-43d0f57d-8206-48d4",
+        "requires": [
+            "IR-0e409667-54e2-47e6"
+        ],
+        "children": [],
+        "goal": [
+            "Perform facial exercise"
+        ],
+        
+        "title": "attraction",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 2000,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-24e545df-dc81-419f",
+        "requires": [
+            "IR-80095306-47c3-4107"
+        ],
+        "children": [],
+        "goal": [
+            "Plan and buy a weeks worth of outfits"
+        ],
+        
+        "title": "fashion",
+        "level": 2,
+        "frequency": 1,
+        "interval": "month",
+        "timelimit": 30,
+        "xp": 1150,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-a43fdd85-48b9-4683",
+        "requires": [
+            "IR-8a103e76-b1a8-434f"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "ADVANCED HAIR CARE TUTORIAL",
+        "emoji": "📔",
+        "link": "https://brickellmensproducts.com/blogs/grooming-manual/63511875-mens-hair-care-manual",
+        "type": "items"
+    },
+    {
+        "id": "IR-e6a1ecf2-981e-496f",
+        "requires": [
+            "IR-8a103e76-b1a8-434f"
+        ],
+        "children": [
+            "IR-c38bb27a-40e7-4921"
+        ],
+        "goal": [
+            "Get a haircut based off of your research"
+        ],
+        
+        "title": "hair care",
+        "level": 2,
+        "frequency": 1,
+        "interval": "month",
+        "timelimit": 30,
+        "xp": 1000,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-c38bb27a-40e7-4921",
+        "requires": [
+            "IR-e6a1ecf2-981e-496f"
+        ],
+        "children": [],
+        "goal": [
+            "Purchase and use haircare products daily"
+        ],
+        
+        "title": "hair care",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 2000,
+        "category": "attraction",
+        "type": "skills"
+    },
+    {
+        "id": "IR-84f84bb4-884f-4b06",
+        "requires": [
+            "IR-545ec239-51a4-4a35"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "Enchanted glove",
+        "emoji": "🥊",
+        "link": "https://www.youtube.com/watch?v=D8DouKeOkfI&feature=youtu.be",
+        "type": "items"
+    },
+    {
+        "id": "IR-df49e8ff-9c9c-44a0",
+        "requires": [
+            "IR-545ec239-51a4-4a35"
+        ],
+        "children": [
+            "IR-b1be2c47-10c4-443c"
+        ],
+        "goal": [
+            "Start training a martial art (MMA/Boxing/etc)"
+        ],
+        
+        "title": "SELF-DEFENCE",
+        "level": 1,
+        "frequency": 3,
+        "interval": "week",
+        "timelimit": 14,
+        "xp": 200,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-6a7e2362-cc02-42d5",
+        "requires": [
+            "IR-545ec239-51a4-4a35"
+        ],
+        "children": [
+            "IR-462accf4-0f38-4221"
+        ],
+        "goal": [
+            "Hit PRs in EVERY exercise in your routine"
+        ],
+        
+        "title": "fitness",
+        "level": 4,
+        "frequency": 5,
+        "interval": "week",
+        "timelimit": 120,
+        "xp": 10000,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-b1be2c47-10c4-443c",
+        "requires": [
+            "IR-df49e8ff-9c9c-44a0"
+        ],
+        "children": [
+            "IR-2c6828a6-f16b-45b4"
+        ],
+        "goal": [
+            "Win 5 training fights with your martial art"
+        ],
+        
+        "title": "SELF-DEFENCE",
+        "level": 2,
+        "frequency": 5,
+        "interval": "month",
+        "timelimit": 30,
+        "xp": 600,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-2c6828a6-f16b-45b4",
+        "requires": [
+            "IR-b1be2c47-10c4-443c"
+        ],
+        "children": [
+            "IR-c096327d-ed3a-4835"
+        ],
+        "goal": [
+            "Win 30 training fights with your martial art"
+        ],
+        
+        "title": "SELF-DEFENCE",
+        "level": 3,
+        "frequency": 30,
+        "interval": "year",
+        "timelimit": 365,
+        "xp": 3200,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-c096327d-ed3a-4835",
+        "requires": [
+            "IR-2c6828a6-f16b-45b4"
+        ],
+        "children": [],
+        "goal": [
+            "Win a martial arts competition"
+        ],
+        "category": "fitness",
+        "xp": 6000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-4f289088-8508-4108",
+        "requires": [
+            "IR-a3697be5-3373-4838"
+        ],
+        "children": [
+            "IR-5b26ac32-88b0-44b6"
+        ],
+        "goal": [
+            "Cold shower 30s (Every other day)"
+        ],
+        
+        "title": "cold showers",
+        "level": 1,
+        "frequency": 4,
+        "interval": "week",
+        "timelimit": 14,
+        "xp": 300,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-55041c99-e63b-4328",
+        "requires": [
+            "IR-a3697be5-3373-4838"
+        ],
+        "children": [
+            "IR-a31784c2-f70a-4c26",
+            "IR-72b33759-d911-42ce"
+        ],
+        "goal": [
+            "Meditate for 15 minutes"
+        ],
+        
+        "title": "MEDITATION",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 800,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-bb974077-4a83-44ca",
+        "requires": [
+            "IR-a3697be5-3373-4838"
+        ],
+        "children": [
+            "IR-c5b9c103-c974-41e5",
+            "IR-28b6413c-7df5-4536"
+        ],
+        "goal": [
+            "Track your fapping addiction"
+        ],
+        
+        "title": "nofap",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 300,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-c33897eb-c41e-45cd",
+        "requires": [
+            "IR-a3697be5-3373-4838"
+        ],
+        "children": [
+            "IR-35c15f68-7ee4-4772",
+            "IR-0815b986-3a6b-4cd0",
+            "IR-58d52492-8c40-4df7",
+            "IR-896f378b-f690-4c7c"
+        ],
+        "goal": [
+            "Track your screentime daily"
+        ],
+        
+        "title": "screentime",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 200,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-35c15f68-7ee4-4772",
+        "requires": [
+            "IR-c33897eb-c41e-45cd"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "Chromatic Logger",
+        "emoji": "⏱",
+        "link": "https://www.rescuetime.com/",
+        "type": "items"
+    },
+    {
+        "id": "IR-db4aba40-54ec-4df7",
+        "requires": [
+            "IR-a3697be5-3373-4838"
+        ],
+        "children": [],
+        "goal": [
+            "Meditate without an app for 15 minutes"
+        ],
+        "category": "mindfulness",
+        "xp": 500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-5b26ac32-88b0-44b6",
+        "requires": [
+            "IR-4f289088-8508-4108"
+        ],
+        "children": [
+            "IR-db12c566-e62c-475b",
+            "IR-7faa991c-7f53-42aa"
+        ],
+        "goal": [
+            "Cold shower 1m"
+        ],
+        
+        "title": "cold showers",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 600,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-db12c566-e62c-475b",
+        "requires": [
+            "IR-5b26ac32-88b0-44b6"
+        ],
+        "children": [
+            "IR-47c40408-62ee-4ed8",
+            "IR-6c95bce6-5006-4793"
+        ],
+        "goal": [
+            "Cold shower 5m"
+        ],
+        
+        "title": "cold showers",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 800,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-47c40408-62ee-4ed8",
+        "requires": [
+            "IR-db12c566-e62c-475b"
+        ],
+        "children": [],
+        "goal": [
+            "Only cold shower"
+        ],
+        
+        "title": "cold showers",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 2500,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-6c95bce6-5006-4793",
+        "requires": [
+            "IR-db12c566-e62c-475b"
+        ],
+        "children": [],
+        "goal": [
+            "20 minute ice bath"
+        ],
+        "category": "mindfulness",
+        "xp": 2500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-a31784c2-f70a-4c26",
+        "requires": [
+            "IR-55041c99-e63b-4328"
+        ],
+        "children": [
+            "IR-14bdb055-96f5-4c6a",
+            "IR-a74a2fdb-b6ef-4a2d"
+        ],
+        "goal": [
+            "Meditate for 20 minutes"
+        ],
+        
+        "title": "MEDITATION",
+        "level": 5,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 3500,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-14bdb055-96f5-4c6a",
+        "requires": [
+            "IR-a31784c2-f70a-4c26"
+        ],
+        "children": [],
+        "goal": [
+            "Meditate for 1 hour straight"
+        ],
+        "category": "example",
+        "xp": 1000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-72b33759-d911-42ce",
+        "requires": [
+            "IR-55041c99-e63b-4328"
+        ],
+        "children": [],
+        "goal": [
+            "Complete 31 days of mindulness (https://cdn.discordapp.com/attachments/842846102696886282/860054078255923200/31_days_of_mindfulness.pdf)"
+        ],
+        "category": "mindfulness",
+        "xp": 500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-c5b9c103-c974-41e5",
+        "requires": [
+            "IR-bb974077-4a83-44ca"
+        ],
+        "children": [],
+        "goal": [
+            "How to start nofap"
+        ],
+        "name": "Nofap guide",
+        "emoji": "📘",
+        "link": "https://www.youtube.com/watch?v=nxFDFvU7PbU",
+        "type": "items"
+    },
+    {
+        "id": "IR-28b6413c-7df5-4536",
+        "requires": [
+            "IR-bb974077-4a83-44ca"
+        ],
+        "children": [
+            "IR-a71082c7-d8a2-4be7",
+            "IR-cdc8635e-79d2-4900",
+            "IR-a4e6de35-9b69-4e0f"
+        ],
+        "goal": [
+            "Reduce your fapping by 25% each month"
+        ],
+        
+        "title": "nofap",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 90,
+        "xp": 4000,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-a71082c7-d8a2-4be7",
+        "requires": [
+            "IR-28b6413c-7df5-4536"
+        ],
+        "children": [],
+        "goal": [
+            "Don't fap at all"
+        ],
+        
+        "title": "nofap",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 90,
+        "xp": 8000,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-cdc8635e-79d2-4900",
+        "requires": [
+            "IR-28b6413c-7df5-4536"
+        ],
+        "children": [],
+        "goal": [
+            "2 weeks without fapping"
+        ],
+        "category": "mindfulness",
+        "xp": 420,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-a4e6de35-9b69-4e0f",
+        "requires": [
+            "IR-28b6413c-7df5-4536"
+        ],
+        "children": [],
+        "goal": [
+            "Edit the data"
+        ],
+        "name": "Anti-fap potion",
+        "emoji": "🧪",
+        "link": "https://easypeasymethod.org/",
+        "type": "items"
+    },
+    {
+        "id": "IR-0815b986-3a6b-4cd0",
+        "requires": [
+            "IR-c33897eb-c41e-45cd"
+        ],
+        "children": [
+            "IR-d78c4dda-f2e6-433f"
+        ],
+        "goal": [
+            "Reduce your screentime below 5 hours a day"
+        ],
+        
+        "title": "screentime",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 21,
+        "xp": 500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-58d52492-8c40-4df7",
+        "requires": [
+            "IR-c33897eb-c41e-45cd"
+        ],
+        "children": [
+            "IR-96600603-275f-4713"
+        ],
+        "goal": [
+            "Maximum of 2 hours of video games a day"
+        ],
+        
+        "title": "video games",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 1000,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-896f378b-f690-4c7c",
+        "requires": [
+            "IR-c33897eb-c41e-45cd"
+        ],
+        "children": [
+            "IR-71b1a115-ca3d-4401"
+        ],
+        "goal": [
+            "Social media used less than 2 hours daily"
+        ],
+        
+        "title": "social media",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 7,
+        "xp": 500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-d78c4dda-f2e6-433f",
+        "requires": [
+            "IR-0815b986-3a6b-4cd0"
+        ],
+        "children": [
+            "IR-dbd482f8-a22d-44e7"
+        ],
+        "goal": [
+            "Reduce your screentime below 3 hours a day"
+        ],
+        
+        "title": "screentime",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 1000,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-96600603-275f-4713",
+        "requires": [
+            "IR-58d52492-8c40-4df7"
+        ],
+        "children": [
+            "IR-5a3114a6-c36e-43e1"
+        ],
+        "goal": [
+            "Reduce video game time to 6 hours a week"
+        ],
+        
+        "title": "video games",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 2500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-71b1a115-ca3d-4401",
+        "requires": [
+            "IR-896f378b-f690-4c7c"
+        ],
+        "children": [
+            "IR-2d9c05b1-a6c1-4803"
+        ],
+        "goal": [
+            "Block one social media platform you use regularly"
+        ],
+        
+        "title": "social media",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 750,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-dbd482f8-a22d-44e7",
+        "requires": [
+            "IR-d78c4dda-f2e6-433f"
+        ],
+        "children": [
+            "IR-5a79635e-b2d6-46c2"
+        ],
+        "goal": [
+            "Reduce your screentime below 2 hours a day"
+        ],
+        
+        "title": "screentime",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 60,
+        "xp": 2000,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-5a79635e-b2d6-46c2",
+        "requires": [
+            "IR-dbd482f8-a22d-44e7"
+        ],
+        "children": [
+            "IR-d906116c-f665-4195"
+        ],
+        "goal": [
+            "Delete any blockers or extensions to limit your screentime, and reduce screentime to less than 2 hours a day"
+        ],
+        
+        "title": "screentime",
+        "level": 5,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 90,
+        "xp": 4500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-d906116c-f665-4195",
+        "requires": [
+            "IR-5a79635e-b2d6-46c2"
+        ],
+        "children": [],
+        "goal": [
+            "Avoid all screens for 3 days"
+        ],
+        "category": "screentime",
+        "xp": 2500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-5a3114a6-c36e-43e1",
+        "requires": [
+            "IR-96600603-275f-4713"
+        ],
+        "children": [
+            "IR-41f96c24-517a-4f18"
+        ],
+        "goal": [
+            "Only play games with friends, maximum of 2 hours a week"
+        ],
+        
+        "title": "video games",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 60,
+        "xp": 3000,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-41f96c24-517a-4f18",
+        "requires": [
+            "IR-5a3114a6-c36e-43e1"
+        ],
+        "children": [],
+        "goal": [
+            "No video games"
+        ],
+        
+        "title": "video games",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 60,
+        "xp": 4500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-2d9c05b1-a6c1-4803",
+        "requires": [
+            "IR-71b1a115-ca3d-4401"
+        ],
+        "children": [
+            "IR-ff15b804-66bf-460a"
+        ],
+        "goal": [
+            "Limit social media to a maximum of 1 hour daily"
+        ],
+        
+        "title": "social media",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 1500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-ff15b804-66bf-460a",
+        "requires": [
+            "IR-2d9c05b1-a6c1-4803"
+        ],
+        "children": [
+            "IR-2f798f27-f253-4dde"
+        ],
+        "goal": [
+            "Delete all blockers and extensions, limit yourself to 2 hours of social media a day"
+        ],
+        
+        "title": "social media",
+        "level": 4,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 2000,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-2f798f27-f253-4dde",
+        "requires": [
+            "IR-ff15b804-66bf-460a"
+        ],
+        "children": [],
+        "goal": [
+            "No recreational social media use"
+        ],
+        
+        "title": "social media",
+        "level": 5,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 60,
+        "xp": 3500,
+        "category": "screentime",
+        "type": "skills"
+    },
+    {
+        "id": "IR-474133a2-aa9a-494b",
+        "requires": [
+            "628f99eec4ce6e67da2b5e17"
+        ],
+        "children": [
+            "IR-f7002994-39de-4ffc",
+            "IR-f634bcab-cd79-43f5"
+        ],
+        "goal": [
+            "Hold eye contact and smile to a stranger"
+        ],
+        "title": "relationships",
+        "level": 1,
+        "frequency": 1,
+        "xp": 100,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-686b7ee7-a89f-4979",
+        "requires": [
+            "628f99eec4ce6e67da2b5e17"
+        ],
+        "children": [
+            "IR-70c002c8-b1ea-4a56"
+        ],
+        "goal": [
+            "Make your bed"
+        ],
+        "title": "discpline",
+        "level": 1,
+        "frequency": 1,
+        "xp": 100,
+        "category": "discipline",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-34697784-3040-4bdf",
+        "requires": [
+            "628f99eec4ce6e67da2b5e17"
+        ],
+        "children": [
+            "IR-27b8374d-1f80-4604",
+            "IR-0d82d449-2e8d-4f7d"
+        ],
+        "goal": [
+            "Visualise acting as your ideal masculine self for 5 minutes"
+        ],
+        "title": "classical masculinity",
+        "level": 1,
+        "frequency": 1,
+        "xp": 300,
+        "category": "masculinity",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-b8cc750a-8b1f-4c76",
+        "requires": [
+            "628f99eec4ce6e67da2b5e17"
+        ],
+        "children": [
+            "IR-18249edf-009f-48c8",
+            "IR-4f4c62f3-203f-42ab",
+            "IR-7d22568d-ea0c-4161",
+            "IR-7df46217-9eab-497b",
+            "IR-ab0297e9-77e2-46e5"
+        ],
+        "goal": [
+            "PROMPT: Who do I want to become?",
+            "PROMPT: What is my biggest weakness?",
+            "PROMPT: What has impacted me most in life?",
+            "PROMPT: What am I most grateful for? why?",
+            "PROMPT: Who do I want to surround myself with?"
+        ],
+        "title": "JOURNALING",
+        "level": 2,
+        "frequency": 1,
+        "xp": 300,
+        "category": "skills",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-e2e4ace9-9117-4012",
+        "requires": [
+            "628f99eec4ce6e67da2b5e17"
+        ],
+        "children": [
+            "IR-edd63013-b09f-4859",
+            "IR-720b5427-ca85-4431",
+            "IR-ee930101-3d5c-455e",
+            "IR-af811d1e-be01-4f5e"
+        ],
+        "goal": [
+            "Read for 10 minutes"
+        ],
+        "title": "reading",
+        "level": 1,
+        "frequency": 1,
+        "xp": 200,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "15",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-f7002994-39de-4ffc",
+        "requires": [
+            "IR-474133a2-aa9a-494b"
+        ],
+        "children": [
+            "IR-311c2cb3-fec8-4f70",
+            "IR-e51b6c69-4568-4f7e",
+            "IR-6e55751b-6a1b-4561",
+            "IR-c9f12e89-5b67-49f6"
+        ],
+        "goal": [
+            "Start a friendly conversation with a stranger"
+        ],
+        "title": "relationships",
+        "level": 2,
+        "frequency": 1,
+        "xp": 200,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-f634bcab-cd79-43f5",
+        "requires": [
+            "IR-474133a2-aa9a-494b"
+        ],
+        "children": [
+            "IR-c1f14fda-ea7d-4bdf"
+        ],
+        "goal": [
+            "Hug a loved one"
+        ],
+        "title": "family",
+        "level": 1,
+        "frequency": 1,
+        "xp": 100,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-c1f14fda-ea7d-4bdf",
+        "requires": [
+            "IR-f634bcab-cd79-43f5"
+        ],
+        "children": [
+            "IR-a7c0a785-aee4-4a79",
+            "IR-c03215d4-b6ef-4652"
+        ],
+        "goal": [
+            "Cook dinner for your family"
+        ],
+        "title": "family",
+        "level": 2,
+        "frequency": 1,
+        "xp": 400,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-a7c0a785-aee4-4a79",
+        "requires": [
+            "IR-c1f14fda-ea7d-4bdf"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Why do I want to improve myself?",
+            "PROMPT: What makes me happy?",
+            "PROMPT: Who am I? How would I describe myself? ",
+            "PROMPT: What do I need to change in my life?",
+            "PROMPT: Where do I want to be in 5 Years?"
+        ],
+        "name": "Family guide",
+        "emoji": "item",
+        "link": "https://www.youtube.com/watch?v=HFF6uLKT3a4",
+        "type": "items"
+    },
+    {
+        "id": "IR-c03215d4-b6ef-4652",
+        "requires": [
+            "IR-c1f14fda-ea7d-4bdf"
+        ],
+        "children": [
+            "IR-49a43a2b-09c3-49dc"
+        ],
+        "goal": [
+            "Spend >20m of quality time with family members"
+        ],
+        "title": "family",
+        "level": 3,
+        "frequency": 1,
+        "xp": 500,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-311c2cb3-fec8-4f70",
+        "requires": [
+            "IR-f7002994-39de-4ffc"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Why do I want to improve myself?",
+            "PROMPT: What makes me happy?",
+            "PROMPT: Who am I? How would I describe myself? ",
+            "PROMPT: What do I need to change in my life?",
+            "PROMPT: Where do I want to be in 5 Years?"
+        ],
+        "name": "Confidence booster",
+        "emoji": "📣",
+        "link": "https://www.youtube.com/watch?v=2nIsZYPO7Us",
+        "type": "items"
+    },
+    {
+        "id": "IR-e51b6c69-4568-4f7e",
+        "requires": [
+            "IR-f7002994-39de-4ffc"
+        ],
+        "children": [],
+        "goal": [
+            "Relationship handbook"
+        ],
+        "name": "relationship toolbox",
+        "emoji": "🧰",
+        "link": "https://drive.google.com/file/d/1VYC1qwsQ0FJh1lsXXsTQerVq-QptESZm/view",
+        "type": "items"
+    },
+    {
+        "id": "IR-6e55751b-6a1b-4561",
+        "requires": [
+            "IR-f7002994-39de-4ffc"
+        ],
+        "children": [
+            "IR-5dda65df-9e7d-4d2a",
+            "IR-44e8e2a3-02bd-455f",
+            "IR-111cb990-8191-4beb",
+            "IR-7b330893-a9dc-48ba",
+            "IR-0483acdd-9612-404c",
+            "IR-a767a278-47b3-42da"
+        ],
+        "goal": [
+            "Speak slowly and with intention, don't allow yourself to be interrupted"
+        ],
+        "title": "communication",
+        "level": 1,
+        "frequency": 1,
+        "xp": 300,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-c9f12e89-5b67-49f6",
+        "requires": [
+            "IR-f7002994-39de-4ffc"
+        ],
+        "children": [
+            "IR-14c846a7-3d19-49b8"
+        ],
+        "goal": [
+            "Start a friendly conversation with a stranger"
+        ],
+        "title": "relationships",
+        "level": 3,
+        "frequency": 3,
+        "xp": 1000,
+        "category": "relationships",
+        "interval": "week",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-5dda65df-9e7d-4d2a",
+        "requires": [
+            "IR-6e55751b-6a1b-4561"
+        ],
+        "children": [
+            "IR-0b3973c4-3736-4a7a"
+        ],
+        "goal": [
+            "Research confidence for an hour"
+        ],
+        "title": "confidence",
+        "level": 1,
+        "frequency": 1,
+        "xp": 300,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-44e8e2a3-02bd-455f",
+        "requires": [
+            "IR-6e55751b-6a1b-4561"
+        ],
+        "children": [
+            "IR-13a3aede-81fe-4606"
+        ],
+        "goal": [
+            "Practice your body language in the mirror for 10 minutes"
+        ],
+        "title": "body language",
+        "level": 1,
+        "frequency": 1,
+        "xp": 200,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-111cb990-8191-4beb",
+        "requires": [
+            "IR-6e55751b-6a1b-4561"
+        ],
+        "children": [
+            "IR-fcb5c701-bc2b-4fea",
+            "IR-fe1d2567-2630-477a"
+        ],
+        "goal": [
+            "Follow the HTWFAIP principles religiously"
+        ],
+        "title": "communication",
+        "level": 2,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-7b330893-a9dc-48ba",
+        "requires": [
+            "IR-6e55751b-6a1b-4561"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Why do I want to improve myself?",
+            "PROMPT: What makes me happy?",
+            "PROMPT: Who am I? How would I describe myself? ",
+            "PROMPT: What do I need to change in my life?",
+            "PROMPT: Where do I want to be in 5 Years?"
+        ],
+        "name": "HTWFAIP",
+        "emoji": "📕",
+        "link": "https://drive.google.com/file/d/1XEonU2uWopJVfPIv0YyPuBq79jR-KOlP/view",
+        "type": "items"
+    },
+    {
+        "id": "IR-0483acdd-9612-404c",
+        "requires": [
+            "IR-6e55751b-6a1b-4561"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Why do I want to improve myself?",
+            "PROMPT: What makes me happy?",
+            "PROMPT: Who am I? How would I describe myself? ",
+            "PROMPT: What do I need to change in my life?",
+            "PROMPT: Where do I want to be in 5 Years?"
+        ],
+        "name": "body language guide",
+        "emoji": "📋",
+        "link": "https://www.youtube.com/watch?v=RgkghUvC6PA",
+        "type": "items"
+    },
+    {
+        "id": "IR-0b3973c4-3736-4a7a",
+        "requires": [
+            "IR-5dda65df-9e7d-4d2a"
+        ],
+        "children": [
+            "IR-56c5862a-0142-4484",
+            "IR-62933a86-fc79-4d41"
+        ],
+        "goal": [
+            "Find an activity you lack confidence in and attempt it"
+        ],
+        "title": "confidence",
+        "level": 2,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-56c5862a-0142-4484",
+        "requires": [
+            "IR-0b3973c4-3736-4a7a"
+        ],
+        "children": [],
+        "goal": [
+            "Approach someone you find attractive and start a conversation"
+        ],
+        "title": "confidence",
+        "level": 3,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "relationships",
+        "interval": "week",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-62933a86-fc79-4d41",
+        "requires": [
+            "IR-0b3973c4-3736-4a7a"
+        ],
+        "children": [],
+        "goal": [
+            "Cold approach 5 people you find attractive in public"
+        ],
+        "category": "relationships",
+        "xp": 3000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-13a3aede-81fe-4606",
+        "requires": [
+            "IR-44e8e2a3-02bd-455f"
+        ],
+        "children": [
+            "IR-b48a02ab-2850-4cc0"
+        ],
+        "goal": [
+            "Be mindful of your posture at least once daily"
+        ],
+        "title": "body language",
+        "level": 2,
+        "frequency": 1,
+        "xp": 500,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-b48a02ab-2850-4cc0",
+        "requires": [
+            "IR-13a3aede-81fe-4606"
+        ],
+        "children": [],
+        "goal": [
+            "Be mindful of your posture and take up more space than you normally would in daily interactions"
+        ],
+        "title": "body language",
+        "level": 3,
+        "frequency": 1,
+        "xp": 1500,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-fcb5c701-bc2b-4fea",
+        "requires": [
+            "IR-111cb990-8191-4beb"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Why do I want to improve myself?",
+            "PROMPT: What makes me happy?",
+            "PROMPT: Who am I? How would I describe myself? ",
+            "PROMPT: What do I need to change in my life?",
+            "PROMPT: Where do I want to be in 5 Years?"
+        ],
+        "name": "HOW TO COMMAND RESPECT",
+        "emoji": "📋",
+        "link": "https://www.youtube.com/watch?v=PYaixyrzDOk",
+        "type": "items"
+    },
+    {
+        "id": "IR-fe1d2567-2630-477a",
+        "requires": [
+            "IR-111cb990-8191-4beb"
+        ],
+        "children": [
+            "IR-8cac07a8-88dd-41ad"
+        ],
+        "goal": [
+            "1) Physically take up more space 2) Initiate platonic touching 3) Don't allow yourself to be cut off 4) Compliment those you dislike 5) share your shortcomings playfully"
+        ],
+        "title": "communication",
+        "level": 3,
+        "frequency": 1,
+        "xp": 2500,
+        "category": "relationships",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-8cac07a8-88dd-41ad",
+        "requires": [
+            "IR-fe1d2567-2630-477a"
+        ],
+        "children": [],
+        "goal": [
+            "Speak publically in front of >20 people"
+        ],
+        "category": "relationships",
+        "xp": 1500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-a767a278-47b3-42da",
+        "requires": [
+            "IR-6e55751b-6a1b-4561"
+        ],
+        "children": [],
+        "goal": [
+            "Write a list of 30 social interaction challenges for 30 days and complete it"
+        ],
+        "category": "relationships",
+        "xp": 2000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-14c846a7-3d19-49b8",
+        "requires": [
+            "IR-c9f12e89-5b67-49f6"
+        ],
+        "children": [
+            "IR-1a4c8ced-8887-45e3"
+        ],
+        "goal": [
+            "Plan two social events with friends"
+        ],
+        "title": "relationships",
+        "level": 4,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-1a4c8ced-8887-45e3",
+        "requires": [
+            "IR-14c846a7-3d19-49b8"
+        ],
+        "children": [],
+        "goal": [
+            "Plan a social event based on a self-improvement activity"
+        ],
+        "category": "relationships",
+        "xp": 1000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-49a43a2b-09c3-49dc",
+        "requires": [
+            "IR-c03215d4-b6ef-4652"
+        ],
+        "children": [
+            "IR-4c700121-9444-4d21"
+        ],
+        "goal": [
+            "Plan an activity for your family"
+        ],
+        "title": "family",
+        "level": 4,
+        "frequency": 1,
+        "xp": 800,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-4c700121-9444-4d21",
+        "requires": [
+            "IR-49a43a2b-09c3-49dc"
+        ],
+        "children": [],
+        "goal": [
+            "Plan a family activity outdoors"
+        ],
+        "title": "family",
+        "level": 5,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "relationships",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-70c002c8-b1ea-4a56",
+        "requires": [
+            "IR-686b7ee7-a89f-4979"
+        ],
+        "children": [
+            "IR-22f751c8-2994-4c14"
+        ],
+        "goal": [
+            "Have a 30 work session"
+        ],
+        "title": "discpline",
+        "level": 2,
+        "frequency": 1,
+        "xp": 300,
+        "category": "discipline",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-22f751c8-2994-4c14",
+        "requires": [
+            "IR-70c002c8-b1ea-4a56"
+        ],
+        "children": [
+            "IR-42760f58-cc7f-43b1",
+            "IR-3716a212-43e9-4612"
+        ],
+        "goal": [
+            "Explode out of bed first thing in the morning with a number of pushups you can comfortably complete"
+        ],
+        "title": "discpline",
+        "level": 3,
+        "frequency": 1,
+        "xp": 750,
+        "category": "discipline",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-42760f58-cc7f-43b1",
+        "requires": [
+            "IR-22f751c8-2994-4c14"
+        ],
+        "children": [
+            "IR-a3bda3f6-b875-42e5"
+        ],
+        "goal": [
+            "Write a list of 7 habits holding you back in life that you can abstain from",
+            "Abstain from habit 1",
+            "Abstain from habit 2",
+            "Abstain from habit 3",
+            "Abstain from habit 4",
+            "Abstain from habit 5",
+            "Abstain from habit 6",
+            "Abstain from habit 7"
+        ],
+        "title": "discpline",
+        "level": 4,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "discipline",
+        "interval": "day",
+        "timelimit": "7",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-3716a212-43e9-4612",
+        "requires": [
+            "IR-22f751c8-2994-4c14"
+        ],
+        "children": [],
+        "goal": [
+            "3 hour deep work session"
+        ],
+        "category": "discipline",
+        "xp": 1000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-a3bda3f6-b875-42e5",
+        "requires": [
+            "IR-42760f58-cc7f-43b1"
+        ],
+        "children": [
+            "IR-6092679a-d131-450a"
+        ],
+        "goal": [
+            "Place a desireable item/addiction where it is accessible and resist it"
+        ],
+        "title": "discpline",
+        "level": 5,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "discipline",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-6092679a-d131-450a",
+        "requires": [
+            "IR-a3bda3f6-b875-42e5"
+        ],
+        "children": [],
+        "goal": [
+            "Complete 5 more skills from the skill tree"
+        ],
+        "category": "discipline",
+        "xp": 1000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-27b8374d-1f80-4604",
+        "requires": [
+            "IR-34697784-3040-4bdf"
+        ],
+        "children": [],
+        "goal": [
+            "Testosterone serum"
+        ],
+        "name": "Testosterone Serum",
+        "emoji": "💉",
+        "link": "https://www.youtube.com/watch?v=iH_6Omu9N5k&ab_channel=Hamza",
+        "type": "items"
+    },
+    {
+        "id": "IR-0d82d449-2e8d-4f7d",
+        "requires": [
+            "IR-34697784-3040-4bdf"
+        ],
+        "children": [
+            "IR-d49a952d-ec41-4ff5",
+            "IR-58127bcd-c81e-49e3",
+            "IR-794598d9-8dc9-463f"
+        ],
+        "goal": [
+            "Take responsibility for 100% of the things in your life"
+        ],
+        "title": "classical masculinity",
+        "level": 2,
+        "frequency": 1,
+        "xp": 300,
+        "category": "masculinity",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-7faa991c-7f53-42aa",
+        "requires": [
+            "IR-5b26ac32-88b0-44b6"
+        ],
+        "children": [],
+        "goal": [
+            "Stay on the coldest setting for 10 minutes straight"
+        ],
+        "category": "mindfulness",
+        "xp": 1500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-0ee0cd31-88a3-4e39",
+        "requires": [
+            "IR-c16dfd46-5131-45e3"
+        ],
+        "children": [],
+        "goal": [
+            "Drink 2 litres of water"
+        ],
+        
+        "title": "water",
+        "level": 3,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 30,
+        "xp": 1000,
+        "category": "hydration",
+        "type": "skills"
+    },
+    {
+        "id": "IR-462accf4-0f38-4221",
+        "requires": [
+            "IR-6a7e2362-cc02-42d5"
+        ],
+        "children": [],
+        "goal": [
+            "Train twice a day for >1.5h total"
+        ],
+        
+        "title": "fitness",
+        "level": 5,
+        "frequency": 6,
+        "interval": "week",
+        "timelimit": 60,
+        "xp": 20000,
+        "category": "fitness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-d49a952d-ec41-4ff5",
+        "requires": [
+            "IR-0d82d449-2e8d-4f7d"
+        ],
+        "children": [],
+        "goal": [
+            "Take responsibility for 100% of the things in your life"
+        ],
+        "name": "enchiridion",
+        "emoji": "📜",
+        "link": "http://classics.mit.edu/Epictetus/epicench.html",
+        "type": "items"
+    },
+    {
+        "id": "IR-58127bcd-c81e-49e3",
+        "requires": [
+            "IR-0d82d449-2e8d-4f7d"
+        ],
+        "children": [
+            "IR-8d871071-776b-4dde"
+        ],
+        "goal": [
+            "Read the rational male"
+        ],
+        "title": "classical masculinity",
+        "level": 3,
+        "frequency": 1,
+        "xp": 600,
+        "category": "SKILLS",
+        "interval": "year",
+        "timelimit": "60",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-8d871071-776b-4dde",
+        "requires": [
+            "IR-58127bcd-c81e-49e3"
+        ],
+        "children": [],
+        "goal": [
+            "Cultivate directionality. Lean into your directionality in life. Go after what you want. Set goals, honour them, and let nothing stand in the way"
+        ],
+        "title": "classical masculinity",
+        "level": 4,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "masculinity",
+        "interval": "day",
+        "timelimit": "60",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-794598d9-8dc9-463f",
+        "requires": [
+            "IR-0d82d449-2e8d-4f7d"
+        ],
+        "children": [
+            "IR-868eea34-d6ac-415d",
+            "IR-bc22793d-a3f6-49b4"
+        ],
+        "goal": [
+            "Spend 2 hours researching stoicism"
+        ],
+        "title": "stoicism",
+        "level": 1,
+        "frequency": 1,
+        "xp": 50,
+        "category": "masculinity",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-868eea34-d6ac-415d",
+        "requires": [
+            "IR-794598d9-8dc9-463f"
+        ],
+        "children": [
+            "IR-fab7500d-b893-4fea"
+        ],
+        "goal": [
+            "Read \"meditations\" by marcus aurelius"
+        ],
+        "title": "stoicism",
+        "level": 2,
+        "frequency": 1,
+        "xp": 200,
+        "category": "masculinity",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-bc22793d-a3f6-49b4",
+        "requires": [
+            "IR-794598d9-8dc9-463f"
+        ],
+        "children": [],
+        "goal": [
+            "Spend 2 hours researching stoicism"
+        ],
+        "name": "meditations",
+        "emoji": "📜",
+        "link": "http://classics.mit.edu/Antoninus/meditations.html",
+        "type": "items"
+    },
+    {
+        "id": "IR-fab7500d-b893-4fea",
+        "requires": [
+            "IR-868eea34-d6ac-415d"
+        ],
+        "children": [],
+        "goal": [
+            "Plan 5 habit to be more stoic and practice them"
+        ],
+        "title": "stoicism",
+        "level": 3,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "masculinity",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-18249edf-009f-48c8",
+        "requires": [
+            "IR-b8cc750a-8b1f-4c76"
+        ],
+        "children": [
+            "IR-4bfcf0a4-da8e-4c37",
+            "IR-3c33a0b1-35f1-417e"
+        ],
+        "goal": [
+            "PROMPT: In what way have my actions affected my life?",
+            "PROMPT: What behaviours do I do unconsciously? Why?",
+            "PROMPT: How are my behaviours affecting my daily life?",
+            "PROMPT: How do I stop my negative behaviours?",
+            "PROMPT: What are the worst things I'm doing? What are the most useful things I could start doing?"
+        ],
+        "title": "JOURNALING",
+        "level": 3,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-4f4c62f3-203f-42ab",
+        "requires": [
+            "IR-b8cc750a-8b1f-4c76"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Who do I want to become?",
+            "PROMPT: What is my biggest weakness?",
+            "PROMPT: What has impacted me most in life?",
+            "PROMPT: What am I most grateful for? why?",
+            "PROMPT: Who do I want to surround myself with?"
+        ],
+        "name": "Advanced journal",
+        "emoji": "📒",
+        "link": "https://www.youtube.com/watch?v=90MCjY62qx0",
+        "type": "items"
+    },
+    {
+        "id": "IR-7d22568d-ea0c-4161",
+        "requires": [
+            "IR-b8cc750a-8b1f-4c76"
+        ],
+        "children": [],
+        "goal": [
+            "PROMPT: Who do I want to become?",
+            "PROMPT: What is my biggest weakness?",
+            "PROMPT: What has impacted me most in life?",
+            "PROMPT: What am I most grateful for? why?",
+            "PROMPT: Who do I want to surround myself with?"
+        ],
+        "name": "How to show gratitude",
+        "emoji": "📜",
+        "link": "https://www.youtube.com/watch?v=1owp6JQxB0E",
+        "type": "items"
+    },
+    {
+        "id": "IR-7df46217-9eab-497b",
+        "requires": [
+            "IR-b8cc750a-8b1f-4c76"
+        ],
+        "children": [
+            "IR-2711373e-2d02-4dbe",
+            "IR-90e4e799-6891-4962"
+        ],
+        "goal": [
+            "Write 5 things you're grateful for"
+        ],
+        "title": "gratitude",
+        "level": 1,
+        "frequency": 1,
+        "xp": 100,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-4bfcf0a4-da8e-4c37",
+        "requires": [
+            "IR-18249edf-009f-48c8"
+        ],
+        "children": [
+            "IR-d6478d97-4610-4d4a"
+        ],
+        "goal": [
+            "PROMPT: What types of problems do I enjoy solving?",
+            "PROMPT: What questions do I need to ask myself right now? Answer them",
+            "PROMPT: What would I do with unlimited time/energy/money?",
+            "PROMPT: What excites me?",
+            "PROMPT: What is my purpose?"
+        ],
+        "title": "JOURNALING",
+        "level": 4,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-2711373e-2d02-4dbe",
+        "requires": [
+            "IR-7df46217-9eab-497b"
+        ],
+        "children": [
+            "IR-42a19c52-3629-483f",
+            "IR-777a5d67-d551-4387",
+            "IR-486d41b1-3a1e-4fb4"
+        ],
+        "goal": [
+            "Practice negative visualisation for 5 minutes"
+        ],
+        "title": "gratitude",
+        "level": 2,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-42a19c52-3629-483f",
+        "requires": [
+            "IR-2711373e-2d02-4dbe"
+        ],
+        "children": [],
+        "goal": [
+            "Gratitude journal about BAD things in your life or childhood trauma"
+        ],
+        "title": "gratitude",
+        "level": 3,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-777a5d67-d551-4387",
+        "requires": [
+            "IR-2711373e-2d02-4dbe"
+        ],
+        "children": [
+            "IR-26d8dde2-27f1-4737",
+            "IR-e5bd6929-033c-4e12"
+        ],
+        "goal": [
+            "Visualise yourself succeding for 10 minutes"
+        ],
+        "title": "visualisation",
+        "level": 1,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-486d41b1-3a1e-4fb4",
+        "requires": [
+            "IR-2711373e-2d02-4dbe"
+        ],
+        "children": [],
+        "goal": [
+            "Practice negative visualisation for 5 minutes"
+        ],
+        "name": "Elite visualisation cap",
+        "emoji": "🪖",
+        "link": "https://www.youtube.com/watch?v=vd-nlPlKbiI",
+        "type": "items"
+    },
+    {
+        "id": "IR-26d8dde2-27f1-4737",
+        "requires": [
+            "IR-777a5d67-d551-4387"
+        ],
+        "children": [
+            "IR-4c8f3ffa-a215-4796"
+        ],
+        "goal": [
+            "Create the wall"
+        ],
+        "title": "visualisation",
+        "level": 2,
+        "frequency": 1,
+        "xp": 750,
+        "category": "SKILLS",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-e5bd6929-033c-4e12",
+        "requires": [
+            "IR-777a5d67-d551-4387"
+        ],
+        "children": [],
+        "goal": [
+            "Practice negative visualisation for 5 minutes"
+        ],
+        "name": "THE WALL",
+        "emoji": "item",
+        "link": "https://www.youtube.com/watch?v=sBl-l4De7pA",
+        "type": "items"
+    },
+    {
+        "id": "IR-4c8f3ffa-a215-4796",
+        "requires": [
+            "IR-26d8dde2-27f1-4737"
+        ],
+        "children": [],
+        "goal": [
+            "Mentally visualise and design a relaxing location in detail. Then visualise it daily for 5 minutes"
+        ],
+        "title": "visualisation",
+        "level": 3,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-d6478d97-4610-4d4a",
+        "requires": [
+            "IR-4bfcf0a4-da8e-4c37"
+        ],
+        "children": [],
+        "goal": [
+            "Deep journal for an hour"
+        ],
+        "category": "example",
+        "xp": 2500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-ab0297e9-77e2-46e5",
+        "requires": [
+            "IR-b8cc750a-8b1f-4c76"
+        ],
+        "children": [
+            "IR-5e429b59-2a87-4cfe",
+            "IR-1d943acd-764b-43a1"
+        ],
+        "goal": [
+            "Go stare at your wall and THINK for 10 mins, Reflect upon yourself, deeply"
+        ],
+        "title": "Mind dump",
+        "level": 1,
+        "frequency": 4,
+        "xp": 300,
+        "category": "SKILLS",
+        "interval": "week",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-3c33a0b1-35f1-417e",
+        "requires": [
+            "IR-18249edf-009f-48c8"
+        ],
+        "children": [],
+        "goal": [
+            "Journal about a quote/book you've recently read. What does this mean to me? How/when can I use it in my life? What would my future self think about this?"
+        ],
+        "category": "example",
+        "xp": 500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-5e429b59-2a87-4cfe",
+        "requires": [
+            "IR-ab0297e9-77e2-46e5"
+        ],
+        "children": [
+            "IR-4aa8c408-d970-4021"
+        ],
+        "goal": [
+            "Go stare at your wall and THINK for 15 mins, Reflect upon yourself, deeply"
+        ],
+        "title": "Mind dump",
+        "level": 2,
+        "frequency": 1,
+        "xp": 800,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-4aa8c408-d970-4021",
+        "requires": [
+            "IR-5e429b59-2a87-4cfe"
+        ],
+        "children": [],
+        "goal": [
+            "Go stare at your wall. THINK and WRITE DOWN your thoughts for 15 mins"
+        ],
+        "title": "Mind dump",
+        "level": 3,
+        "frequency": 1,
+        "xp": 1500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-1d943acd-764b-43a1",
+        "requires": [
+            "IR-ab0297e9-77e2-46e5"
+        ],
+        "children": [],
+        "goal": [
+            "Go stare at your wall and THINK for 10 mins, Reflect upon yourself, deeply"
+        ],
+        "name": "mind dump guide",
+        "emoji": "item",
+        "link": "https://www.youtube.com/watch?v=H4VWDJUDHX0",
+        "type": "items"
+    },
+    {
+        "id": "IR-edd63013-b09f-4859",
+        "requires": [
+            "IR-e2e4ace9-9117-4012"
+        ],
+        "children": [],
+        "goal": [],
+        "name": "ancient library",
+        "emoji": "item",
+        "link": "https://drive.google.com/drive/folders/1HGG7si_q8bfmT4eHEH0vcytn9TegRtPy",
+        "type": "items"
+    },
+    {
+        "id": "IR-720b5427-ca85-4431",
+        "requires": [
+            "IR-e2e4ace9-9117-4012"
+        ],
+        "children": [
+            "IR-1130abda-7458-4808",
+            "IR-f677c7d2-02d1-4c45"
+        ],
+        "goal": [
+            "Read for 15 minutes"
+        ],
+        "title": "reading",
+        "level": 2,
+        "frequency": 1,
+        "xp": 600,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-1130abda-7458-4808",
+        "requires": [
+            "IR-720b5427-ca85-4431"
+        ],
+        "children": [
+            "IR-8546fab0-6474-46e6",
+            "IR-8887d5c9-90e3-481c"
+        ],
+        "goal": [
+            "Read for 20 minutes"
+        ],
+        "title": "reading",
+        "level": 3,
+        "frequency": 1,
+        "xp": 1500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-8546fab0-6474-46e6",
+        "requires": [
+            "IR-1130abda-7458-4808"
+        ],
+        "children": [
+            "IR-8da6554c-8cb9-4249"
+        ],
+        "goal": [
+            "Read 1 book every 2 weeks"
+        ],
+        "title": "reading",
+        "level": 4,
+        "frequency": 2,
+        "xp": 3000,
+        "category": "SKILLS",
+        "interval": "month",
+        "timelimit": "60",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-8da6554c-8cb9-4249",
+        "requires": [
+            "IR-8546fab0-6474-46e6"
+        ],
+        "children": [
+            "IR-2dcedeb9-48ee-4e2f"
+        ],
+        "goal": [
+            "Read two books from each discipline: PRODUCTIVITY, HABITS, RELATIONSHIPS, ENTREPRENEURSHIP, HAPPINESS"
+        ],
+        "title": "reading",
+        "level": 5,
+        "frequency": 1,
+        "xp": 7500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "120",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-ee930101-3d5c-455e",
+        "requires": [
+            "IR-e2e4ace9-9117-4012"
+        ],
+        "children": [
+            "IR-a7de0efa-d91e-4c12"
+        ],
+        "goal": [
+            "Practice a form of art (music, drawing, etc)"
+        ],
+        "title": "culture",
+        "level": 1,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-af811d1e-be01-4f5e",
+        "requires": [
+            "IR-e2e4ace9-9117-4012"
+        ],
+        "children": [
+            "IR-29d754a4-56c4-4d55",
+            "IR-054948e3-5141-4b9d",
+            "IR-899b83a6-1789-497b",
+            "IR-1fa0e03e-d0a7-44c5"
+        ],
+        "goal": [
+            "15 minutes of deep work"
+        ],
+        "title": "studying",
+        "level": 1,
+        "frequency": 1,
+        "xp": 250,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-2dcedeb9-48ee-4e2f",
+        "requires": [
+            "IR-8da6554c-8cb9-4249"
+        ],
+        "children": [],
+        "goal": [
+            "Read everything in the ancient library"
+        ],
+        "category": "example",
+        "xp": 15000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-8887d5c9-90e3-481c",
+        "requires": [
+            "IR-1130abda-7458-4808"
+        ],
+        "children": [],
+        "goal": [
+            "Read 10 books in total"
+        ],
+        "category": "reading",
+        "xp": 2500,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-a7de0efa-d91e-4c12",
+        "requires": [
+            "IR-ee930101-3d5c-455e"
+        ],
+        "children": [
+            "IR-b7f8e343-0b40-477a"
+        ],
+        "goal": [
+            "Experience a cultural event/place with friends or family"
+        ],
+        "title": "culture",
+        "level": 2,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "SKILLS",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-b7f8e343-0b40-477a",
+        "requires": [
+            "IR-a7de0efa-d91e-4c12"
+        ],
+        "children": [],
+        "goal": [
+            "Participate in a cultural event"
+        ],
+        "category": "culture",
+        "xp": 2000,
+        "type": "challenges"
+    },
+    {
+        "id": "IR-29d754a4-56c4-4d55",
+        "requires": [
+            "IR-af811d1e-be01-4f5e"
+        ],
+        "children": [
+            "IR-0fe34058-7986-4cc8",
+            "IR-22dbace6-a924-4f79"
+        ],
+        "goal": [
+            "30 mintues of deep work"
+        ],
+        "title": "studying",
+        "level": 2,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-054948e3-5141-4b9d",
+        "requires": [
+            "IR-af811d1e-be01-4f5e"
+        ],
+        "children": [
+            "IR-fb1a1e9c-cfd7-4d00"
+        ],
+        "goal": [
+            "Create and study with flashcards"
+        ],
+        "title": "recall",
+        "level": 1,
+        "frequency": 1,
+        "xp": 100,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-899b83a6-1789-497b",
+        "requires": [
+            "IR-af811d1e-be01-4f5e"
+        ],
+        "children": [],
+        "goal": [
+            "15 minutes of deep work"
+        ],
+        "name": "NEURO-ENHANCEMENT PILL",
+        "emoji": "💊",
+        "link": "https://www.youtube.com/watch?v=3znAl0QH1eE",
+        "type": "items"
+    },
+    {
+        "id": "IR-1fa0e03e-d0a7-44c5",
+        "requires": [
+            "IR-af811d1e-be01-4f5e"
+        ],
+        "children": [],
+        "goal": [
+            "15 minutes of deep work"
+        ],
+        "name": "flashcards",
+        "emoji": "🗃",
+        "link": "https://apps.ankiweb.net/",
+        "type": "items"
+    },
+    {
+        "id": "IR-0fe34058-7986-4cc8",
+        "requires": [
+            "IR-29d754a4-56c4-4d55"
+        ],
+        "children": [
+            "IR-61867251-d580-417a"
+        ],
+        "goal": [
+            "1 hour of deep work"
+        ],
+        "title": "studying",
+        "level": 3,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-fb1a1e9c-cfd7-4d00",
+        "requires": [
+            "IR-054948e3-5141-4b9d"
+        ],
+        "children": [
+            "IR-4401ebff-ab59-4f3c"
+        ],
+        "goal": [
+            "Review your notes for 30 minutes"
+        ],
+        "title": "recall",
+        "level": 2,
+        "frequency": 1,
+        "xp": 100,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-61867251-d580-417a",
+        "requires": [
+            "IR-0fe34058-7986-4cc8"
+        ],
+        "children": [],
+        "goal": [
+            "2 hours of deep work"
+        ],
+        "title": "studying",
+        "level": 4,
+        "frequency": 1,
+        "xp": 3000,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-4401ebff-ab59-4f3c",
+        "requires": [
+            "IR-fb1a1e9c-cfd7-4d00"
+        ],
+        "children": [],
+        "goal": [
+            "Review your studying"
+        ],
+        "title": "recall",
+        "level": 3,
+        "frequency": 1,
+        "xp": 100,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "5",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-22dbace6-a924-4f79",
+        "requires": [
+            "IR-29d754a4-56c4-4d55"
+        ],
+        "children": [],
+        "goal": [
+            "30 mintues of deep work"
+        ],
+        "name": "Elite study guide",
+        "emoji": "📙",
+        "link": "https://www.youtube.com/watch?v=nqYmmZKY4sA",
+        "type": "items"
+    },
+    {
+        "id": "IR-6f2712da-b217-4386",
+        "requires": [
+            "IR-4f4448c4-c745-4c44"
+        ],
+        "children": [
+            "IR-0f9e7299-eb7b-45c5"
+        ],
+        "goal": [
+            "Cook a meal at home"
+        ],
+        
+        "title": "Cooking",
+        "level": 1,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 7,
+        "xp": 500,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-0f9e7299-eb7b-45c5",
+        "requires": [
+            "IR-6f2712da-b217-4386"
+        ],
+        "children": [
+            "IR-2f512773-374e-45d3"
+        ],
+        "goal": [
+            "Create a weekly meal plan and stick to it"
+        ],
+        
+        "title": "Cooking",
+        "level": 2,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 14,
+        "xp": 1000,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-2f512773-374e-45d3",
+        "requires": [
+            "IR-0f9e7299-eb7b-45c5"
+        ],
+        "children": [
+            "IR-8589144e-2ab3-415c"
+        ],
+        "goal": [
+            "Research 3 healthy meals and cook them throughout the week"
+        ],
+        
+        "title": "Cooking",
+        "level": 3,
+        "frequency": 3,
+        "interval": "week",
+        "timelimit": 7,
+        "xp": 1500,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-8589144e-2ab3-415c",
+        "requires": [
+            "IR-2f512773-374e-45d3"
+        ],
+        "children": [],
+        "goal": [
+            "Research 10 healthy meals and cook them throughout the month"
+        ],
+        
+        "title": "Cooking",
+        "level": 4,
+        "frequency": 10,
+        "interval": "month",
+        "timelimit": 30,
+        "xp": 2500,
+        "category": "Diet",
+        "type": "skills"
+    },
+    {
+        "id": "IR-a74a2fdb-b6ef-4a2d",
+        "requires": [
+            "IR-a31784c2-f70a-4c26"
+        ],
+        "children": [],
+        "goal": [
+            "Meditate for 20 minutes"
+        ],
+        
+        "title": "MEDITATION",
+        "level": 6,
+        "frequency": 1,
+        "interval": "day",
+        "timelimit": 120,
+        "xp": 10000,
+        "category": "mindfulness",
+        "type": "skills"
+    },
+    {
+        "id": "IR-3d266646-738e-45c9",
+        "requires": [
+            "IR-11873d54-3248-402e"
+        ],
+        "children": [],
+        "goal": [
+            "Wash your face with soap twice a day"
+        ],
+        "name": "Wardrobe enhancer",
+        "emoji": "🛒",
+        "link": "https://theessentialman.com/mens-style-beginners/",
+        "type": "items"
+    },
+    {
+        "id": "IR-b6485b62-5da9-4825",
+        "requires": [
+            "IR-09ad0d42-934f-46cf"
+        ],
+        "children": [],
+        "goal": [
+            "Perform some type of strength training exercise"
+        ],
+        "name": "exercise guide",
+        "emoji": "📦",
+        "link": "https://m.youtube.com/watch?v=4oKtIdfohC4&feature=youtu.be",
+        "type": "items"
+    },
+    {
+        "id": "IR-2d9b7adc-80df-452e",
+        "requires": [
+            "IR-8a1a50b3-f377-4292"
+        ],
+        "children": [],
+        "goal": [
+            "Set a consistent bedtime and wake time"
+        ],
+        "name": "morning routine",
+        "emoji": "📒",
+        "link": "https://www.youtube.com/watch?v=R9M8vnIYSEg",
+        "type": "items"
+    },
+    {
+        "id": "IR-e8d5649e-dccb-473c",
+        "requires": [
+            "IR-8a1a50b3-f377-4292"
+        ],
+        "children": [],
+        "goal": [
+            "Set a consistent bedtime and wake time"
+        ],
+        "name": "Ultimate sleep guide",
+        "emoji": "📔",
+        "link": "https://www.youtube.com/watch?v=-GycLiOqMjc",
+        "type": "items"
+    },
+    {
+        "id": "IR-d2dfe149-8e39-4826",
+        "requires": [
+            "IR-4f4448c4-c745-4c44"
+        ],
+        "children": [],
+        "goal": [
+            "DON'T eat any Fast Food"
+        ],
+        "name": "Dieters utensils",
+        "emoji": "🍴",
+        "link": "https://m.youtube.com/watch?v=7_AoUF4zfV4",
+        "type": "items"
+    },
+    {
+        "id": "IR-90e4e799-6891-4962",
+        "requires": [
+            "IR-7df46217-9eab-497b"
+        ],
+        "children": [],
+        "goal": [
+            "Write 5 things you're grateful for"
+        ],
+        "name": "Negative visualisation guide",
+        "emoji": "📕",
+        "link": "https://www.youtube.com/watch?v=SScd40GNusQ",
+        "type": "items"
+    },
+    {
+        "id": "IR-f677c7d2-02d1-4c45",
+        "requires": [
+            "IR-720b5427-ca85-4431"
+        ],
+        "children": [
+            "IR-284e643d-6619-4bef",
+            "IR-11ed9559-40d8-4dfb"
+        ],
+        "goal": [
+            "Set aside time to come up with 5 creative solutions/businesses/ideas"
+        ],
+        "title": "business",
+        "level": 1,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "14",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-284e643d-6619-4bef",
+        "requires": [
+            "IR-f677c7d2-02d1-4c45"
+        ],
+        "children": [
+            "IR-c224514e-6207-4b7d"
+        ],
+        "goal": [
+            "Develop a realistic business plan with a concrete start date and a plan of operation"
+        ],
+        "title": "business",
+        "level": 2,
+        "frequency": 1,
+        "xp": 1000,
+        "category": "SKILLS",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-11ed9559-40d8-4dfb",
+        "requires": [
+            "IR-f677c7d2-02d1-4c45"
+        ],
+        "children": [
+            "IR-c6b4a0e5-07d2-4106"
+        ],
+        "goal": [
+            "Track your expenses for a month"
+        ],
+        "title": "finance",
+        "level": 1,
+        "frequency": 1,
+        "xp": 500,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-c224514e-6207-4b7d",
+        "requires": [
+            "IR-284e643d-6619-4bef"
+        ],
+        "children": [
+            "IR-d649d2ae-bc7d-48b6"
+        ],
+        "goal": [
+            "Start your business and make $100 from it"
+        ],
+        "title": "business",
+        "level": 3,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "SKILLS",
+        "interval": "year",
+        "timelimit": "365",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-d649d2ae-bc7d-48b6",
+        "requires": [
+            "IR-c224514e-6207-4b7d"
+        ],
+        "children": [],
+        "goal": [
+            "Attain your first 100 customers"
+        ],
+        "title": "business",
+        "level": 4,
+        "frequency": 1,
+        "xp": 4000,
+        "category": "SKILLS",
+        "interval": "year",
+        "timelimit": "365",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-c6b4a0e5-07d2-4106",
+        "requires": [
+            "IR-11ed9559-40d8-4dfb"
+        ],
+        "children": [
+            "IR-6102ef69-2810-4551"
+        ],
+        "goal": [
+            "Make a budget and stick to it. Practice minimalism"
+        ],
+        "title": "finance",
+        "level": 2,
+        "frequency": 1,
+        "xp": 800,
+        "category": "SKILLS",
+        "interval": "day",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-6102ef69-2810-4551",
+        "requires": [
+            "IR-c6b4a0e5-07d2-4106"
+        ],
+        "children": [
+            "IR-e81c3e0a-0ae8-4992"
+        ],
+        "goal": [
+            "Research finance for 10 hours (e.g. Stocks/Tax/Jobs/Business fundamentals)"
+        ],
+        "title": "finance",
+        "level": 3,
+        "frequency": 1,
+        "xp": 2000,
+        "category": "SKILLS",
+        "interval": "month",
+        "timelimit": "30",
+        
+        "type": "skills"
+    },
+    {
+        "id": "IR-e81c3e0a-0ae8-4992",
+        "requires": [
+            "IR-6102ef69-2810-4551"
+        ],
+        "children": [],
+        "goal": [
+            "Start investing and make $500"
+        ],
+        "title": "finance",
+        "level": 4,
+        "frequency": 1,
+        "xp": 5000,
+        "category": "SKILLS",
+        "interval": "year",
+        "timelimit": "365",
+        
+        "type": "skills"
     }
 ]
