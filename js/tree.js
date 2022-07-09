@@ -89,7 +89,6 @@ function drawNode(data, parentId) {
     if (!parentNode) {
         let ul = document.createElement('ul');
         ul.id = `node-${parentId}-ul`;
-        console.log(parentId)
         document.getElementById(`node-${parentId}`).appendChild(ul);
     }
 
@@ -114,7 +113,6 @@ function addNode(tree, parentId, newNodeData) {
 function drawChildren(list, parent) {
     let children = list.filter(node => node.requires[0] == parent.id);
     if (children.length < 1) return;
-    console.log(children)
     children.forEach(child => {
         drawNode(child, parent.id);
         if (child) {
@@ -203,7 +201,6 @@ function showError(message) {
 
 function getRoots(list) {
     let root = list.filter(item => item.isRoot);
-
     return root ? root : null;
 }
 

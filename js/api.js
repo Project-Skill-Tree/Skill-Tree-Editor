@@ -47,7 +47,7 @@ function formatAPIToEditor(data) {
             item.id = item._id;
             delete item._id;
             delete item.__v;
-            if(!item.requires || item.requires.length < 1) item.isRoot = true;
+            if(!item.requires || item.requires.length == 0) item.isRoot = true;
             result.push(item);
         });
     });
@@ -57,6 +57,7 @@ function formatAPIToEditor(data) {
 
 async function updateTree(tree) {
     let spinner = document.getElementById('spinner');
+    oldTree = getAllNodes();
     spinner.style.display = 'flex';
     let duplicateNodes = findDuplicateNodes(tree);
     if(duplicateNodes.length > 0) {
@@ -112,25 +113,24 @@ function sortTree() {
 
 async function replaceIntermediateReferences(tree) {
     // for each item that has an intermediate reference, send it to the server and replace the reference with the new id
-    let changedNodes = structuredClone(tree);
-    // if(oldTree && oldTree.length > 0) changedNodes = findAllChangedNodes(oldTree, newTree);
-    console.log(changedNodes)
-    // changedNodes.sort((a, b) => {
+    let newNodes = structuredClone(tree);
+    
+    console.log(newNodes)
+    // newNodes.sort((a, b) => {
     //     return (a.requires ? a.requires.length : 0) - (b.requires ? b.requires.length : 0);
     // });
 
     let method = 'POST';
 
     // sort the nodes by amount of requires to make sure we send the root nodes first if there are any new ones
-    changedNodes.sort((a, b) => {
+    newNodes.sort((a, b) => {
         return (a.requires ? a.requires.length : 0) - (b.requires ? b.requires.length : 0);
     });
     
-    for(var i = 0; i < changedNodes.length; i++) {
-        node = changedNodes[i];
+    for(var i = 0; i < newNodes.length; i++) {
+        node = newNodes[i];
         let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
         let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/create${endpoint}`;
-        console.log(url)
         let headers = new Headers();
         headers.append('api_key', window.localStorage.getItem('api_key'));
         headers.append('Content-Type', 'application/json');
@@ -157,8 +157,8 @@ async function replaceIntermediateReferences(tree) {
             showError('Error creating node \n Some nodes may not have been created.');
             return;
         }
-        let newTree = await replaceID(changedNodes, node.id, responseID);
-        changedNodes = newTree;
+        let newTree = await replaceID(newNodes, node.id, responseID);
+        newNodes = newTree;
     }
 
     return tree;
