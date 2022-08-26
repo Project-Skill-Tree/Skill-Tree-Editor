@@ -262,8 +262,8 @@ function showcaseData(data) {
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
                     editorFields.appendChild(li);
-                    let deleteBtn = document.createElement('button');
-                    if(field == 'requires' && index != 0) {
+                    if(field == 'requires' || field == 'goal') {
+                        let deleteBtn = document.createElement('button');
                         deleteBtn.innerHTML = 'Delete';
                         deleteBtn.classList.add('btn', 'btn-danger');
                         deleteBtn.addEventListener('click', function () {
