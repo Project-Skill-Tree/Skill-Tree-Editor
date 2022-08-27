@@ -328,8 +328,8 @@ function saveShowcasedNode() {
     let data = structuredClone(findNode(changedTree, id));
     let newData = {};
     newData.id = data.id;
-    newData.requires = data.requires;
-    if(data.goal) newData.goal = data.goal 
+    newData.requires = data.requires || [];
+    newData.goal = data.goal || []
 
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
