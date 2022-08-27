@@ -329,8 +329,7 @@ function saveShowcasedNode() {
     let newData = {};
     newData.id = data.id;
     newData.requires = data.requires;
-    if(data.goal) newData.goal = data.goal 
-
+    newData.goal = data.goal 
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
         newData[input.name] = input.type == "number" ? parseInt(input.value) : input.value;
