@@ -1,4 +1,3 @@
-let childrenCount = {};
 let oldTree = [];
 
 // array that takes on all the changes of the tree
@@ -13,7 +12,6 @@ let typeTemplates = {
         "requires": []
     },
     "skills": {
-        "icon": "skill",
         "title": "skill",
         "level": 1,
         "goal": [],
@@ -23,10 +21,10 @@ let typeTemplates = {
         "xp": 69,
         "category": "new",
         "type": "skills",
-        "requires": [],
-        "children": []
+        "requires": []
     },
     "challenges": {
+        "title": "challenge",
         "goal": [],
         "category": "example",
         "type": "challenges",
@@ -58,7 +56,6 @@ function drawNode(data, parentId) {
             if (isClone && data.type != 'root') {
                 newNode = structuredClone(findNode(changedTree, data.id));
                 newNode.id = generateUID();
-                newNode.children = [];
                 newNode.requires = [];
                 newNode.level += 1;
                 delete newNode.isRoot;
@@ -92,7 +89,6 @@ function drawNode(data, parentId) {
     if (!parentNode) {
         let ul = document.createElement('ul');
         ul.id = `node-${parentId}-ul`;
-        console.log(parentId)
         document.getElementById(`node-${parentId}`).appendChild(ul);
     }
 
@@ -103,9 +99,7 @@ function drawNode(data, parentId) {
 function addNode(tree, parentId, newNodeData) {
     let parent = findNode(tree, parentId);
     if (parent) {
-        if (!parent.children && parent.children != []) parent.children = [];
         if (!parent.requires && parent.requires != []) parent.requires = [];
-        parent.children.push(newNodeData.id);
         newNodeData.requires = [parentId];
         changedTree.push(newNodeData);
         saveTree();
@@ -117,14 +111,20 @@ function addNode(tree, parentId, newNodeData) {
 
 // iterates through the node's children and draws them all using the drawNode function
 function drawChildren(list, parent) {
-    if (!parent.children) return;
-    parent.children.forEach(child => {
-        let childData = findNode(list, child);
-        drawNode(findNode(list, child), parent.id);
-        if (childData) {
-            drawChildren(list, childData);
+    let children = list.filter(node => node.requires[0] == parent.id);
+    if (children.length < 1) return;
+    children.forEach(child => {
+        drawNode(child, parent.id);
+        if (child) {
+            drawChildren(list, child);
         }
     });
+}
+
+function getChildren(list, nodeId) {
+    let children = list.filter(node => node.requires[0] == nodeId);
+
+    return children ? children : null;
 }
 
 // removes a node from the UI and tree
@@ -137,18 +137,9 @@ function deleteNode(list, nodeId) {
     }
 
     // delete children
-    if (node.children) {
+    let children = getChildren(list, nodeId);
+    if (children) {
         deleteChildren(list, nodeId);
-    }
-
-    // remove child reference from parent
-    let parentId = document.getElementById(`node-${node.id}`).parentElement.getAttribute('id');
-    parentId = parentId.replace('node-', '');
-    parentId = parentId.replace('-ul', '');
-
-    let parentIndex = findNodeIndex(list, parentId);
-    if (parent) {
-        list[parentIndex].children = list[parentIndex].children.filter(child => child != nodeId);
     }
 
     document.querySelector(`#node-${nodeId}`).remove();
@@ -158,18 +149,18 @@ function deleteNode(list, nodeId) {
 
 // wipes and entire node's family from the UI and tree. Basically goes through all the children and the children's children etc. and removes them
 function deleteChildren(list, nodeId) {
-    let node = findNode(list, nodeId);
-    if (node.children) {
-        node.children.forEach(child => {
+    let children = getChildren(list, nodeId);
+    if (children) {
+        children.forEach(child => {
             deleteChildren(list, child);
-            let nodeIndex = findNodeIndex(list, child);
+            let nodeIndex = findNodeIndex(list, child.id);
             list.splice(nodeIndex, 1);
         });
     }
 }
 
 // init command that initalizes the whole tree
-async function init(tree) {
+async function init(tree, startFromScratch = true) {
     // check if the user has their credentials stored in local storage, if not, prompt the user to input them
     if (!tree && (!window.localStorage.getItem('api_url') || !window.localStorage.getItem('api_key'))) {
         var varModal = new bootstrap.Modal(
@@ -184,10 +175,10 @@ async function init(tree) {
     }
 
     let data = tree || await getAllNodes();
-
-
-    oldTree = tree || formatAPIToEditor(data);
-    changedTree = structuredClone(oldTree);
+    let formattedData = tree || formatAPIToEditor(data);
+    console.log(oldTree);
+    oldTree = {};
+    changedTree = structuredClone(formattedData);
 
     console.log("initializing tree")
 
@@ -210,7 +201,6 @@ function showError(message) {
 
 function getRoots(list) {
     let root = list.filter(item => item.isRoot);
-
     return root ? root : null;
 }
 
@@ -248,7 +238,6 @@ function showcaseData(data) {
         let type = skillEditor.querySelector('#node-type').value;
         editFields.innerHTML = '';
         let newData = structuredClone(typeTemplates[type]);
-        newData.children = data.children;
         newData.id = data.id;
         newData.requires = data.requires;
         showcaseData(newData);
@@ -257,7 +246,7 @@ function showcaseData(data) {
 
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
-        if (['type', 'children'].includes(field)) continue;
+        if (field == "type") continue;
         if(Array.isArray(data[field])) {
             let openEditorBtn = document.createElement('button');
             openEditorBtn.innerHTML = `Edit ${field}`;
@@ -268,19 +257,21 @@ function showcaseData(data) {
                 let editorElement = document.querySelector('#arrayEditorModal');
                 let editorFields = editorElement.querySelector('#array-list');
                 editorFields.innerHTML = '';
-                data[field].forEach(item => {
+                data[field].forEach((item, index) => {
                     let li = document.createElement('li');
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
                     editorFields.appendChild(li);
-                    let deleteBtn = document.createElement('button');
-                    deleteBtn.innerHTML = 'Delete';
-                    deleteBtn.classList.add('btn', 'btn-danger');
-                    deleteBtn.addEventListener('click', function () {
-                        data[field].splice(data[field].indexOf(item), 1);
-                        if(item.includes('"')) item = item.replace(/"/g, '&quot;');
-                        editorFields.querySelector('li[aria-label="' + item + '"]').remove();
-                    });
+                    if(field == 'requires' || field == 'goal') {
+                        let deleteBtn = document.createElement('button');
+                        deleteBtn.innerHTML = 'Delete';
+                        deleteBtn.classList.add('btn', 'btn-danger');
+                        deleteBtn.addEventListener('click', function () {
+                            data[field].splice(data[field].indexOf(item), 1);
+                            if(item.includes('"')) item = item.replace(/"/g, '&quot;');
+                            editorFields.querySelector('li[aria-label="' + item + '"]').remove();
+                        });
+                    }
                     li.appendChild(deleteBtn);
                 });
 
@@ -338,7 +329,6 @@ function saveShowcasedNode() {
     let newData = {};
     newData.id = data.id;
     newData.requires = data.requires;
-    if(data.children) newData.children = data.children
     if(data.goal) newData.goal = data.goal 
 
     let inputs = document.querySelectorAll('.edit-fields input');
@@ -347,7 +337,6 @@ function saveShowcasedNode() {
     });
     newData.type = document.querySelector('#node-type').value;
 
-    // data.children = findNode(changedTree, data.id).children;
     updateNode(id, newData);
 }
 
@@ -378,7 +367,7 @@ function loadJson() {
     document.querySelector('.tree').innerHTML = "";
     let json = document.querySelector('#json-input').value;
     let data = JSON.parse(json);
-    init(data);
+    init(data, true);
 }
 
 // loading the tree from local storage
@@ -386,7 +375,7 @@ function loadLastSession() {
     let tree = window.localStorage.getItem('tree');
     document.querySelector('.tree').innerHTML = "";
     if (tree) {
-        init(JSON.parse(tree));
+        init(JSON.parse(tree), false);
     }
     else {
         console.log('No tree found');
@@ -416,6 +405,7 @@ function updateVariables() {
 function findAllChangedNodes(oldList, newList) {
     let changedNodes = [];
     // console.log(oldList);
+    if(!oldList || oldList.length < 1) return changedNodes;
     newList.forEach(newNode => {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
         if (oldNode) {
