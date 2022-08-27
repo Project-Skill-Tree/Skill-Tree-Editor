@@ -14,7 +14,7 @@ let typeTemplates = {
     "skills": {
         "title": "skill",
         "level": 1,
-        "goal": [],
+        "goals": [],
         "frequency": 1,
         "interval": "week",
         "timelimit": 12,
@@ -25,7 +25,7 @@ let typeTemplates = {
     },
     "challenges": {
         "title": "challenge",
-        "goal": [],
+        "goals": [],
         "category": "example",
         "type": "challenges",
         "xp": 420,
@@ -262,8 +262,8 @@ function showcaseData(data) {
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
                     editorFields.appendChild(li);
-                    if(field == 'requires' || field == 'goal') {
-                        let deleteBtn = document.createElement('button');
+                    let deleteBtn = document.createElement('button');
+                    if(field == 'requires' || field == 'goals') {
                         deleteBtn.innerHTML = 'Delete';
                         deleteBtn.classList.add('btn', 'btn-danger');
                         deleteBtn.addEventListener('click', function () {
@@ -287,7 +287,7 @@ function showcaseData(data) {
                     editorElement.querySelector('#array-input').value = '';
 
                     // save the new item in the array
-                    changedTree[findNodeIndex(changedTree, data.id)].goal.push(inputData);
+                    changedTree[findNodeIndex(changedTree, data.id)].goals.push(inputData);
                 };
             });
 
@@ -329,7 +329,7 @@ function saveShowcasedNode() {
     let newData = {};
     newData.id = data.id;
     newData.requires = data.requires;
-    if(data.goal) newData.goal = data.goal 
+    if(data.goals) newData.goals = data.goals
 
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
