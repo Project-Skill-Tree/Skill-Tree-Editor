@@ -35,7 +35,7 @@ let typeTemplates = {
 
 // add a new node to the tree UI using the data passed in
 function drawNode(data, parentId) {
-    if(!data) return;
+    if (!data) return;
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
@@ -247,7 +247,7 @@ function showcaseData(data) {
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
         if (field == "type") continue;
-        if(Array.isArray(data[field])) {
+        if (Array.isArray(data[field])) {
             let openEditorBtn = document.createElement('button');
             openEditorBtn.innerHTML = `Edit ${field}`;
             openEditorBtn.classList.add('btn', 'btn-primary');
@@ -263,26 +263,35 @@ function showcaseData(data) {
                     li.setAttribute('aria-label', item);
                     editorFields.appendChild(li);
                     let deleteBtn = document.createElement('button');
-                    if(field == 'requires' || field == 'goals') {
-                        deleteBtn.innerHTML = 'Delete';
-                        deleteBtn.classList.add('btn', 'btn-danger');
-                        deleteBtn.addEventListener('click', function () {
-                            data[field].splice(data[field].indexOf(item), 1);
-                            if(item.includes('"')) item = item.replace(/"/g, '&quot;');
-                            editorFields.querySelector('li[aria-label="' + item + '"]').remove();
-                        });
-                    }
+                    deleteBtn.innerHTML = 'Delete';
+                    deleteBtn.classList.add('btn', 'btn-danger');
+                    deleteBtn.addEventListener('click', function () {
+                        data[field].splice(data[field].indexOf(item), 1);
+                        if (item.includes('"')) item = item.replace(/"/g, '&quot;');
+                        editorFields.querySelector('li[aria-label="' + item + '"]').remove();
+                    });
                     li.appendChild(deleteBtn);
                 });
 
                 let addBtn = editorElement.querySelector('#add-array-button');
                 addBtn.onclick = () => {
                     let inputData = document.querySelector('#array-input').value;
-                    if(inputData === "") return;
+                    if (inputData === "") return;
                     console.log(`Adding goal ${inputData} to ${data.title || data.id}`);
+
+                    let deleteBtn = document.createElement('button');
                     
                     let li = document.createElement('li');
                     li.innerHTML = inputData;
+                    li.appendChild(deleteBtn)
+                    
+                    deleteBtn.innerHTML = 'Delete';
+                    deleteBtn.classList.add('btn', 'btn-danger');
+                    deleteBtn.addEventListener('click', function () {
+                        li.remove()
+                        data[field].splice(data[field].indexOf(inputData), 1);
+                    });
+
                     editorFields.appendChild(li);
                     editorElement.querySelector('#array-input').value = '';
 
@@ -329,7 +338,7 @@ function saveShowcasedNode() {
     let newData = {};
     newData.id = data.id;
     newData.requires = data.requires;
-    if(data.goals) newData.goals = data.goals
+    if (data.goals) newData.goals = data.goals
 
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
@@ -405,7 +414,7 @@ function updateVariables() {
 function findAllChangedNodes(oldList, newList) {
     let changedNodes = [];
     // console.log(oldList);
-    if(!oldList || oldList.length < 1) return changedNodes;
+    if (!oldList || oldList.length < 1) return changedNodes;
     newList.forEach(newNode => {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
         if (oldNode) {
