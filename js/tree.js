@@ -422,6 +422,11 @@ function findAllChangedNodes(oldList, newList) {
     return changedNodes;
 }
 
+function setLanguage(e) {
+    if(!e.dataset.value) return
+    window.localStorage.setItem('language', e.dataset.value)
+}
+
 document.querySelector("#editor-expand").addEventListener('click', () => {
     let editor = document.querySelector('#node-editor');
     editor.classList.add('expanded');

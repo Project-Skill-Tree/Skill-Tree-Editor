@@ -19,7 +19,7 @@ label {
     font-smooth: always;
 }
 
-.row > div {
+.row>div {
     width: auto;
     max-width: none;
 }
@@ -63,15 +63,22 @@ label {
     display: none;
 }
 
-#editor-expand {
+#menu-buttons {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     top: 0;
     right: 0;
     bottom: auto;
     left: auto;
     z-index: 90;
-    cursor: pointer;
     margin: 20px 20px 0 0;
+    justify-content: center;
+    width: 3rem;
+}
+
+.menu-button {
     padding: 0;
     width: 3rem;
     height: 3rem;
@@ -84,7 +91,6 @@ label {
     bottom: auto;
     left: 0;
     z-index: 95;
-    cursor: pointer;
     margin: 20px 0 0 20px;
 }
 
@@ -120,6 +126,7 @@ label {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
