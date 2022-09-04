@@ -14,7 +14,7 @@ let typeTemplates = {
     "skills": {
         "title": "skill",
         "level": 1,
-        "goal": [],
+        "goal": {},
         "frequency": 1,
         "interval": "week",
         "timelimit": 12,
@@ -25,7 +25,7 @@ let typeTemplates = {
     },
     "challenges": {
         "title": "challenge",
-        "goal": [],
+        "goal": {},
         "category": "example",
         "type": "challenges",
         "xp": 420,
@@ -35,7 +35,7 @@ let typeTemplates = {
 
 // add a new node to the tree UI using the data passed in
 function drawNode(data, parentId) {
-    if(!data) return;
+    if (!data) return;
     let node = document.createElement('li');
     let nodeAncor = document.createElement('a');
     let nodeTitle = document.createElement('span');
@@ -247,7 +247,7 @@ function showcaseData(data) {
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
         if (field == "type") continue;
-        if(Array.isArray(data[field])) {
+        if (Array.isArray(data[field]) || field === 'goals') {
             let openEditorBtn = document.createElement('button');
             openEditorBtn.innerHTML = `Edit ${field}`;
             openEditorBtn.classList.add('btn', 'btn-primary');
@@ -257,18 +257,20 @@ function showcaseData(data) {
                 let editorElement = document.querySelector('#arrayEditorModal');
                 let editorFields = editorElement.querySelector('#array-list');
                 editorFields.innerHTML = '';
-                data[field].forEach((item, index) => {
+                if (!data[field][getLanguage()]) data[field][getLanguage()] = []
+
+                data[field][getLanguage()].forEach((item, index) => {
                     let li = document.createElement('li');
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
                     editorFields.appendChild(li);
-                    if(field == 'requires' || field == 'goal') {
-                        let deleteBtn = document.createElement('button');
+                    let deleteBtn = document.createElement('button');
+                    if (field == 'requires' || field == 'goal') {
                         deleteBtn.innerHTML = 'Delete';
                         deleteBtn.classList.add('btn', 'btn-danger');
                         deleteBtn.addEventListener('click', function () {
                             data[field].splice(data[field].indexOf(item), 1);
-                            if(item.includes('"')) item = item.replace(/"/g, '&quot;');
+                            if (item.includes('"')) item = item.replace(/"/g, '&quot;');
                             editorFields.querySelector('li[aria-label="' + item + '"]').remove();
                         });
                     }
@@ -278,16 +280,16 @@ function showcaseData(data) {
                 let addBtn = editorElement.querySelector('#add-array-button');
                 addBtn.onclick = () => {
                     let inputData = document.querySelector('#array-input').value;
-                    if(inputData === "") return;
+                    if (inputData === "") return;
                     console.log(`Adding goal ${inputData} to ${data.title || data.id}`);
-                    
+
                     let li = document.createElement('li');
                     li.innerHTML = inputData;
                     editorFields.appendChild(li);
                     editorElement.querySelector('#array-input').value = '';
 
                     // save the new item in the array
-                    changedTree[findNodeIndex(changedTree, data.id)].goal.push(inputData);
+                    changedTree[findNodeIndex(changedTree, data.id)].goals[getLanguage()].push(inputData);
                 };
             });
 
@@ -329,7 +331,7 @@ function saveShowcasedNode() {
     let newData = {};
     newData.id = data.id;
     newData.requires = data.requires || [];
-    newData.goal = data.goal || []
+    newData.goals = data.goals || {}
 
     let inputs = document.querySelectorAll('.edit-fields input');
     inputs.forEach(input => {
@@ -405,7 +407,7 @@ function updateVariables() {
 function findAllChangedNodes(oldList, newList) {
     let changedNodes = [];
     // console.log(oldList);
-    if(!oldList || oldList.length < 1) return changedNodes;
+    if (!oldList || oldList.length < 1) return changedNodes;
     newList.forEach(newNode => {
         let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
         if (oldNode) {
@@ -420,11 +422,6 @@ function findAllChangedNodes(oldList, newList) {
         }
     });
     return changedNodes;
-}
-
-function setLanguage(e) {
-    if(!e.dataset.value) return
-    window.localStorage.setItem('language', e.dataset.value)
 }
 
 document.querySelector("#editor-expand").addEventListener('click', () => {

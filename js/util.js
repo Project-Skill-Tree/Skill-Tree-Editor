@@ -23,3 +23,14 @@ async function replaceID(tree, id, newId) {
     stringTree = JSON.parse(stringTree);
     return stringTree
 }
+
+function getLanguage() {
+    return window.localStorage.getItem('language') || 'en'
+}
+
+function setLanguage(e) {
+    if(!e.dataset.value) return
+    window.localStorage.setItem('language', e.dataset.value)
+    document.querySelector(`#language-select .dropdown-item.disabled`).classList.remove('disabled')
+    e.classList.add('disabled')
+}

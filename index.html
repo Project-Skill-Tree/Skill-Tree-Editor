@@ -30,7 +30,7 @@
             d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
         </svg>
       </button>
-      <div class="menu-button">
+      <div id="language-select" class="menu-button">
         <div class="btn-group dropstart">
           <button class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -295,6 +295,8 @@
   <script src="./js/api.js"></script>
   <script src="./js/tree.js"></script>
   <script>
+    document.querySelector(`#language-select .dropdown-item[data-value="${getLanguage()}"`).classList.add('disabled')    
+
     init();
   </script>
 </body>
