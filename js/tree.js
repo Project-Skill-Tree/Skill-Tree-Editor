@@ -14,7 +14,7 @@ let typeTemplates = {
     "skills": {
         "title": "skill",
         "level": 1,
-        "goal": {},
+        "goals": [],
         "frequency": 1,
         "interval": "week",
         "timelimit": 12,
@@ -25,7 +25,7 @@ let typeTemplates = {
     },
     "challenges": {
         "title": "challenge",
-        "goal": {},
+        "goals": [],
         "category": "example",
         "type": "challenges",
         "xp": 420,
@@ -257,24 +257,36 @@ function showcaseData(data) {
                 let editorElement = document.querySelector('#arrayEditorModal');
                 let editorFields = editorElement.querySelector('#array-list');
                 editorFields.innerHTML = '';
-                if (!data[field][getLanguage()]) data[field][getLanguage()] = []
-
-                data[field][getLanguage()].forEach((item, index) => {
+                const currentLanguage = getLanguage();
+                if (data[field][currentLanguage] == undefined) data[field][currentLanguage] = []
+                if(currentLanguage != 'en') {
+                    // let englishPreview = document.createElement('li');
+                    // englishPreview.innerText = `EN: ${data[field]['en'][index]}`;
+                    document.getElementById('array-input').placeholder = getUntranslated(data, field, currentLanguage)[0] || "";
+                }
+                data[field][currentLanguage].forEach((item, index) => {
                     let li = document.createElement('li');
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
-                    editorFields.appendChild(li);
+                    if(currentLanguage != 'en') {
+                        let english = document.createElement('b');
+                        english.innerText = `EN: ${data[field]['en']}`;
+                        li.prepend(document.createElement('br'));
+                        li.prepend(english);
+                    }
                     let deleteBtn = document.createElement('button');
-                    if (field == 'requires' || field == 'goal') {
+                    if (field == 'requires' || field == 'goals') {
                         deleteBtn.innerHTML = 'Delete';
                         deleteBtn.classList.add('btn', 'btn-danger');
                         deleteBtn.addEventListener('click', function () {
-                            data[field].splice(data[field].indexOf(item), 1);
+                            data[field][currentLanguage].splice(data[field][currentLanguage].indexOf(item), 1);
                             if (item.includes('"')) item = item.replace(/"/g, '&quot;');
                             editorFields.querySelector('li[aria-label="' + item + '"]').remove();
                         });
+                        
                     }
                     li.appendChild(deleteBtn);
+                    editorFields.appendChild(li);
                 });
 
                 let addBtn = editorElement.querySelector('#add-array-button');
@@ -290,6 +302,8 @@ function showcaseData(data) {
 
                     // save the new item in the array
                     changedTree[findNodeIndex(changedTree, data.id)].goals[getLanguage()].push(inputData);
+
+                    document.getElementById('array-input').placeholder = getUntranslated(data, field, getLanguage())[0] || ""
                 };
             });
 
@@ -340,6 +354,12 @@ function saveShowcasedNode() {
     newData.type = document.querySelector('#node-type').value;
 
     updateNode(id, newData);
+}
+
+
+function getUntranslated(node, field, language) {
+    if(node[field] && !node[field][language]) return node[field]['en'] || [];
+    return node[field]['en'].slice(node[field][language].length)
 }
 
 // update a node in the UI tree once the title is changed
