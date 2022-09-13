@@ -247,7 +247,7 @@ function showcaseData(data) {
     for (let field in data) {
         // skip over the fields that are handled by the app automatically or have a separate UI
         if (field == "type") continue;
-        if (Array.isArray(data[field]) || field === 'goals') {
+        if (isJson(data[field])) {
             let openEditorBtn = document.createElement('button');
             openEditorBtn.innerHTML = `Edit ${field}`;
             openEditorBtn.classList.add('btn', 'btn-primary');
@@ -259,18 +259,20 @@ function showcaseData(data) {
                 editorFields.innerHTML = '';
                 const currentLanguage = getLanguage();
                 if (data[field][currentLanguage] == undefined) data[field][currentLanguage] = []
+                document.getElementById('array-input').placeholder = "";
                 if(currentLanguage != 'en') {
                     // let englishPreview = document.createElement('li');
                     // englishPreview.innerText = `EN: ${data[field]['en'][index]}`;
                     document.getElementById('array-input').placeholder = getUntranslated(data, field, currentLanguage)[0] || "";
                 }
+                    
                 data[field][currentLanguage].forEach((item, index) => {
                     let li = document.createElement('li');
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
                     if(currentLanguage != 'en') {
                         let english = document.createElement('b');
-                        english.innerText = `EN: ${data[field]['en']}`;
+                        english.innerText = `EN: ${data[field]['en'][index]}`;
                         li.prepend(document.createElement('br'));
                         li.prepend(english);
                     }

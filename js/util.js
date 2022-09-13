@@ -11,7 +11,7 @@ function isEqualJson(obj1, obj2) {
 
     //return true when the two json has same length and all the properties has same value key by key
     let r = keys1.length === keys2.length && Object.keys(obj1).every(key => {
-        return typeof obj1[key] == "object" ? JSON.stringify(obj1[key]) == JSON.stringify(obj2[key]) : obj1[key] == obj2[key]; 
+        return typeof obj1[key] == "object" ? JSON.stringify(obj1[key]) == JSON.stringify(obj2[key]) : obj1[key] == obj2[key];
     });
     return r;
 }
@@ -29,8 +29,24 @@ function getLanguage() {
 }
 
 function setLanguage(e) {
-    if(!e.dataset.value) return
+    if (!e.dataset.value) return
     window.localStorage.setItem('language', e.dataset.value)
     document.querySelector(`#language-select .dropdown-item.disabled`).classList.remove('disabled')
     e.classList.add('disabled')
+}
+
+function isJson(item) {
+    item = typeof item !== "string" ? JSON.stringify(item) : item;
+
+    try {
+        item = JSON.parse(item);
+    } catch (e) {
+        return false;
+    }
+
+    if (typeof item === "object" && item !== null) {
+        return true;
+    }
+
+    return false;
 }
