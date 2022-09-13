@@ -302,6 +302,13 @@ function showcaseData(data) {
                     editorFields.appendChild(li);
                     editorElement.querySelector('#array-input').value = '';
 
+                    if(currentLanguage != 'en') {
+                        let english = document.createElement('b');
+                        english.innerText = `EN: ${data[field]['en'][data[field][currentLanguage].length]}`;
+                        li.prepend(document.createElement('br'));
+                        li.prepend(english);
+                    }
+
                     // save the new item in the array
                     changedTree[findNodeIndex(changedTree, data.id)].goals[getLanguage()].push(inputData);
 
