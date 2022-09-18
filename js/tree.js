@@ -267,6 +267,7 @@ function showcaseData(data) {
                 }
                     
                 data[field][currentLanguage].forEach((item, index) => {
+                    if(!item) return;
                     let li = document.createElement('li');
                     li.innerHTML = item;
                     li.setAttribute('aria-label', item);
@@ -281,7 +282,7 @@ function showcaseData(data) {
                         deleteBtn.innerHTML = 'Delete';
                         deleteBtn.classList.add('btn', 'btn-danger');
                         deleteBtn.addEventListener('click', function () {
-                            data[field][currentLanguage].splice(data[field][currentLanguage].indexOf(item), 1);
+                            data[field][currentLanguage][data[field][currentLanguage].indexOf(item)] = null;
                             if (item.includes('"')) item = item.replace(/"/g, '&quot;');
                             editorFields.querySelector('li[aria-label="' + item + '"]').remove();
                         });
