@@ -56,22 +56,43 @@ function formatAPIToEditor(data) {
 }
 
 async function updateTree(tree) {
+    tree.forEach(node => {
+        if (node._id) {
+            node.id = node._id.slice()
+            delete node._id
+        }
+    })
     let spinner = document.getElementById('spinner');
-    oldTree = getAllNodes();
+    oldTree = await getAllNodes();
+    oldTree = [...oldTree.skills.map(node => {
+        node.type = "skills"
+        return node
+    }), ...oldTree.challenges.map(node => {
+        node.type = "challenges"
+        return node
+    }),...oldTree.items.map(node => {
+        node.type = "items"
+        return node
+    })]
+
+    oldTree.forEach(node => {
+        node.id = node._id.slice()
+        delete node.__v
+        delete node._id
+    })
+
     spinner.style.display = 'flex';
     let duplicateNodes = findDuplicateNodes(tree);
     if(duplicateNodes.length > 0) {
         showError(`There are duplicate skill nodes with the same title and level. \n${duplicateNodes.join(',').replaceAll('-', ' ')}`);
         return;
     }
-
-    let newNodes = tree.filter(node => node.id.startsWith('IR'));
-
-    let newTree = await replaceIntermediateReferences(newNodes);
-    if(newTree === false) {
+    let newTree = await replaceIntermediateReferences(tree);
+    if (newTree === false) {
         return;
     }
 
+    console.log(newTree)
     if(oldTree && oldTree.length > 0) newTree = findAllChangedNodes(oldTree, newTree);
 
     newTree = await newTree.filter(node => !node.id.startsWith('IR'));
@@ -80,13 +101,16 @@ async function updateTree(tree) {
         let method = 'PUT';
         let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
         let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/update${endpoint}`;
-        console.log(url)
         let headers = new Headers();
         headers.append('api_key', window.localStorage.getItem('api_key'));
         headers.append('Content-Type', 'application/json');
 
-        delete node.isNew;
-        delete node.isRoot;
+        const sendNode = structuredClone(node)
+        delete sendNode.isNew;
+        delete sendNode.isRoot;
+        sendNode._id = sendNode.id.slice()
+        delete sendNode.id
+        delete sendNode.type
 
         fetch(url, {
             method: method,
@@ -113,9 +137,8 @@ function sortTree() {
 
 async function replaceIntermediateReferences(tree) {
     // for each item that has an intermediate reference, send it to the server and replace the reference with the new id
-    let newNodes = structuredClone(tree);
-    
-    console.log(newNodes)
+    let newTree = structuredClone(tree);
+
     // newNodes.sort((a, b) => {
     //     return (a.requires ? a.requires.length : 0) - (b.requires ? b.requires.length : 0);
     // });
@@ -123,12 +146,14 @@ async function replaceIntermediateReferences(tree) {
     let method = 'POST';
 
     // sort the nodes by amount of requires to make sure we send the root nodes first if there are any new ones
-    newNodes.sort((a, b) => {
+    newTree.sort((a, b) => {
         return (a.requires ? a.requires.length : 0) - (b.requires ? b.requires.length : 0);
     });
     
-    for(var i = 0; i < newNodes.length; i++) {
-        node = newNodes[i];
+    for(var i = 0; i < newTree.length; i++) {
+        node = newTree[i];
+        if (!node.id.startsWith('IR')) continue
+
         let endpoint = (node.type[0].toUpperCase() + node.type.slice(1)).slice(0, -1);
         let url = `${window.localStorage.getItem('api_url')}/v1/${node.type}/create${endpoint}`;
         let headers = new Headers();
@@ -144,7 +169,6 @@ async function replaceIntermediateReferences(tree) {
             body: JSON.stringify(node)
         })
 
-        
         response = await response.json();
         console.log(response)
         if(response.response !== 'success') {
@@ -157,8 +181,7 @@ async function replaceIntermediateReferences(tree) {
             showError('Error creating node \n Some nodes may not have been created.');
             return;
         }
-        let newTree = await replaceID(newNodes, node.id, responseID);
-        newNodes = newTree;
+        newTree = await replaceID(newTree, node.id, responseID);
     }
 
     return tree;
