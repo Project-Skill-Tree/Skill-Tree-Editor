@@ -15,6 +15,7 @@ let typeTemplates = {
         "title": "skill",
         "level": 1,
         "goals": [],
+        "tips": [],
         "frequency": 1,
         "interval": "week",
         "timelimit": 12,
@@ -111,6 +112,9 @@ function addNode(tree, parentId, newNodeData) {
 
 // iterates through the node's children and draws them all using the drawNode function
 function drawChildren(list, parent) {
+    if(parent.type == "skills" && parent.tips == undefined){
+        parent.tips = []
+    }
     let children = list.filter(node => node.requires[0] == parent.id);
     if (children.length < 1) return;
     children.forEach(child => {
@@ -296,7 +300,7 @@ function showcaseData(data) {
                     editorElement.querySelector('#array-input').value = '';
 
                     // save the new item in the array
-                    changedTree[findNodeIndex(changedTree, data.id)].goals.push(inputData);
+                    changedTree[findNodeIndex(changedTree, data.id)][field].push(inputData);
                 };
             });
 
@@ -416,9 +420,11 @@ function findAllChangedNodes(oldList, newList) {
     // console.log(oldList);
     if (!oldList || oldList.length < 1) return changedNodes;
     newList.forEach(newNode => {
-        let oldNode = oldList.find(oldNode => oldNode.id == newNode.id);
+        let oldNode = oldList.find(oldNode => newNode.id == oldNode.id)
+        if (newNode.isRoot) oldNode.isRoot = newNode.isRoot
         if (oldNode) {
             if (!isEqualJson(newNode, oldNode)) {
+                console.log("DIFFERENT:",newNode, oldNode)
                 newNode.isNew = false;
                 changedNodes.push(newNode);
             }
